@@ -568,6 +568,9 @@ importers:
 
   packages/infrastructure:
     dependencies:
+      '@creative-lab/application':
+        specifier: workspace:*
+        version: link:../application
       '@creative-lab/core':
         specifier: workspace:*
         version: link:../core
