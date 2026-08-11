@@ -2,7 +2,7 @@
   "name": "@creative-lab/infrastructure",
   "version": "0.0.0",
   "private": true,
-  "description": "Creative Lab infrastructure package — scaffolding only (BUILD-000A)",
+  "description": "Creative Lab infrastructure package — BUILD-002 foundation",
   "type": "module",
   "exports": {
     ".": {
@@ -12,9 +12,7 @@
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
+  "files": ["dist"],
   "scripts": {
     "build": "tsc -p tsconfig.json",
     "typecheck": "tsc -p tsconfig.json --noEmit",
@@ -24,6 +22,7 @@
     "clean": "rm -rf dist coverage .turbo *.tsbuildinfo"
   },
   "dependencies": {
+    "@creative-lab/application": "workspace:*",
     "@creative-lab/core": "workspace:*"
   },
   "devDependencies": {
