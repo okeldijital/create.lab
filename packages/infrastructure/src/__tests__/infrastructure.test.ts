@@ -106,7 +106,9 @@ describe("InMemoryEventDispatcher", () => {
   it("publishes many in order", async () => {
     const dispatcher = new InMemoryEventDispatcher();
     const seen: string[] = [];
-    dispatcher.subscribe("TestEvent", (received) => seen.push(received.eventId));
+    dispatcher.subscribe("TestEvent", (received) => {
+      seen.push(received.eventId);
+    });
     await dispatcher.publishMany([event, { ...event, eventId: "evt-2" }]);
     expect(seen).toEqual(["evt-1", "evt-2"]);
   });
