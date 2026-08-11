@@ -1,12 +1,23 @@
 /**
  * @creative-lab/infrastructure
  *
- * Platform infrastructure package. Scaffolding only (BUILD-000A).
- *
- * Owns framework and platform technical capabilities that are not
- * business-domain concerns. Core remains framework-agnostic; this
- * package hosts adapters and technical integrations.
- *
- * No business rules. No domain entities. No Payload collections.
+ * BUILD-002 infrastructure foundation. Concrete technical adapters live here;
+ * domain and application packages depend only on their ports.
  */
-export {};
+export { InMemoryUnitOfWork } from "./unit-of-work/InMemoryUnitOfWork.js";
+export { InMemoryEventDispatcher } from "./events/InMemoryEventDispatcher.js";
+export { InMemoryAuthorizationService } from "./authorization/InMemoryAuthorizationService.js";
+export { InMemoryRepository } from "./repositories/InMemoryRepository.js";
+export type { InfrastructureEntity } from "./repositories/InMemoryRepository.js";
+export { createInfrastructureConfiguration } from "./configuration/InfrastructureConfiguration.js";
+export type {
+  InfrastructureConfiguration,
+  InfrastructureMode,
+} from "./configuration/InfrastructureConfiguration.js";
+export {
+  InfrastructureError,
+  TransactionError,
+  RepositoryError,
+  EventDispatchError,
+  AuthorizationAdapterError,
+} from "./errors/InfrastructureErrors.js";
