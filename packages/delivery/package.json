@@ -1,0 +1,42 @@
+{
+  "name": "@creative-lab/delivery",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Creative Lab delivery management bounded context — EPIC-212 pure domain model",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": ["dist"],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint src --max-warnings 0",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "clean": "rm -rf dist coverage .turbo *.tsbuildinfo"
+  },
+  "dependencies": {
+    "@creative-lab/core": "workspace:*",
+    "@creative-lab/organization": "workspace:*",
+    "@creative-lab/workforce": "workspace:*",
+    "@creative-lab/capacity": "workspace:*",
+    "@creative-lab/scheduling": "workspace:*",
+    "@creative-lab/operations": "workspace:*",
+    "@creative-lab/projects": "workspace:*",
+    "@creative-lab/allocation": "workspace:*",
+    "@creative-lab/production": "workspace:*",
+    "@creative-lab/assets": "workspace:*",
+    "@creative-lab/review": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8",
+    "eslint": "^9.17.0"
+  }
+}

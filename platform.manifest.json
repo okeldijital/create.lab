@@ -1,0 +1,941 @@
+{
+  "platformVersion": "0.0.0",
+  "constitutionVersion": "BUILD-000",
+  "engineeringStandardsVersion": "BUILD-000A",
+  "architectureVersion": "BUILD-001",
+  "domainLayerVersion": "EPIC-220",
+  "dependencyMatrixVersion": "EPIC-220",
+  "documentVersions": {
+    "domainMap": "BUILD-001",
+    "packageClassification": "BUILD-001",
+    "packageDependencies": "BUILD-001",
+    "auditDomainStabilization": "BUILD-000B",
+    "build001": "BUILD-001"
+  },
+  "packages": [
+    {
+      "name": "@creative-lab/core",
+      "path": "packages/core",
+      "version": "0.0.0",
+      "classification": "Domain Kernel",
+      "notes": "AggregateRoot, Entity, ValueObject, DomainEvent, DomainError, Identity, Specification, Clock, Guard, Result",
+      "implementation": "CORE-001 domain kernel",
+      "status": "kernel-implemented"
+    },
+    {
+      "name": "@creative-lab/config",
+      "path": "packages/config",
+      "version": "0.0.0",
+      "classification": "Platform Configuration"
+    },
+    {
+      "name": "@creative-lab/infrastructure",
+      "path": "packages/infrastructure",
+      "version": "0.0.0",
+      "classification": "Infrastructure"
+    },
+    {
+      "name": "@creative-lab/ui",
+      "path": "packages/ui",
+      "version": "0.0.0",
+      "classification": "Presentation Library"
+    },
+    {
+      "name": "@creative-lab/organization",
+      "path": "packages/organization",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-201 domain model",
+      "status": "domain-implemented"
+    },
+    {
+      "name": "@creative-lab/workforce",
+      "path": "packages/workforce",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-202 domain model",
+      "status": "domain-implemented"
+    },
+    {
+      "name": "@creative-lab/capacity",
+      "path": "packages/capacity",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-203 domain model",
+      "status": "domain-implemented"
+    },
+    {
+      "name": "@creative-lab/scheduling",
+      "path": "packages/scheduling",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-204 domain model",
+      "status": "domain-implemented"
+    },
+    {
+      "name": "@creative-lab/allocation",
+      "path": "packages/allocation",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-208 domain model",
+      "status": "domain-implemented",
+      "notes": "Allocation, AllocationGroup, Reservation \u2014 commitments only"
+    },
+    {
+      "name": "@creative-lab/production",
+      "path": "packages/production",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-209 domain model",
+      "status": "domain-implemented"
+    },
+    {
+      "name": "@creative-lab/operations",
+      "path": "packages/operations",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-206 domain model",
+      "status": "domain-implemented"
+    },
+    {
+      "name": "@creative-lab/projects",
+      "path": "packages/projects",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-207 domain model",
+      "status": "domain-implemented"
+    },
+    {
+      "name": "@creative-lab/collaboration",
+      "path": "packages/collaboration",
+      "version": "0.0.0",
+      "classification": "Business Domain (satellite)"
+    },
+    {
+      "name": "@creative-lab/assets",
+      "path": "packages/assets",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-210 domain model",
+      "status": "domain-implemented",
+      "notes": "Asset, AssetVersion, AssetCollection, AssetRelationship \u2014 no storage"
+    },
+    {
+      "name": "@creative-lab/review",
+      "path": "packages/review",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-211 domain model",
+      "status": "domain-implemented"
+    },
+    {
+      "name": "@creative-lab/delivery",
+      "path": "packages/delivery",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-212 domain model",
+      "status": "domain-implemented"
+    },
+    {
+      "name": "@creative-lab/billing",
+      "path": "packages/billing",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-213 domain model",
+      "status": "domain-implemented",
+      "notes": "Invoice, InvoiceLine, Payment (business record), CreditNote \u2014 no gateway/PDF/email"
+    },
+    {
+      "name": "@creative-lab/crm",
+      "path": "packages/crm",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-214 domain model",
+      "status": "domain-implemented",
+      "notes": "Customer, Contact, Opportunity, Interaction \u2014 no email/marketing/external CRM"
+    },
+    {
+      "name": "@creative-lab/services",
+      "path": "packages/services",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-215 domain model",
+      "status": "domain-implemented",
+      "notes": "Service, ServiceCategory, PriceBook, PriceRule \u2014 no quotes/invoices/tax"
+    },
+    {
+      "name": "@creative-lab/quotation",
+      "path": "packages/quotation",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-216 domain model",
+      "status": "domain-implemented",
+      "notes": "Quote, QuoteVersion, QuoteLine, QuoteApproval \u2014 no PDF/email/invoice/project"
+    },
+    {
+      "name": "@creative-lab/contracts",
+      "path": "packages/contracts",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-217 domain model",
+      "status": "domain-implemented",
+      "notes": "Contract, ContractVersion, ContractTerm, ContractAmendment \u2014 no PDF/signatures"
+    },
+    {
+      "name": "@creative-lab/engagement",
+      "path": "packages/engagement",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-218 domain model",
+      "status": "domain-implemented",
+      "notes": "Engagement, Deliverable, Milestone, Obligation \u2014 contractual execution only"
+    },
+    {
+      "name": "@creative-lab/portfolio",
+      "path": "packages/portfolio",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-219 domain model",
+      "status": "domain-implemented",
+      "notes": "Portfolio, Program, Initiative, PortfolioMilestone \u2014 strategic governance only"
+    },
+    {
+      "name": "@creative-lab/knowledge",
+      "path": "packages/knowledge",
+      "version": "0.0.0",
+      "classification": "Business Domain",
+      "implementation": "EPIC-220 domain model",
+      "status": "domain-implemented",
+      "notes": "KnowledgeArticle, KnowledgeVersion, KnowledgeCategory, KnowledgeReference \u2014 identity/lifecycle/taxonomy/governance only"
+    },
+    {
+      "name": "@creative-lab/application",
+      "path": "packages/application",
+      "version": "0.0.0",
+      "classification": "Application Layer",
+      "implementation": "BUILD-001 application foundation",
+      "status": "application-implemented",
+      "notes": "Commands, queries, handlers, DTOs, mappers; UoW/auth/event ports only"
+    },
+    {
+      "name": "@creative-lab/test-utils",
+      "path": "packages/test-utils",
+      "version": "0.0.0",
+      "classification": "Test Support"
+    }
+  ],
+  "applications": [
+    {
+      "name": "@creative-lab/web",
+      "path": "apps/web",
+      "version": "0.0.0",
+      "role": "End-user web application (scaffold)"
+    },
+    {
+      "name": "@creative-lab/cms",
+      "path": "apps/cms",
+      "version": "0.0.0",
+      "role": "Payload CMS host (scaffold)"
+    }
+  ],
+  "epics": [
+    {
+      "id": "EPIC-201",
+      "path": "docs/epics/EPIC-201.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/organization"
+    },
+    {
+      "id": "EPIC-202",
+      "path": "docs/epics/EPIC-202.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/workforce"
+    },
+    {
+      "id": "EPIC-203",
+      "path": "docs/epics/EPIC-203.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/capacity"
+    },
+    {
+      "id": "EPIC-204",
+      "path": "docs/epics/EPIC-204.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/scheduling"
+    },
+    {
+      "id": "EPIC-205",
+      "path": "docs/epics/EPIC-205.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/allocation"
+    },
+    {
+      "id": "EPIC-206",
+      "path": "docs/epics/EPIC-206.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/operations"
+    },
+    {
+      "id": "EPIC-207",
+      "path": "docs/epics/EPIC-207.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/projects"
+    },
+    {
+      "id": "EPIC-208",
+      "path": "docs/epics/EPIC-208.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/allocation"
+    },
+    {
+      "id": "EPIC-209",
+      "path": "docs/epics/EPIC-209.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/production"
+    },
+    {
+      "id": "EPIC-210",
+      "path": "docs/epics/EPIC-210.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/assets"
+    },
+    {
+      "id": "EPIC-211",
+      "path": "docs/epics/EPIC-211.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/review"
+    },
+    {
+      "id": "EPIC-212",
+      "path": "docs/epics/EPIC-212.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/delivery"
+    },
+    {
+      "id": "EPIC-213",
+      "path": "docs/epics/EPIC-213.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/billing"
+    },
+    {
+      "id": "EPIC-214",
+      "path": "docs/epics/EPIC-214.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/crm"
+    },
+    {
+      "id": "EPIC-215",
+      "path": "docs/epics/EPIC-215.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/services"
+    },
+    {
+      "id": "EPIC-216",
+      "path": "docs/epics/EPIC-216.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/quotation"
+    },
+    {
+      "id": "EPIC-217",
+      "path": "docs/epics/EPIC-217.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/contracts"
+    },
+    {
+      "id": "EPIC-218",
+      "path": "docs/epics/EPIC-218.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/engagement"
+    },
+    {
+      "id": "EPIC-219",
+      "path": "docs/epics/EPIC-219.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/portfolio"
+    },
+    {
+      "id": "EPIC-220",
+      "path": "docs/epics/EPIC-220.md",
+      "status": "Implemented (domain model)",
+      "package": "packages/knowledge"
+    }
+  ],
+  "adr": [
+    {
+      "id": "ADR-001",
+      "path": "docs/adr/ADR-001-organization-first.md",
+      "title": "Organization First",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-002",
+      "path": "docs/adr/ADR-002-shared-tenant-architecture.md",
+      "title": "Shared Tenant Architecture",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-003",
+      "path": "docs/adr/ADR-003-repository-pattern.md",
+      "title": "Repository Pattern",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-004",
+      "path": "docs/adr/ADR-004-event-architecture.md",
+      "title": "Event Architecture",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-005",
+      "path": "docs/adr/ADR-005-authorization.md",
+      "title": "Authorization",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-006",
+      "path": "docs/adr/ADR-006-activity-infrastructure.md",
+      "title": "Activity Infrastructure",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-007",
+      "path": "docs/adr/ADR-007-payload-integration.md",
+      "title": "Payload Integration",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-008",
+      "path": "docs/adr/ADR-008-package-boundaries.md",
+      "title": "Package Boundaries",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-009",
+      "path": "docs/adr/ADR-009-domain-driven-design.md",
+      "title": "Domain Driven Design",
+      "status": "Accepted"
+    },
+    {
+      "id": "ADR-010",
+      "path": "docs/adr/ADR-010-testing-strategy.md",
+      "title": "Testing Strategy",
+      "status": "Accepted"
+    }
+  ],
+  "dependencies": [
+    {
+      "from": "core",
+      "to": []
+    },
+    {
+      "from": "config",
+      "to": []
+    },
+    {
+      "from": "ui",
+      "to": [
+        "core",
+        "config"
+      ]
+    },
+    {
+      "from": "infrastructure",
+      "to": [
+        "core",
+        "config"
+      ]
+    },
+    {
+      "from": "organization",
+      "to": [
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "workforce",
+      "to": [
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "capacity",
+      "to": [
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "scheduling",
+      "to": [
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "operations",
+      "to": [
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "projects",
+      "to": [
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "allocation",
+      "to": [
+        "projects",
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "production",
+      "to": [
+        "allocation",
+        "projects",
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "assets",
+      "to": [
+        "production",
+        "allocation",
+        "projects",
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "review",
+      "to": [
+        "assets",
+        "production",
+        "allocation",
+        "projects",
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "delivery",
+      "to": [
+        "review",
+        "assets",
+        "production",
+        "allocation",
+        "projects",
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "billing",
+      "to": [
+        "delivery",
+        "review",
+        "assets",
+        "production",
+        "allocation",
+        "projects",
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "crm",
+      "to": [
+        "billing",
+        "delivery",
+        "review",
+        "assets",
+        "production",
+        "allocation",
+        "projects",
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "services",
+      "to": [
+        "crm",
+        "billing",
+        "delivery",
+        "review",
+        "assets",
+        "production",
+        "allocation",
+        "projects",
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "quotation",
+      "to": [
+        "services",
+        "crm",
+        "billing",
+        "delivery",
+        "review",
+        "assets",
+        "production",
+        "allocation",
+        "projects",
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "contracts",
+      "to": [
+        "quotation",
+        "services",
+        "crm",
+        "billing",
+        "delivery",
+        "review",
+        "assets",
+        "production",
+        "allocation",
+        "projects",
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "engagement",
+      "to": [
+        "contracts",
+        "quotation",
+        "services",
+        "crm",
+        "billing",
+        "delivery",
+        "review",
+        "assets",
+        "production",
+        "allocation",
+        "projects",
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "portfolio",
+      "to": [
+        "engagement",
+        "contracts",
+        "quotation",
+        "services",
+        "crm",
+        "billing",
+        "delivery",
+        "review",
+        "assets",
+        "production",
+        "allocation",
+        "projects",
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "knowledge",
+      "to": [
+        "portfolio",
+        "engagement",
+        "contracts",
+        "quotation",
+        "services",
+        "crm",
+        "billing",
+        "delivery",
+        "review",
+        "assets",
+        "production",
+        "allocation",
+        "projects",
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    },
+    {
+      "from": "collaboration",
+      "to": [
+        "core",
+        "organization"
+      ]
+    },
+    {
+      "from": "test-utils",
+      "to": []
+    },
+    {
+      "from": "application",
+      "to": [
+        "knowledge",
+        "portfolio",
+        "engagement",
+        "contracts",
+        "quotation",
+        "services",
+        "crm",
+        "billing",
+        "delivery",
+        "review",
+        "assets",
+        "production",
+        "allocation",
+        "projects",
+        "operations",
+        "scheduling",
+        "capacity",
+        "workforce",
+        "organization",
+        "core",
+        "infrastructure",
+        "config"
+      ]
+    }
+  ],
+  "lastUpdated": "2026-08-07",
+  "audits": [
+    {
+      "id": "AUDIT-001",
+      "title": "Domain Stabilization",
+      "build": "BUILD-000B",
+      "status": "Completed",
+      "path": "docs/audits/AUDIT-001-Domain-Stabilization.md",
+      "report": "reports/domain-audit-report.json",
+      "decision": "APPROVED \u2014 proceed to BUILD-001 Application Layer Foundation"
+    }
+  ],
+  "builds": [
+    {
+      "id": "BUILD-000A",
+      "title": "Engineering Foundation",
+      "status": "Completed",
+      "path": "docs"
+    },
+    {
+      "id": "BUILD-000B",
+      "title": "Domain Audit & Stabilization",
+      "status": "Completed",
+      "path": "docs/audits/AUDIT-001-Domain-Stabilization.md",
+      "report": "reports/domain-audit-report.json"
+    },
+    {
+      "id": "BUILD-001",
+      "title": "Application Layer Foundation",
+      "status": "Completed",
+      "path": "packages/application",
+      "document": "docs/builds/BUILD-001.md"
+    },
+    {
+      "id": "CORE-001",
+      "title": "Shared Domain Kernel Consolidation",
+      "status": "Completed",
+      "path": "packages/core"
+    },
+    {
+      "id": "EPIC-206",
+      "title": "Operations (Work Execution)",
+      "status": "Completed",
+      "path": "packages/operations"
+    },
+    {
+      "id": "EPIC-207",
+      "title": "Project Management",
+      "status": "Completed",
+      "path": "packages/projects"
+    },
+    {
+      "id": "EPIC-208",
+      "title": "Resource Allocation",
+      "status": "Completed",
+      "path": "packages/allocation"
+    },
+    {
+      "id": "EPIC-209",
+      "title": "Production Management",
+      "status": "Completed",
+      "path": "packages/production"
+    },
+    {
+      "id": "EPIC-210",
+      "title": "Asset Management",
+      "status": "Completed",
+      "path": "packages/assets"
+    },
+    {
+      "id": "EPIC-211",
+      "title": "Review & Approval Domain",
+      "status": "Completed",
+      "path": "packages/review"
+    },
+    {
+      "id": "EPIC-212",
+      "title": "Delivery Management",
+      "status": "Completed",
+      "path": "packages/delivery"
+    },
+    {
+      "id": "EPIC-213",
+      "title": "Billing & Invoicing Domain",
+      "status": "Completed",
+      "path": "packages/billing"
+    },
+    {
+      "id": "EPIC-214",
+      "title": "Customer Relationship Management (CRM)",
+      "status": "Completed",
+      "path": "packages/crm"
+    },
+    {
+      "id": "EPIC-215",
+      "title": "Services & Pricing Domain",
+      "status": "Completed",
+      "path": "packages/services"
+    },
+    {
+      "id": "EPIC-216",
+      "title": "Quotation Management",
+      "status": "Completed",
+      "path": "packages/quotation"
+    },
+    {
+      "id": "EPIC-217",
+      "title": "Contract Management",
+      "status": "Completed",
+      "path": "packages/contracts"
+    },
+    {
+      "id": "EPIC-218",
+      "title": "Engagement Management",
+      "status": "Completed",
+      "path": "packages/engagement"
+    },
+    {
+      "id": "EPIC-219",
+      "title": "Portfolio Management",
+      "status": "Completed",
+      "path": "packages/portfolio"
+    },
+    {
+      "id": "EPIC-220",
+      "title": "Knowledge Management",
+      "status": "Completed",
+      "path": "packages/knowledge"
+    }
+  ],
+  "applicationLayerVersion": "BUILD-001"
+}

@@ -1,0 +1,259 @@
+{
+  "auditId": "AUDIT-001",
+  "build": "BUILD-000B",
+  "title": "Domain Audit & Stabilization",
+  "version": "1.0.0",
+  "generatedAt": "2026-08-07T00:00:00.000Z",
+  "status": "Completed",
+  "decision": "APPROVED",
+  "nextBuild": "BUILD-001 — Application Layer Foundation",
+  "architectureScore": 98,
+  "blockingIssues": [],
+  "prerequisites": {
+    "BUILD-000A": "completed",
+    "EPIC-201_to_EPIC-220": "completed"
+  },
+  "summary": {
+    "primaryDomainPackages": 19,
+    "supportingPackagesAudited": 4,
+    "structuralPass": "19/19",
+    "purityHits": 0,
+    "repositoryPorts": 81,
+    "aggregates": 81,
+    "valueObjects": 150,
+    "domainServices": 81,
+    "policies": 77,
+    "domainEvents": 233,
+    "domainErrors": 228,
+    "totalSourceFilesApprox": 1028,
+    "totalTests": 1077,
+    "testsPassed": 1077,
+    "testsFailed": 0,
+    "testsSkipped": 0,
+    "coveragePercent": null,
+    "coverageNote": "Monorepo-wide coverage gate not enforced; per-package test:coverage scripts available"
+  },
+  "validation": {
+    "checkDeps": { "command": "node scripts/check-deps.mjs", "exitCode": 0, "result": "pass" },
+    "scaffoldCheck": { "command": "node scripts/scaffold-check.mjs", "exitCode": 0, "result": "pass" },
+    "typecheck": { "command": "pnpm typecheck", "exitCode": 0, "result": "pass", "approxElapsedSec": 84 },
+    "lint": { "command": "pnpm lint", "exitCode": 0, "result": "pass" },
+    "test": { "command": "pnpm test", "exitCode": 0, "result": "pass", "approxElapsedSec": 78 },
+    "build": { "command": "pnpm build", "exitCode": 0, "result": "pass", "approxElapsedSec": 6 },
+    "fullValidationWallClockSec": 216
+  },
+  "testsByPackage": {
+    "core": 14,
+    "organization": 61,
+    "workforce": 41,
+    "capacity": 24,
+    "scheduling": 24,
+    "operations": 39,
+    "projects": 32,
+    "allocation": 40,
+    "production": 45,
+    "assets": 50,
+    "review": 45,
+    "delivery": 50,
+    "billing": 70,
+    "crm": 62,
+    "services": 65,
+    "quotation": 70,
+    "contracts": 76,
+    "engagement": 80,
+    "portfolio": 85,
+    "knowledge": 104
+  },
+  "packageScores": {
+    "core": { "classification": "Domain Kernel", "score": 100, "pass": true },
+    "infrastructure": { "classification": "Infrastructure", "score": null, "pass": true, "note": "Non-domain; adapters expected" },
+    "config": { "classification": "Platform Configuration", "score": null, "pass": true, "note": "No domain src tree by design" },
+    "ui": { "classification": "Presentation", "score": null, "pass": true, "note": "UI concerns allowed" },
+    "organization": { "epic": "EPIC-201", "score": 100, "pass": true, "aggregates": 5 },
+    "workforce": { "epic": "EPIC-202", "score": 100, "pass": true, "aggregates": 5 },
+    "capacity": { "epic": "EPIC-203", "score": 100, "pass": true, "aggregates": 5 },
+    "scheduling": { "epic": "EPIC-204", "score": 100, "pass": true, "aggregates": 5 },
+    "operations": { "epic": "EPIC-206", "score": 100, "pass": true, "aggregates": 5 },
+    "projects": { "epic": "EPIC-207", "score": 100, "pass": true, "aggregates": 5 },
+    "allocation": { "epic": "EPIC-205/EPIC-208", "score": 100, "pass": true, "aggregates": 3 },
+    "production": { "epic": "EPIC-209", "score": 100, "pass": true, "aggregates": 4 },
+    "assets": { "epic": "EPIC-210", "score": 100, "pass": true, "aggregates": 4 },
+    "review": { "epic": "EPIC-211", "score": 100, "pass": true, "aggregates": 4 },
+    "delivery": { "epic": "EPIC-212", "score": 100, "pass": true, "aggregates": 4 },
+    "billing": { "epic": "EPIC-213", "score": 100, "pass": true, "aggregates": 4 },
+    "crm": { "epic": "EPIC-214", "score": 100, "pass": true, "aggregates": 4 },
+    "services": { "epic": "EPIC-215", "score": 100, "pass": true, "aggregates": 4 },
+    "quotation": { "epic": "EPIC-216", "score": 100, "pass": true, "aggregates": 4 },
+    "contracts": { "epic": "EPIC-217", "score": 100, "pass": true, "aggregates": 4 },
+    "engagement": { "epic": "EPIC-218", "score": 100, "pass": true, "aggregates": 4 },
+    "portfolio": { "epic": "EPIC-219", "score": 100, "pass": true, "aggregates": 4 },
+    "knowledge": { "epic": "EPIC-220", "score": 100, "pass": true, "aggregates": 4 }
+  },
+  "audits": {
+    "1_structure": { "result": "pass", "domainPackagesPass": "19/19" },
+    "2_aggregates": { "result": "pass", "count": 81 },
+    "3_valueObjects": { "result": "pass", "count": 150 },
+    "4_domainServices": { "result": "pass", "count": 81 },
+    "5_policies": { "result": "pass", "count": 77 },
+    "6_repositoryPorts": { "result": "pass", "count": 81, "implementationsInDomain": 0 },
+    "7_events": { "result": "pass", "count": 233, "extendsDomainEvent": true, "versioned": true, "organizationId": true },
+    "8_errors": { "result": "pass", "count": 228, "extendsDomainError": true },
+    "9_dependencyMatrix": { "result": "pass", "tool": "scripts/check-deps.mjs" },
+    "10_importGraph": {
+      "result": "pass",
+      "chain": [
+        "organization",
+        "workforce",
+        "capacity",
+        "scheduling",
+        "operations",
+        "projects",
+        "allocation",
+        "production",
+        "assets",
+        "review",
+        "delivery",
+        "billing",
+        "crm",
+        "services",
+        "quotation",
+        "contracts",
+        "engagement",
+        "portfolio",
+        "knowledge"
+      ],
+      "terminalDomain": "knowledge",
+      "circularDependencies": false,
+      "reverseImports": false
+    },
+    "11_documentation": { "result": "pass", "readmes": true, "epics": "EPIC-201..EPIC-220", "architectureDocs": true },
+    "12_manifest": { "result": "pass", "correctionsApplied": true },
+    "13_packageMetadata": {
+      "result": "pass_with_observation",
+      "requiredFields": true,
+      "observation": "Many packages declare full allow-list dependencies beyond actual imports (OBS-001)"
+    },
+    "14_buildValidation": { "result": "pass" },
+    "15_testSummary": { "result": "pass", "total": 1077, "passed": 1077, "failed": 0, "skipped": 0 },
+    "16_domainPurity": { "result": "pass", "forbiddenImportHits": 0 },
+    "17_publicApi": { "result": "pass", "exportRootOnly": true },
+    "18_namingStandards": { "result": "pass" },
+    "19_architecturalConsistency": { "result": "pass" },
+    "20_engineeringStandards": {
+      "result": "pass",
+      "references": [
+        "Platform Constitution",
+        "ADR-001",
+        "ADR-008",
+        "ADR-009",
+        "ADR-010",
+        "package-dependencies.md",
+        "package-classification.md",
+        "domain-map.md"
+      ]
+    }
+  },
+  "actualImports": {
+    "organization": ["@creative-lab/core"],
+    "workforce": ["@creative-lab/core", "@creative-lab/organization"],
+    "capacity": ["@creative-lab/core", "@creative-lab/organization"],
+    "scheduling": ["@creative-lab/core", "@creative-lab/organization", "@creative-lab/capacity"],
+    "operations": ["@creative-lab/core", "@creative-lab/organization", "@creative-lab/scheduling"],
+    "projects": ["@creative-lab/core", "@creative-lab/organization", "@creative-lab/operations", "@creative-lab/scheduling"],
+    "allocation": ["@creative-lab/core", "@creative-lab/organization", "@creative-lab/capacity", "@creative-lab/operations", "@creative-lab/projects"],
+    "production": ["@creative-lab/core", "@creative-lab/organization", "@creative-lab/operations", "@creative-lab/projects"],
+    "assets": ["@creative-lab/core", "@creative-lab/organization", "@creative-lab/production", "@creative-lab/projects"],
+    "review": ["@creative-lab/core", "@creative-lab/organization", "@creative-lab/assets", "@creative-lab/production", "@creative-lab/projects"],
+    "delivery": ["@creative-lab/core", "@creative-lab/organization", "@creative-lab/assets", "@creative-lab/production", "@creative-lab/projects", "@creative-lab/review"],
+    "billing": ["@creative-lab/core", "@creative-lab/organization", "@creative-lab/delivery", "@creative-lab/projects"],
+    "crm": ["@creative-lab/core", "@creative-lab/organization", "@creative-lab/projects"],
+    "services": ["@creative-lab/core", "@creative-lab/organization"],
+    "quotation": ["@creative-lab/core", "@creative-lab/organization", "@creative-lab/crm", "@creative-lab/services"],
+    "contracts": ["@creative-lab/core", "@creative-lab/organization", "@creative-lab/crm", "@creative-lab/quotation"],
+    "engagement": ["@creative-lab/core", "@creative-lab/organization", "@creative-lab/contracts", "@creative-lab/crm", "@creative-lab/projects"],
+    "portfolio": ["@creative-lab/core", "@creative-lab/organization", "@creative-lab/engagement", "@creative-lab/projects"],
+    "knowledge": ["@creative-lab/core", "@creative-lab/organization"]
+  },
+  "aggregatesByPackage": {
+    "organization": ["Organization", "Studio", "OrganizationSettings", "Department", "Team"],
+    "workforce": ["EmploymentContract", "ReportingRelationship", "Position", "Employment", "Worker"],
+    "capacity": ["AvailabilityProfile", "WorkingPattern", "Capability", "CapacityProfile", "ResourceCapacity"],
+    "scheduling": ["Schedule", "Calendar", "Booking", "Shift", "TimeBlock"],
+    "operations": ["WorkSession", "WorkOutput", "WorkOrder", "WorkIncident", "WorkMilestone"],
+    "projects": ["Deliverable", "Project", "ProjectObjective", "ProjectPhase", "ProjectDependency"],
+    "allocation": ["AllocationGroup", "Reservation", "Allocation"],
+    "production": ["ProductionSession", "Production", "ProductionMilestone", "Revision"],
+    "assets": ["Asset", "AssetCollection", "AssetRelationship", "AssetVersion"],
+    "review": ["Review", "ReviewDecision", "ReviewSession", "Approval"],
+    "delivery": ["DeliveryReceipt", "DeliveryPackage", "Delivery", "DeliveryItem"],
+    "billing": ["Payment", "InvoiceLine", "CreditNote", "Invoice"],
+    "crm": ["Opportunity", "Contact", "Interaction", "Customer"],
+    "services": ["PriceRule", "PriceBook", "Service", "ServiceCategory"],
+    "quotation": ["Quote", "QuoteApproval", "QuoteLine", "QuoteVersion"],
+    "contracts": ["Contract", "ContractVersion", "ContractAmendment", "ContractTerm"],
+    "engagement": ["Obligation", "Deliverable", "Milestone", "Engagement"],
+    "portfolio": ["PortfolioMilestone", "Program", "Portfolio", "Initiative"],
+    "knowledge": ["KnowledgeCategory", "KnowledgeReference", "KnowledgeArticle", "KnowledgeVersion"]
+  },
+  "observations": [
+    {
+      "id": "OBS-001",
+      "severity": "low",
+      "title": "Allow-list package.json dependencies exceed actual imports",
+      "blocking": false,
+      "disposition": "accepted"
+    },
+    {
+      "id": "OBS-002",
+      "severity": "low",
+      "title": "Monorepo-wide coverage percent not enforced",
+      "blocking": false,
+      "disposition": "accepted"
+    },
+    {
+      "id": "OBS-003",
+      "severity": "info",
+      "title": "collaboration remains satellite scaffold",
+      "blocking": false,
+      "disposition": "out_of_scope"
+    },
+    {
+      "id": "OBS-004",
+      "severity": "info",
+      "title": "EPIC-205 superseded by EPIC-208 for allocation package",
+      "blocking": false,
+      "disposition": "documented"
+    }
+  ],
+  "corrections": [
+    {
+      "id": "FIX-001",
+      "description": "platform.manifest.json architectureVersion updated EPIC-212 → BUILD-000B"
+    },
+    {
+      "id": "FIX-002",
+      "description": "platform.manifest.json epics[] expanded to EPIC-201 through EPIC-220"
+    },
+    {
+      "id": "FIX-003",
+      "description": "Registered BUILD-000A, BUILD-000B, and AUDIT-001 in manifest"
+    },
+    {
+      "id": "FIX-004",
+      "description": "Added domainLayerVersion, dependencyMatrixVersion, documentVersions"
+    }
+  ],
+  "domainModelSourceChanges": [],
+  "recommendation": {
+    "approveApplicationLayer": true,
+    "statement": "Domain layer is certified pure, consistent, and green. Proceed to BUILD-001 Application Layer Foundation. Keep persistence, HTTP, auth, and UI out of domain packages; optional package.json dependency slimming under OBS-001."
+  },
+  "documents": {
+    "auditMarkdown": "docs/audits/AUDIT-001-Domain-Stabilization.md",
+    "reportJson": "reports/domain-audit-report.json",
+    "manifest": "platform.manifest.json",
+    "domainMap": "docs/architecture/domain-map.md",
+    "packageClassification": "docs/architecture/package-classification.md",
+    "packageDependencies": "docs/standards/package-dependencies.md"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "name": "@creative-lab/web",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Creative Lab web application — scaffolding only (BUILD-000)",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "lint": "eslint . --max-warnings 0",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "dev": "echo \"Web app scaffolding only — no dev server in BUILD-000\"",
+    "clean": "rm -rf dist coverage .turbo *.tsbuildinfo"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8",
+    "eslint": "^9.17.0"
+  }
+}

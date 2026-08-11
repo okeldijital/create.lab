@@ -1,0 +1,7 @@
+{
+  "platformName": "Creative Lab",
+  "packageScope": "@creative-lab",
+  "nodeEngine": ">=20",
+  "packageManager": "pnpm@9.15.0",
+  "defaultLanguage": "TypeScript"
+}
