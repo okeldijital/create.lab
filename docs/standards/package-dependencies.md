@@ -221,3 +221,13 @@ Changes to this matrix require:
         ↑
 @creative-lab/infrastructure
 ```
+
+## BUILD-012 addendum
+
+`infrastructure` may depend on `capacity` for concrete repository adapters implementing EPIC-203 ports (CapacityProfile, Capability, AvailabilityProfile, WorkingPattern, ResourceCapacity). The capacity domain must not import infrastructure, Drizzle, or postgres.js. Direction remains:
+
+```text
+@creative-lab/capacity
+        ↑
+@creative-lab/infrastructure
+```

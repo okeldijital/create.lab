@@ -1,6 +1,6 @@
 import type { OrganizationId } from "@creative-lab/organization";
 import type { CapacityProfileId, ResourceCapacity, ResourceCapacityId, ResourceCapacityRepository } from "@creative-lab/capacity";
-import { and, eq } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 import type { DrizzleDatabase } from "../PostgresDatabase.js";
 import { resourceCapacities } from "./schema.js";
 import { ResourceCapacityMapper } from "./mappers.js";

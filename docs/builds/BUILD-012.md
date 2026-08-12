@@ -2,7 +2,7 @@
 
 ## Status
 
-Implementation complete / validation pending
+**Completed — locally validated**
 
 ## Scope
 
@@ -25,6 +25,14 @@ Infrastructure responsibilities:
 - migration `0008_capacity_persistence.sql`
 - mapper round-trip tests
 
+## Boundary
+
+Dependency direction:
+
+`@creative-lab/infrastructure → @creative-lab/capacity`
+
+The Capacity domain remains independent of PostgreSQL, Drizzle, and infrastructure.
+
 ## Non-scope
 
 - Scheduling persistence
@@ -36,4 +44,4 @@ Infrastructure responsibilities:
 
 ## Validation
 
-Validation is pending local execution of the full monorepo gates.
+Local validation gates were executed on `build/012-capacity-persistence`. See `reports/build-012-validation.md` for measured results.

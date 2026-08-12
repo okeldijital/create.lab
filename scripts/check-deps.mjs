@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Dependency graph enforcement for Creative Lab packages.
- * BUILD-011 adds Infrastructure → Knowledge repository adapters.
+ * BUILD-012 adds Infrastructure → Capacity repository adapters.
  */
 
 import { readFileSync, readdirSync, existsSync } from "node:fs";
@@ -16,7 +16,7 @@ const ALLOWED_DEPS = {
   core: new Set([]),
   config: new Set([]),
   ui: new Set(["core", "config"]),
-  infrastructure: new Set(["application", "organization", "crm", "workforce", "services", "quotation", "contracts", "knowledge", "core", "config"]),
+  infrastructure: new Set(["application", "organization", "crm", "workforce", "capacity", "services", "quotation", "contracts", "knowledge", "core", "config"]),
   organization: new Set(["core", "infrastructure", "config"]),
   workforce: new Set(["organization", "core", "infrastructure", "config"]),
   capacity: new Set(["workforce", "organization", "core", "infrastructure", "config"]),

@@ -125,7 +125,7 @@ upstream contexts; never reverse). See
 | **Upstream dependencies**      | Workforce, Organization, Core (package uses core + organization + workforce).                            |
 | **Downstream dependencies**    | Scheduling, Allocation, Operations.                                                                      |
 | **Primary aggregates**         | CapacityProfile (root per resource); Capability; AvailabilityProfile; WorkingPattern; ResourceCapacity.  |
-| **Implementation package**     | `@creative-lab/capacity` — pure domain model (EPIC-203).                                                 |
+| **Implementation package**     | `@creative-lab/capacity` — pure domain model (EPIC-203). Persistence adapters: BUILD-012 infrastructure. |
 | **Future epics**               | EPIC-203 domain complete; equipment resource types; scheduling consumption.                              |
 
 ---

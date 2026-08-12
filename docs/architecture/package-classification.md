@@ -87,6 +87,8 @@ dependencies, and lifecycle expectations remain explicit.
 
 **BUILD-011:** Infrastructure owns EPIC-220 Knowledge PostgreSQL/Drizzle adapters (KnowledgeCategory, KnowledgeArticle, KnowledgeVersion, KnowledgeReference).
 
+**BUILD-012:** Infrastructure owns EPIC-203 Capacity PostgreSQL/Drizzle adapters (CapacityProfile, Capability, AvailabilityProfile, WorkingPattern, ResourceCapacity).
+
 ## config — Platform Configuration
 
 | Field                          | Value                                                                                      |

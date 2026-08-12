@@ -590,6 +590,9 @@ importers:
       '@creative-lab/application':
         specifier: workspace:*
         version: link:../application
+      '@creative-lab/capacity':
+        specifier: workspace:*
+        version: link:../capacity
       '@creative-lab/contracts':
         specifier: workspace:*
         version: link:../contracts
