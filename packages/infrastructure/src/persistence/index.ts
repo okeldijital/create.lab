@@ -15,6 +15,22 @@ export {
 } from "./contracts/index.js";
 
 export {
+  knowledgeCategories,
+  knowledgeArticles,
+  knowledgeVersions,
+  knowledgeReferences,
+  knowledgeSchema,
+  KnowledgeCategoryMapper,
+  KnowledgeArticleMapper,
+  KnowledgeVersionMapper,
+  KnowledgeReferenceMapper,
+  PostgresKnowledgeCategoryRepository,
+  PostgresKnowledgeArticleRepository,
+  PostgresKnowledgeVersionRepository,
+  PostgresKnowledgeReferenceRepository,
+} from "./knowledge/index.js";
+
+export {
   organizations,
   departments,
   teams,
