@@ -107,6 +107,19 @@ export {
 } from "./operations/index.js";
 
 export {
+  allocations,
+  allocationGroups,
+  reservations,
+  allocationSchema,
+  AllocationMapper,
+  AllocationGroupMapper,
+  ReservationMapper,
+  PostgresAllocationRepository,
+  PostgresAllocationGroupRepository,
+  PostgresReservationRepository,
+} from "./allocation/index.js";
+
+export {
   organizations,
   departments,
   teams,

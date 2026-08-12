@@ -2,7 +2,7 @@
   "name": "@creative-lab/infrastructure",
   "version": "0.0.0",
   "private": true,
-  "description": "Creative Lab infrastructure package — BUILD-015 Operations persistence",
+  "description": "Creative Lab infrastructure package — BUILD-016 Allocation persistence",
   "type": "module",
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
@@ -20,6 +20,7 @@
     "clean": "rm -rf dist coverage .turbo *.tsbuildinfo"
   },
   "dependencies": {
+    "@creative-lab/allocation": "workspace:*",
     "@creative-lab/application": "workspace:*",
     "@creative-lab/capacity": "workspace:*",
     "@creative-lab/contracts": "workspace:*",

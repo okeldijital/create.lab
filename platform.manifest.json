@@ -2,7 +2,7 @@
   "platformVersion": "0.0.0",
   "constitutionVersion": "BUILD-000",
   "engineeringStandardsVersion": "BUILD-000A",
-  "architectureVersion": "BUILD-015",
+  "architectureVersion": "BUILD-016",
   "domainLayerVersion": "EPIC-220",
   "dependencyMatrixVersion": "EPIC-220",
   "documentVersions": {
@@ -27,7 +27,8 @@
     "build012": "BUILD-012",
     "build013": "BUILD-013",
     "build014": "BUILD-014",
-    "build015": "BUILD-015"
+    "build015": "BUILD-015",
+    "build016": "BUILD-016"
   },
   "packages": [
     {
@@ -50,9 +51,9 @@
       "path": "packages/infrastructure",
       "version": "0.0.0",
       "classification": "Infrastructure",
-      "implementation": "BUILD-002 foundation + BUILD-004 PostgreSQL/Drizzle + BUILD-005 Organization + BUILD-006 CRM + BUILD-007 Workforce + BUILD-008 Services + BUILD-009 Quotation + BUILD-010 Contracts + BUILD-011 Knowledge + BUILD-012 Capacity + BUILD-013 Scheduling + BUILD-014 Projects + BUILD-015 Operations persistence",
+      "implementation": "BUILD-002 foundation + BUILD-004 PostgreSQL/Drizzle + BUILD-005 Organization + BUILD-006 CRM + BUILD-007 Workforce + BUILD-008 Services + BUILD-009 Quotation + BUILD-010 Contracts + BUILD-011 Knowledge + BUILD-012 Capacity + BUILD-013 Scheduling + BUILD-014 Projects + BUILD-015 Operations + BUILD-016 Allocation persistence",
       "status": "infrastructure-implemented",
-      "notes": "In-memory UnitOfWork/EventDispatcher/AuthorizationService; PostgreSQL + Drizzle + postgres.js; PostgresUnitOfWork; EPIC-201 Organization; EPIC-214 CRM; EPIC-202 Workforce; EPIC-215 Services; EPIC-216 Quotation; EPIC-217 Contracts; EPIC-220 Knowledge; EPIC-203 Capacity; EPIC-204 Scheduling; EPIC-207 Projects; EPIC-206 Operations WorkOrder/WorkSession/WorkMilestone/WorkOutput/WorkIncident schema, mappers, and repository adapters"
+      "notes": "In-memory UnitOfWork/EventDispatcher/AuthorizationService; PostgreSQL + Drizzle + postgres.js; PostgresUnitOfWork; EPIC-201 Organization; EPIC-214 CRM; EPIC-202 Workforce; EPIC-215 Services; EPIC-216 Quotation; EPIC-217 Contracts; EPIC-220 Knowledge; EPIC-203 Capacity; EPIC-204 Scheduling; EPIC-207 Projects; EPIC-206 Operations; EPIC-208 Allocation Allocation/AllocationGroup/Reservation schema, mappers, and repository adapters"
     },
     {
       "name": "@creative-lab/ui",
@@ -478,6 +479,7 @@
         "scheduling",
         "operations",
         "projects",
+        "allocation",
         "services",
         "quotation",
         "contracts",
@@ -1025,6 +1027,16 @@
       "report": "reports/build-015-validation.md",
       "migration": "packages/infrastructure/migrations/0011_operations_persistence.sql",
       "domain": "EPIC-206"
+    },
+    {
+      "id": "BUILD-016",
+      "title": "Allocation Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/allocation",
+      "document": "docs/builds/BUILD-016.md",
+      "report": "reports/build-016-validation.md",
+      "migration": "packages/infrastructure/migrations/0012_allocation_persistence.sql",
+      "domain": "EPIC-208"
     },
     {
       "id": "CORE-001",

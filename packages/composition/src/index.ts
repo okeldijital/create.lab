@@ -50,3 +50,7 @@ export {
   OPERATIONS_REPOSITORY_KEYS,
   registerPostgresOperationsRepositories,
 } from "./OperationsPersistenceComposition.js";
+export {
+  ALLOCATION_REPOSITORY_KEYS,
+  registerPostgresAllocationRepositories,
+} from "./AllocationPersistenceComposition.js";

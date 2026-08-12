@@ -161,7 +161,7 @@ upstream contexts; never reverse). See
 | **Upstream dependencies**      | Projects, Operations, Scheduling, Capacity, Workforce, Organization, Core.                                                          |
 | **Downstream dependencies**    | Production; reporting / analytics / billing consumers of commitment history.                                                        |
 | **Primary aggregates**         | Allocation; AllocationGroup; Reservation.                                                                                           |
-| **Implementation package**     | `@creative-lab/allocation` — pure domain model (EPIC-208).                                                                          |
+| **Implementation package**     | `@creative-lab/allocation` — pure domain model (EPIC-208). Persistence adapters: BUILD-016 infrastructure.                          |
 | **Future epics**               | EPIC-208 domain complete; adapters deferred.                                                                                        |
 
 

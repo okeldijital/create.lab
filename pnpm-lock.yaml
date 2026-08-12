@@ -587,6 +587,9 @@ importers:
 
   packages/infrastructure:
     dependencies:
+      '@creative-lab/allocation':
+        specifier: workspace:*
+        version: link:../allocation
       '@creative-lab/application':
         specifier: workspace:*
         version: link:../application

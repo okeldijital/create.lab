@@ -95,6 +95,8 @@ dependencies, and lifecycle expectations remain explicit.
 
 **BUILD-015:** Infrastructure owns EPIC-206 Operations PostgreSQL/Drizzle adapters (WorkOrder, WorkSession, WorkMilestone, WorkOutput, WorkIncident).
 
+**BUILD-016:** Infrastructure owns EPIC-208 Resource Allocation PostgreSQL/Drizzle adapters (Allocation, AllocationGroup, Reservation).
+
 ## config — Platform Configuration
 
 | Field                          | Value                                                                                      |

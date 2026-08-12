@@ -263,3 +263,15 @@ Changes to this matrix require:
 ```
 
 Operations references Allocation and Booking identities as opaque UUIDs only; BUILD-015 does not create reverse domain dependencies or allocation/booking tables.
+
+## BUILD-016 addendum
+
+`infrastructure` may depend on `allocation` for concrete repository adapters implementing EPIC-208 ports (Allocation, AllocationGroup, Reservation). The allocation domain must not import infrastructure, Drizzle, or postgres.js. Direction remains:
+
+```text
+@creative-lab/allocation
+        ↑
+@creative-lab/infrastructure
+```
+
+Allocation is downstream of Projects and Operations. Project, work-order, and resource identities are stored as opaque references (no new Resource table).
