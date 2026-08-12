@@ -93,6 +93,8 @@ dependencies, and lifecycle expectations remain explicit.
 
 **BUILD-014:** Infrastructure owns EPIC-207 Projects PostgreSQL/Drizzle adapters (Project, ProjectPhase, ProjectObjective, ProjectDependency, Deliverable).
 
+**BUILD-015:** Infrastructure owns EPIC-206 Operations PostgreSQL/Drizzle adapters (WorkOrder, WorkSession, WorkMilestone, WorkOutput, WorkIncident).
+
 ## config — Platform Configuration
 
 | Field                          | Value                                                                                      |

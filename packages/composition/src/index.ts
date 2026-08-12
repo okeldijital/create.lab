@@ -46,3 +46,7 @@ export {
   PROJECTS_REPOSITORY_KEYS,
   registerPostgresProjectsRepositories,
 } from "./ProjectsPersistenceComposition.js";
+export {
+  OPERATIONS_REPOSITORY_KEYS,
+  registerPostgresOperationsRepositories,
+} from "./OperationsPersistenceComposition.js";

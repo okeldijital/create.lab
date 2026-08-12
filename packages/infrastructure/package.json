@@ -2,7 +2,7 @@
   "name": "@creative-lab/infrastructure",
   "version": "0.0.0",
   "private": true,
-  "description": "Creative Lab infrastructure package — BUILD-014 Projects persistence",
+  "description": "Creative Lab infrastructure package — BUILD-015 Operations persistence",
   "type": "module",
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
@@ -26,6 +26,7 @@
     "@creative-lab/core": "workspace:*",
     "@creative-lab/crm": "workspace:*",
     "@creative-lab/knowledge": "workspace:*",
+    "@creative-lab/operations": "workspace:*",
     "@creative-lab/organization": "workspace:*",
     "@creative-lab/projects": "workspace:*",
     "@creative-lab/quotation": "workspace:*",

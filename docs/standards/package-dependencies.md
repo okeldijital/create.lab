@@ -251,3 +251,15 @@ Changes to this matrix require:
         ↑
 @creative-lab/infrastructure
 ```
+
+## BUILD-015 addendum
+
+`infrastructure` may depend on `operations` for concrete repository adapters implementing EPIC-206 ports (WorkOrder, WorkSession, WorkMilestone, WorkOutput, WorkIncident). The operations domain must not import infrastructure, Drizzle, or postgres.js. Direction remains:
+
+```text
+@creative-lab/operations
+        ↑
+@creative-lab/infrastructure
+```
+
+Operations references Allocation and Booking identities as opaque UUIDs only; BUILD-015 does not create reverse domain dependencies or allocation/booking tables.

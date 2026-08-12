@@ -178,7 +178,7 @@ upstream contexts; never reverse). See
 | **Upstream dependencies**      | Scheduling, Capacity, Workforce, Organization, Core.                                                                                |
 | **Downstream dependencies**    | Reporting / Analytics / Billing (future consumers of execution history).                                                            |
 | **Primary aggregates**         | WorkOrder (root); WorkSession; WorkMilestone; WorkOutput (metadata); WorkIncident.                                                  |
-| **Implementation package**     | `@creative-lab/operations` — pure domain model (EPIC-206).                                                                          |
+| **Implementation package**     | `@creative-lab/operations` — pure domain model (EPIC-206). Persistence adapters: BUILD-015 infrastructure.                          |
 | **Future epics**               | EPIC-206 domain complete; adapters and reporting consumers deferred.                                                                |
 
 ### Package note

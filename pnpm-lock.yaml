@@ -605,6 +605,9 @@ importers:
       '@creative-lab/knowledge':
         specifier: workspace:*
         version: link:../knowledge
+      '@creative-lab/operations':
+        specifier: workspace:*
+        version: link:../operations
       '@creative-lab/organization':
         specifier: workspace:*
         version: link:../organization

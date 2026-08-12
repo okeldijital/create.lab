@@ -88,6 +88,25 @@ export {
 } from "./projects/index.js";
 
 export {
+  workOrders,
+  workSessions,
+  workMilestones,
+  workOutputs,
+  workIncidents,
+  operationsSchema,
+  WorkOrderMapper,
+  WorkSessionMapper,
+  WorkMilestoneMapper,
+  WorkOutputMapper,
+  WorkIncidentMapper,
+  PostgresWorkOrderRepository,
+  PostgresWorkSessionRepository,
+  PostgresWorkMilestoneRepository,
+  PostgresWorkOutputRepository,
+  PostgresWorkIncidentRepository,
+} from "./operations/index.js";
+
+export {
   organizations,
   departments,
   teams,
