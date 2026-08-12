@@ -2,7 +2,7 @@
   "platformVersion": "0.0.0",
   "constitutionVersion": "BUILD-000",
   "engineeringStandardsVersion": "BUILD-000A",
-  "architectureVersion": "BUILD-010",
+  "architectureVersion": "BUILD-011",
   "domainLayerVersion": "EPIC-220",
   "dependencyMatrixVersion": "EPIC-220",
   "documentVersions": {
@@ -22,7 +22,8 @@
     "build007": "BUILD-007",
     "build008": "BUILD-008",
     "build009": "BUILD-009",
-    "build010": "BUILD-010"
+    "build010": "BUILD-010",
+    "build011": "BUILD-011"
   },
   "packages": [
     {
@@ -45,9 +46,9 @@
       "path": "packages/infrastructure",
       "version": "0.0.0",
       "classification": "Infrastructure",
-      "implementation": "BUILD-002 foundation + BUILD-004 PostgreSQL/Drizzle + BUILD-005 Organization + BUILD-006 CRM + BUILD-007 Workforce + BUILD-008 Services + BUILD-009 Quotation + BUILD-010 Contracts persistence",
+      "implementation": "BUILD-002 foundation + BUILD-004 PostgreSQL/Drizzle + BUILD-005 Organization + BUILD-006 CRM + BUILD-007 Workforce + BUILD-008 Services + BUILD-009 Quotation + BUILD-010 Contracts + BUILD-011 Knowledge persistence",
       "status": "infrastructure-implemented",
-      "notes": "In-memory UnitOfWork/EventDispatcher/AuthorizationService; PostgreSQL + Drizzle + postgres.js; PostgresUnitOfWork; EPIC-201 Organization; EPIC-214 CRM; EPIC-202 Workforce; EPIC-215 Services; EPIC-216 Quotation Quote/QuoteVersion/QuoteLine/QuoteApproval; EPIC-217 Contracts Contract/ContractVersion/ContractTerm/ContractAmendment schema, mappers, and repository adapters"
+      "notes": "In-memory UnitOfWork/EventDispatcher/AuthorizationService; PostgreSQL + Drizzle + postgres.js; PostgresUnitOfWork; EPIC-201 Organization; EPIC-214 CRM; EPIC-202 Workforce; EPIC-215 Services; EPIC-216 Quotation; EPIC-217 Contracts; EPIC-220 Knowledge KnowledgeCategory/KnowledgeArticle/KnowledgeVersion/KnowledgeReference schema, mappers, and repository adapters"
     },
     {
       "name": "@creative-lab/ui",
@@ -472,6 +473,7 @@
         "services",
         "quotation",
         "contracts",
+        "knowledge",
         "core",
         "config"
       ]
@@ -965,6 +967,16 @@
       "report": "reports/build-010-validation.md",
       "migration": "packages/infrastructure/migrations/0006_contracts_persistence.sql",
       "domain": "EPIC-217"
+    },
+    {
+      "id": "BUILD-011",
+      "title": "Knowledge Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/knowledge",
+      "document": "docs/builds/BUILD-011.md",
+      "report": "reports/build-011-validation.md",
+      "migration": "packages/infrastructure/migrations/0007_knowledge_persistence.sql",
+      "domain": "EPIC-220"
     },
     {
       "id": "CORE-001",

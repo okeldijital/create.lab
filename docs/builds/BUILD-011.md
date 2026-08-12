@@ -2,7 +2,7 @@
 
 ## Status
 
-Implementation complete — validation pending.
+**Completed — locally validated**
 
 ## Scope
 
@@ -43,16 +43,4 @@ The Knowledge domain remains independent of PostgreSQL, Drizzle, and infrastruct
 
 ## Validation
 
-Full local validation is pending. The required gates are:
-
-```text
-pnpm install --frozen-lockfile
-pnpm typecheck
-pnpm lint
-pnpm test
-pnpm build
-pnpm exec node scripts/check-deps.mjs
-pnpm exec node scripts/scaffold-check.mjs
-```
-
-Live PostgreSQL integration must be reported separately from mapper/unit validation.
+Local validation gates were executed on `build/011-knowledge-persistence`. See `reports/build-011-validation.md` for measured results.

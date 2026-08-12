@@ -404,7 +404,7 @@ identities without owning Operations data.
 | **Upstream dependencies**      | Portfolio, Engagement, Contracts, Quotation, Services, CRM, Billing, Delivery, Review, Assets, Production, Allocation, Projects, Operations, Scheduling, Capacity, Workforce, Organization, Core. |
 | **Downstream dependencies**    | _(none — terminal business domain)_                                                                                                 |
 | **Primary aggregates**         | KnowledgeArticle; KnowledgeVersion; KnowledgeCategory; KnowledgeReference.                                                          |
-| **Implementation package**     | `@creative-lab/knowledge` — pure domain model (EPIC-220).                                                                           |
+| **Implementation package**     | `@creative-lab/knowledge` — pure domain model (EPIC-220). Persistence adapters: BUILD-011 infrastructure.                           |
 | **Future epics**               | EPIC-220 domain complete; content/search adapters deferred to infrastructure.                                                       |
 
 ---

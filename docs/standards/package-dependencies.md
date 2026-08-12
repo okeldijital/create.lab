@@ -211,3 +211,13 @@ Changes to this matrix require:
         ↑
 @creative-lab/infrastructure
 ```
+
+## BUILD-011 addendum
+
+`infrastructure` may depend on `knowledge` for concrete repository adapters implementing EPIC-220 ports (KnowledgeCategory, KnowledgeArticle, KnowledgeVersion, KnowledgeReference). The knowledge domain must not import infrastructure, Drizzle, or postgres.js. Direction remains:
+
+```text
+@creative-lab/knowledge
+        ↑
+@creative-lab/infrastructure
+```

@@ -85,6 +85,8 @@ dependencies, and lifecycle expectations remain explicit.
 
 **BUILD-010:** Infrastructure owns EPIC-217 Contracts PostgreSQL/Drizzle adapters (Contract, ContractVersion, ContractTerm, ContractAmendment).
 
+**BUILD-011:** Infrastructure owns EPIC-220 Knowledge PostgreSQL/Drizzle adapters (KnowledgeCategory, KnowledgeArticle, KnowledgeVersion, KnowledgeReference).
+
 ## config — Platform Configuration
 
 | Field                          | Value                                                                                      |
