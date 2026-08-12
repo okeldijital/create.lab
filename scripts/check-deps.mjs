@@ -13,7 +13,9 @@ const root = join(__dirname, "..");
 const packagesDir = join(root, "packages");
 
 const ALLOWED_DEPS = {
-  core: new Set([]), config: new Set([]), ui: new Set(["core", "config"]),
+  core: new Set([]),
+  config: new Set([]),
+  ui: new Set(["core", "config"]),
   infrastructure: new Set(["application", "organization", "crm", "workforce", "services", "quotation", "contracts", "core", "config"]),
   organization: new Set(["core", "infrastructure", "config"]),
   workforce: new Set(["organization", "core", "infrastructure", "config"]),
@@ -34,19 +36,83 @@ const ALLOWED_DEPS = {
   engagement: new Set(["contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
   portfolio: new Set(["engagement", "contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
   knowledge: new Set(["portfolio", "engagement", "contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
+  collaboration: new Set(["core", "organization"]),
+  "test-utils": new Set([]),
   application: new Set(["knowledge", "portfolio", "engagement", "contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
-  composition: new Set(["application", "infrastructure"]), collaboration: new Set(["core", "organization"]), "test-utils": new Set([]),
+  composition: new Set(["application", "infrastructure"]),
 };
+
 const REGISTERED = new Set(Object.keys(ALLOWED_DEPS));
 const SCOPE = "@creative-lab";
-function listPackages() { return readdirSync(packagesDir, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name); }
-function readPackageJson(name) { const p = join(packagesDir, name, "package.json"); if (!existsSync(p)) return null; return JSON.parse(readFileSync(p, "utf8")); }
-function shortName(dep) { return dep.startsWith(`${SCOPE}/`) ? dep.slice(SCOPE.length + 1) : null; }
-function collectWorkspaceDeps(pkgJson) { const deps = { ...(pkgJson.dependencies || {}), ...(pkgJson.peerDependencies || {}) }; return Object.entries(deps).flatMap(([name, version]) => { const short = shortName(name); return short && typeof version === "string" && version.startsWith("workspace:") ? [short] : []; }); }
-function main() {
-  const packages = listPackages(); let failed = false; const graph = new Map();
-  for (const name of packages) { if (!REGISTERED.has(name)) { console.error(`Unregistered package directory: packages/${name}`); failed = true; continue; } const pkg = readPackageJson(name); if (!pkg) { console.error(`Missing package.json for ${name}`); failed = true; continue; } const allowed = ALLOWED_DEPS[name]; const actual = collectWorkspaceDeps(pkg); graph.set(name, new Set(actual)); for (const dep of actual) { if (!REGISTERED.has(dep) || !allowed.has(dep)) { console.error(`Dependency violation: ${name} → ${dep} is not allowed by the matrix.`); failed = true; } } }
-  const visiting = new Set(); const visited = new Set(); function dfs(node, path) { if (visiting.has(node)) { console.error(`Circular dependency detected: ${[...path, node].join(" → ")}`); failed = true; return; } if (visited.has(node)) return; visiting.add(node); for (const next of graph.get(node) || []) dfs(next, [...path, node]); visiting.delete(node); visited.add(node); }
-  for (const name of graph.keys()) dfs(name, []); if (failed) process.exit(1); console.log("Dependency graph check passed.");
+
+function listPackages() {
+  return readdirSync(packagesDir, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name);
 }
+
+function readPackageJson(name) {
+  const p = join(packagesDir, name, "package.json");
+  if (!existsSync(p)) return null;
+  return JSON.parse(readFileSync(p, "utf8"));
+}
+
+function shortName(dep) {
+  return dep.startsWith(`${SCOPE}/`) ? dep.slice(SCOPE.length + 1) : null;
+}
+
+function collectWorkspaceDeps(pkgJson) {
+  const deps = { ...(pkgJson.dependencies || {}), ...(pkgJson.peerDependencies || {}) };
+  return Object.entries(deps).flatMap(([name, version]) => {
+    const short = shortName(name);
+    return short && typeof version === "string" && version.startsWith("workspace:") ? [short] : [];
+  });
+}
+
+function main() {
+  const packages = listPackages();
+  let failed = false;
+  const graph = new Map();
+
+  for (const name of packages) {
+    if (!REGISTERED.has(name)) {
+      console.error(`Unregistered package directory: packages/${name}`);
+      failed = true;
+      continue;
+    }
+    const pkg = readPackageJson(name);
+    if (!pkg) {
+      console.error(`Missing package.json for ${name}`);
+      failed = true;
+      continue;
+    }
+    const allowed = ALLOWED_DEPS[name];
+    const actual = collectWorkspaceDeps(pkg);
+    graph.set(name, new Set(actual));
+    for (const dep of actual) {
+      if (!REGISTERED.has(dep) || !allowed.has(dep)) {
+        console.error(`Dependency violation: ${name} → ${dep} is not allowed by the matrix.`);
+        failed = true;
+      }
+    }
+  }
+
+  const visiting = new Set();
+  const visited = new Set();
+  function dfs(node, path) {
+    if (visiting.has(node)) {
+      console.error(`Circular dependency detected: ${[...path, node].join(" → ")}`);
+      failed = true;
+      return;
+    }
+    if (visited.has(node)) return;
+    visiting.add(node);
+    for (const next of graph.get(node) || []) dfs(next, [...path, node]);
+    visiting.delete(node);
+    visited.add(node);
+  }
+  for (const name of graph.keys()) dfs(name, []);
+
+  if (failed) process.exit(1);
+  console.log("Dependency graph check passed.");
+}
+
 main();
