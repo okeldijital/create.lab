@@ -9,6 +9,7 @@ import {
   CapacityUnit,
   CapabilityLevel,
   ResourceType,
+  asResourceId,
 } from "@creative-lab/capacity";
 import type { OrganizationId } from "@creative-lab/organization";
 import {
@@ -45,7 +46,7 @@ const workingPattern = WorkingPattern.create({
 const capacityProfile = CapacityProfile.create({
   id: id(),
   organizationId,
-  resourceId: id() as never,
+  resourceId: asResourceId(id()),
   resourceType: ResourceType.WORKER,
   availabilityProfileId: availabilityProfile.id,
   workingPatternId: workingPattern.id,
