@@ -1,34 +1,37 @@
 # @creative-lab/infrastructure
 
-> Platform infrastructure package — scaffolding only (BUILD-000A).
+> Platform infrastructure package — concrete adapters for the application layer (BUILD-002 onward).
 
 ## Purpose
 
-`infrastructure` provides all platform-level technical capabilities that are
-not business-domain concerns. It keeps `@creative-lab/core` framework-agnostic
-by owning concrete adapters and technical integrations.
+`infrastructure` owns technical implementations behind application and domain
+ports. It keeps business-domain packages framework- and database-agnostic.
 
-## Responsibilities
+## BUILD-004 Persistence Foundation
 
-Owns (when implemented in future builds):
+The persistence boundary is standardized as:
 
-- Payload CMS integration
-- Environment and configuration loading
-- Logging
-- Storage, email, queue, cache, and search providers
-- External API clients
-- Authentication providers (technical adapters)
-- File and object storage
-- Event bus and scheduler implementations
-- Infrastructure adapters
+- PostgreSQL — relational database
+- Drizzle ORM — schema/query layer
+- postgres.js — PostgreSQL driver
+- `DATABASE_URL` — connection configuration
+- `PostgresUnitOfWork` — infrastructure implementation of the application
+  `UnitOfWork` port
 
-**Never contains business rules.**
+BUILD-004 intentionally does **not** introduce a generic persistence table
+model or move domain rules into infrastructure. Bounded-context repository
+adapters and their schemas are added against the repository ports they own.
 
 ## Structure
 
 ```
 packages/infrastructure/
 ├── src/
+│   ├── persistence/
+│   │   ├── PostgresConfiguration.ts
+│   │   ├── PostgresDatabase.ts
+│   │   ├── PostgresUnitOfWork.ts
+│   │   └── index.ts
 │   ├── config/
 │   ├── logging/
 │   ├── storage/
@@ -39,10 +42,8 @@ packages/infrastructure/
 │   ├── payload/
 │   ├── auth/
 │   ├── integrations/
-│   ├── scheduler/
 │   ├── events/
 │   ├── adapters/
-│   ├── utils/
 │   └── index.ts
 ├── package.json
 ├── tsconfig.json
@@ -52,18 +53,12 @@ packages/infrastructure/
 
 ## Dependency rules
 
-May import: `@creative-lab/core`, `@creative-lab/config`.
+Infrastructure may depend on application/core/config as prescribed by the
+package dependency matrix. Domain and application packages must not import
+Drizzle, postgres.js, SQL drivers, or PostgreSQL-specific types.
 
-Must not import domain packages (`organization`, `workforce`, etc.) or `@creative-lab/ui`.
-
-See [package-dependencies](../../docs/standards/package-dependencies.md).
-
-## Authority
-
-- Platform Constitution Title II
-- ADR-008 Package Boundaries
-- Package Classification: Infrastructure
-- BUILD-000A-01
+See [package-dependencies](../../docs/standards/package-dependencies.md) and
+[ADR-008](../../docs/adr/ADR-008-postgresql-drizzle-persistence.md).
 
 ## Development
 
