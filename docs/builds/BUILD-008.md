@@ -2,7 +2,7 @@
 
 ## Status
 
-Implementation complete; local validation pending.
+**Completed — locally validated.**
 
 ## Scope
 
@@ -63,16 +63,4 @@ Mapper round-trip coverage was added for all four aggregates. Live PostgreSQL in
 
 ## Validation
 
-The local implementation agent must run:
-
-```bash
-pnpm install --frozen-lockfile
-pnpm typecheck
-pnpm lint
-pnpm test
-pnpm build
-pnpm exec node scripts/check-deps.mjs
-pnpm exec node scripts/scaffold-check.mjs
-```
-
-BUILD-008 must not be considered validated until all gates pass and the working tree is clean.
+Local monorepo gates have been executed and passed. See `reports/build-008-validation.md`.

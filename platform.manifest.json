@@ -2,7 +2,7 @@
   "platformVersion": "0.0.0",
   "constitutionVersion": "BUILD-000",
   "engineeringStandardsVersion": "BUILD-000A",
-  "architectureVersion": "BUILD-007",
+  "architectureVersion": "BUILD-008",
   "domainLayerVersion": "EPIC-220",
   "dependencyMatrixVersion": "EPIC-220",
   "documentVersions": {
@@ -19,7 +19,8 @@
     "build004PersistenceAdr": "docs/adr/ADR-008-postgresql-drizzle-persistence.md",
     "build005": "BUILD-005",
     "build006": "BUILD-006",
-    "build007": "BUILD-007"
+    "build007": "BUILD-007",
+    "build008": "BUILD-008"
   },
   "packages": [
     {
@@ -42,9 +43,9 @@
       "path": "packages/infrastructure",
       "version": "0.0.0",
       "classification": "Infrastructure",
-      "implementation": "BUILD-002 foundation + BUILD-004 PostgreSQL/Drizzle + BUILD-005 Organization + BUILD-006 CRM + BUILD-007 Workforce persistence",
+      "implementation": "BUILD-002 foundation + BUILD-004 PostgreSQL/Drizzle + BUILD-005 Organization + BUILD-006 CRM + BUILD-007 Workforce + BUILD-008 Services persistence",
       "status": "infrastructure-implemented",
-      "notes": "In-memory UnitOfWork/EventDispatcher/AuthorizationService; PostgreSQL + Drizzle + postgres.js; PostgresUnitOfWork; EPIC-201 Organization adapters; EPIC-214 CRM adapters; EPIC-202 Workforce Worker/Position/Employment/EmploymentContract/ReportingRelationship schema, mappers, and repository adapters"
+      "notes": "In-memory UnitOfWork/EventDispatcher/AuthorizationService; PostgreSQL + Drizzle + postgres.js; PostgresUnitOfWork; EPIC-201 Organization; EPIC-214 CRM; EPIC-202 Workforce; EPIC-215 Services Service/ServiceCategory/PriceBook/PriceRule schema, mappers, and repository adapters"
     },
     {
       "name": "@creative-lab/ui",
@@ -926,6 +927,16 @@
       "report": "reports/build-007-validation.md",
       "migration": "packages/infrastructure/migrations/0003_workforce_persistence.sql",
       "domain": "EPIC-202"
+    },
+    {
+      "id": "BUILD-008",
+      "title": "Services Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/services",
+      "document": "docs/builds/BUILD-008.md",
+      "report": "reports/build-008-validation.md",
+      "migration": "packages/infrastructure/migrations/0004_services_persistence.sql",
+      "domain": "EPIC-215"
     },
     {
       "id": "CORE-001",
