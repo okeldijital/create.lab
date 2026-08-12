@@ -31,7 +31,7 @@ describe("organization persistence mappings", () => {
 
   it("maps organizations to persistence rows and reconstitutes them", () => {
     const row = OrganizationMapper.toRow(organization);
-    const restored = OrganizationMapper.fromRow(row as typeof row & { id: string });
+    const restored = OrganizationMapper.fromRow(row);
 
     expect(row.id).toBe(organization.id);
     expect(row.slug).toBe("creative-lab");

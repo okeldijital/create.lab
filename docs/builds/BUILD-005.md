@@ -2,7 +2,7 @@
 
 ## Status
 
-**Implementation complete; local validation pending.**
+**Completed — locally validated.**
 
 ## Objective
 

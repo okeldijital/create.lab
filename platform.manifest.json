@@ -2,7 +2,7 @@
   "platformVersion": "0.0.0",
   "constitutionVersion": "BUILD-000",
   "engineeringStandardsVersion": "BUILD-000A",
-  "architectureVersion": "BUILD-004",
+  "architectureVersion": "BUILD-005",
   "domainLayerVersion": "EPIC-220",
   "dependencyMatrixVersion": "EPIC-220",
   "documentVersions": {
@@ -16,7 +16,8 @@
     "build003DependencyMatrix": "BUILD-003",
     "build003PackageClassification": "BUILD-003",
     "build004": "BUILD-004",
-    "build004PersistenceAdr": "docs/adr/ADR-008-postgresql-drizzle-persistence.md"
+    "build004PersistenceAdr": "docs/adr/ADR-008-postgresql-drizzle-persistence.md",
+    "build005": "BUILD-005"
   },
   "packages": [
     {
@@ -39,9 +40,9 @@
       "path": "packages/infrastructure",
       "version": "0.0.0",
       "classification": "Infrastructure",
-      "implementation": "BUILD-002 infrastructure foundation + BUILD-004 PostgreSQL/Drizzle persistence foundation",
+      "implementation": "BUILD-002 foundation + BUILD-004 PostgreSQL/Drizzle + BUILD-005 EPIC-201 Organization persistence adapters",
       "status": "infrastructure-implemented",
-      "notes": "In-memory UnitOfWork, EventDispatcher, AuthorizationService; PostgreSQL + Drizzle ORM + postgres.js persistence foundation; PostgresUnitOfWork implements application UnitOfWork port; no domain-specific schemas or repository adapters yet"
+      "notes": "In-memory UnitOfWork/EventDispatcher/AuthorizationService; PostgreSQL + Drizzle + postgres.js persistence foundation; PostgresUnitOfWork; EPIC-201 Organization/Department/Team/Studio/OrganizationSettings schema, mappers, and repository adapters"
     },
     {
       "name": "@creative-lab/ui",
@@ -893,6 +894,16 @@
         "orm": "Drizzle ORM",
         "driver": "postgres.js"
       }
+    },
+    {
+      "id": "BUILD-005",
+      "title": "Organization Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/organization",
+      "document": "docs/builds/BUILD-005.md",
+      "report": "reports/build-005-validation.md",
+      "migration": "packages/infrastructure/migrations/0001_organization_persistence.sql",
+      "domain": "EPIC-201"
     },
     {
       "id": "CORE-001",
