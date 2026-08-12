@@ -2,48 +2,70 @@
 
 ## Status
 
-**NOT VALIDATED — local execution required.**
+**VALIDATED**
 
-BUILD-003 has been implemented on `build/003-integration-composition-foundation`, but this environment cannot execute the monorepo's pnpm toolchain against the repository checkout.
+| Field | Value |
+| ----- | ----- |
+| Branch | `build/003-integration-composition-foundation` |
+| Baseline | `43f61398a6ae42f349f198b7ea3cdbf3b988d140` (BUILD-002 merge) |
+| Package | `@creative-lab/composition` |
+| Date | 2026-08-12 |
 
-## Implementation checks performed
+## Implementation summary
 
-- Branch created from validated BUILD-002 merge `43f61398a6ae42f349f198b7ea3cdbf3b988d140`.
-- Composition package added with application/infrastructure dependencies.
-- Composition root wires BUILD-002 in-memory UnitOfWork, EventDispatcher, and AuthorizationService into BUILD-001 UseCaseExecutor.
-- Repository binding boundary added without persistence behavior.
-- Integration tests added for command execution, authorization, transaction rollback, and repository binding.
-- Dependency enforcement updated for `composition → application` and `composition → infrastructure`.
-- Scaffold enforcement updated to register the composition package.
-- BUILD-003 and architecture documentation added.
+Composition root package wires BUILD-001 application use-case orchestration to BUILD-002 infrastructure adapters:
 
-## Required local gates
+- `createApplicationComposition()` assembles default in-memory `UnitOfWork`, `EventDispatcher`, and `AuthorizationService` into `UseCaseExecutor`
+- Optional dependency overrides for configuration, UoW, event dispatcher, and authorization
+- `registerCommandHandler` / `registerQueryHandler` / `executeCommand` composition helpers
+- `RepositoryRegistry` composition-only binding point (no persistence behavior)
+- Dependency matrix allows only `composition → application` and `composition → infrastructure`
 
-```text
-pnpm install --frozen-lockfile
-pnpm typecheck
-pnpm lint
-pnpm test
-pnpm build
-pnpm exec node scripts/check-deps.mjs
-pnpm exec node scripts/scaffold-check.mjs
-```
+## Files changed (completion commit scope)
 
-## Known pre-validation items
+- `pnpm-lock.yaml` — workspace importer for `@creative-lab/composition`
+- `platform.manifest.json` — BUILD-003 + composition package registration
+- `packages/composition/src/__tests__/ApplicationComposition.test.ts` — command typing fix for `Command` excess-property checks
+- `packages/composition/tsconfig.json` — effective test exclude globs (`*.test.ts` / `*.spec.ts`)
+- `docs/builds/BUILD-003.md` — status update
+- `reports/build-003-validation.md` — this report
 
-1. `pnpm-lock.yaml` has not been regenerated for the new workspace package by this implementation environment. The local implementation agent must run the frozen-lockfile workflow and resolve the workspace importer if required.
-2. `platform.manifest.json` has not been rewritten in this branch because the repository connector does not provide a safe partial JSON update operation. The local implementation agent must synchronize the manifest with BUILD-003 before declaring the build complete.
-
-## Gate results
+## Gates
 
 | Gate | Result |
-|---|---|
-| Frozen install | NOT RUN |
-| Typecheck | NOT RUN |
-| Lint | NOT RUN |
-| Tests | NOT RUN |
-| Build | NOT RUN |
-| Dependency check | NOT RUN |
-| Scaffold check | NOT RUN |
+| ---- | ------ |
+| `pnpm install --frozen-lockfile` | **PASS** |
+| `pnpm typecheck` | **PASS** |
+| `pnpm lint` | **PASS** |
+| `pnpm test` | **PASS** — **1233** tests passed |
+| `pnpm build` | **PASS** |
+| `pnpm exec node scripts/check-deps.mjs` | **PASS** |
+| `pnpm exec node scripts/scaffold-check.mjs` | **PASS** |
 
-No claim of local validation is made by this report.
+### Test breakdown (final `pnpm test`)
+
+| Area | Tests |
+| ---- | ----- |
+| Domain packages (prior suite) | 1077 |
+| Application | 122 |
+| Infrastructure | 31 |
+| Composition | 3 |
+| **Total** | **1233** |
+
+## Architecture checks
+
+| Check | Result |
+| ----- | ------ |
+| composition → application | Allowed / present |
+| composition → infrastructure | Allowed / present |
+| application → composition | Forbidden / absent |
+| infrastructure → composition | Forbidden / absent |
+| domain → composition | Forbidden / absent |
+
+## Deviations
+
+None relative to BUILD-003 scope. Local completion only synchronized lockfile/manifest registry artifacts and applied the minimal typecheck/build fix for composition tests and tsconfig exclude globs.
+
+## Remaining concerns
+
+None blocking. Concrete persistence adapters and presentation entry points remain intentionally out of scope for BUILD-003.

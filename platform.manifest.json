@@ -2,7 +2,7 @@
   "platformVersion": "0.0.0",
   "constitutionVersion": "BUILD-000",
   "engineeringStandardsVersion": "BUILD-000A",
-  "architectureVersion": "BUILD-001",
+  "architectureVersion": "BUILD-003",
   "domainLayerVersion": "EPIC-220",
   "dependencyMatrixVersion": "EPIC-220",
   "documentVersions": {
@@ -10,7 +10,11 @@
     "packageClassification": "BUILD-001",
     "packageDependencies": "BUILD-001",
     "auditDomainStabilization": "BUILD-000B",
-    "build001": "BUILD-001"
+    "build001": "BUILD-001",
+    "build003": "BUILD-003",
+    "integrationComposition": "BUILD-003",
+    "build003DependencyMatrix": "BUILD-003",
+    "build003PackageClassification": "BUILD-003"
   },
   "packages": [
     {
@@ -32,7 +36,10 @@
       "name": "@creative-lab/infrastructure",
       "path": "packages/infrastructure",
       "version": "0.0.0",
-      "classification": "Infrastructure"
+      "classification": "Infrastructure",
+      "implementation": "BUILD-002 infrastructure foundation",
+      "status": "infrastructure-implemented",
+      "notes": "In-memory UnitOfWork, EventDispatcher, AuthorizationService, repository adapter base"
     },
     {
       "name": "@creative-lab/ui",
@@ -216,6 +223,15 @@
       "implementation": "BUILD-001 application foundation",
       "status": "application-implemented",
       "notes": "Commands, queries, handlers, DTOs, mappers; UoW/auth/event ports only"
+    },
+    {
+      "name": "@creative-lab/composition",
+      "path": "packages/composition",
+      "version": "0.0.0",
+      "classification": "Integration / Composition Root",
+      "implementation": "BUILD-003 integration and composition foundation",
+      "status": "composition-implemented",
+      "notes": "Outer composition boundary; wires application ports to infrastructure implementations; not imported by domain/application/infrastructure"
     },
     {
       "name": "@creative-lab/test-utils",
@@ -441,6 +457,7 @@
     {
       "from": "infrastructure",
       "to": [
+        "application",
         "core",
         "config"
       ]
@@ -805,9 +822,16 @@
         "infrastructure",
         "config"
       ]
+    },
+    {
+      "from": "composition",
+      "to": [
+        "application",
+        "infrastructure"
+      ]
     }
   ],
-  "lastUpdated": "2026-08-07",
+  "lastUpdated": "2026-08-12",
   "audits": [
     {
       "id": "AUDIT-001",
@@ -839,6 +863,22 @@
       "status": "Completed",
       "path": "packages/application",
       "document": "docs/builds/BUILD-001.md"
+    },
+    {
+      "id": "BUILD-002",
+      "title": "Infrastructure Foundation",
+      "status": "Completed",
+      "path": "packages/infrastructure",
+      "document": "docs/builds/BUILD-002.md",
+      "report": "reports/build-002-validation.md"
+    },
+    {
+      "id": "BUILD-003",
+      "title": "Integration & Composition Foundation",
+      "status": "Completed",
+      "path": "packages/composition",
+      "document": "docs/builds/BUILD-003.md",
+      "report": "reports/build-003-validation.md"
     },
     {
       "id": "CORE-001",

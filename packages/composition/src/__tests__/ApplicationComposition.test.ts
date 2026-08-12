@@ -49,9 +49,10 @@ describe("ApplicationComposition", () => {
       [permission],
     );
 
+    const command: TestCommand = { type: "composition.test", value: "wired" };
     const result = await executeCommand<string>(
       composition,
-      { type: "composition.test", value: "wired" },
+      command,
       context,
       { permission },
     );
@@ -72,8 +73,9 @@ describe("ApplicationComposition", () => {
 
     registerCommandHandler(composition, handler);
 
+    const command: TestCommand = { type: "composition.test", value: "x" };
     await expect(
-      executeCommand(composition, { type: "composition.test", value: "x" }, context),
+      executeCommand(composition, command, context),
     ).rejects.toThrow("expected failure");
 
     expect(composition.unitOfWork.isActive()).toBe(false);

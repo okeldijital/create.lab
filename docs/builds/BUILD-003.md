@@ -3,7 +3,7 @@
 | Field | Value |
 |---|---|
 | Build | BUILD-003 |
-| Status | Implementation in progress — local validation required |
+| Status | Completed — locally validated |
 | Branch | `build/003-integration-composition-foundation` |
 | Baseline | `43f61398a6ae42f349f198b7ea3cdbf3b988d140` (validated BUILD-002 merge) |
 | Scope | Compose BUILD-001 application use cases with BUILD-002 infrastructure implementations |
