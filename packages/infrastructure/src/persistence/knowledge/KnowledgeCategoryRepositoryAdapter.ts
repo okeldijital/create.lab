@@ -1,9 +1,9 @@
-import type { KnowledgeCategory, KnowledgeCategoryId, KnowledgeCategoryRepository, KnowledgeStatus as _Unused } from "@creative-lab/knowledge";
-import { eq, and } from "drizzle-orm";
+import type { CategoryStatus, KnowledgeCategory, KnowledgeCategoryId, KnowledgeCategoryRepository } from "@creative-lab/knowledge";
+import { and, eq } from "drizzle-orm";
 import type { OrganizationId } from "@creative-lab/organization";
 import type { DrizzleDatabase } from "../PostgresDatabase.js";
-import { knowledgeCategories } from "./schema.js";
 import { KnowledgeCategoryMapper } from "./mappers.js";
+import { knowledgeCategories } from "./schema.js";
 
 export class PostgresKnowledgeCategoryRepository implements KnowledgeCategoryRepository {
   constructor(private readonly db: DrizzleDatabase) {}
@@ -18,7 +18,7 @@ export class PostgresKnowledgeCategoryRepository implements KnowledgeCategoryRep
     return rows.map(KnowledgeCategoryMapper.fromRow);
   }
 
-  async findByStatus(status: "ACTIVE" | "ARCHIVED"): Promise<KnowledgeCategory[]> {
+  async findByStatus(status: CategoryStatus): Promise<KnowledgeCategory[]> {
     const rows = await this.db.select().from(knowledgeCategories).where(eq(knowledgeCategories.status, status));
     return rows.map(KnowledgeCategoryMapper.fromRow);
   }
