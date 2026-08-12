@@ -5,10 +5,6 @@ import {
   QuoteApproval,
   QuoteLine,
   QuoteVersion,
-  asQuoteApprovalId,
-  asQuoteId,
-  asQuoteLineId,
-  asQuoteVersionId,
 } from "@creative-lab/quotation";
 import type { OrganizationId } from "@creative-lab/organization";
 import type { CustomerId, OpportunityId } from "@creative-lab/crm";
@@ -67,15 +63,6 @@ const approval = QuoteApproval.create({
   notes: "Customer review pending",
   now,
 });
-
-void asQuoteApprovalId;
-void asQuoteId;
-void asQuoteLineId;
-void asQuoteVersionId;
-
-// The explicit branded casts above are intentionally kept available to this
-// test file for future repository fixtures; mapper round-trips remain the
-// assertions under test.
 
 describe("Quotation persistence mappers", () => {
   it("round-trips Quote", () => {
