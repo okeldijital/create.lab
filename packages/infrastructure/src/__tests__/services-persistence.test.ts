@@ -1,3 +1,4 @@
+import { randomUUID } from "node:crypto";
 import { describe, expect, it } from "vitest";
 import {
   PriceBook,
@@ -16,8 +17,8 @@ import {
   ServiceCategoryMapper,
   ServiceMapper,
 } from "../persistence/services/mappers.js";
-import { createId } from "./test-helpers.js";
 
+const createId = (): string => randomUUID();
 const organizationId = createId() as OrganizationId;
 const now = new Date("2026-01-01T00:00:00.000Z");
 
@@ -60,10 +61,6 @@ const priceRule = PriceRule.create({
   currency: "ZAR",
   now,
 });
-
-function createId(): string {
-  return crypto.randomUUID();
-}
 
 describe("Services persistence mappers", () => {
   it("round-trips Service", () => {
