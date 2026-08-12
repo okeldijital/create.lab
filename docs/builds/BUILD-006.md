@@ -1,5 +1,9 @@
 # BUILD-006 — CRM Persistence
 
+## Status
+
+**Completed — locally validated.**
+
 ## Objective
 
 Introduce PostgreSQL + Drizzle persistence for EPIC-214 `@creative-lab/crm` without changing the CRM domain model or leaking infrastructure concerns into domain/application packages.
@@ -45,4 +49,4 @@ Constraints include organization/customer foreign keys, organization-scoped cust
 
 ## Validation
 
-Local validation is performed by the implementation Agent. BUILD-006 must not be marked validated until the complete monorepo gates pass and PostgreSQL integration availability is explicitly reported.
+Local monorepo gates have been executed and passed. PostgreSQL live integration was unavailable in the validation environment and is reported as such in `reports/build-006-validation.md`.

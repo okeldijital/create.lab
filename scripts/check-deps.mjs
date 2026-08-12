@@ -16,7 +16,7 @@ const ALLOWED_DEPS = {
   core: new Set([]),
   config: new Set([]),
   ui: new Set(["core", "config"]),
-  infrastructure: new Set(["application", "organization", "core", "config"]),
+  infrastructure: new Set(["application", "organization", "crm", "core", "config"]),
   organization: new Set(["core", "infrastructure", "config"]),
   workforce: new Set(["organization", "core", "infrastructure", "config"]),
   capacity: new Set(["workforce", "organization", "core", "infrastructure", "config"]),
