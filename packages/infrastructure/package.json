@@ -2,7 +2,7 @@
   "name": "@creative-lab/infrastructure",
   "version": "0.0.0",
   "private": true,
-  "description": "Creative Lab infrastructure package — BUILD-009 Quotation persistence",
+  "description": "Creative Lab infrastructure package — BUILD-010 Contracts persistence",
   "type": "module",
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@creative-lab/application": "workspace:*",
+    "@creative-lab/contracts": "workspace:*",
     "@creative-lab/core": "workspace:*",
     "@creative-lab/crm": "workspace:*",
     "@creative-lab/organization": "workspace:*",

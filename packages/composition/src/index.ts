@@ -26,3 +26,7 @@ export {
   QUOTATION_REPOSITORY_KEYS,
   registerPostgresQuotationRepositories,
 } from "./QuotationPersistenceComposition.js";
+export {
+  CONTRACTS_REPOSITORY_KEYS,
+  registerPostgresContractsRepositories,
+} from "./ContractsPersistenceComposition.js";
