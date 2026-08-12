@@ -4,7 +4,7 @@
 | ------------------- | ------------------------- |
 | Document Title      | Package Classification    |
 | Document Identifier | ARCH-PKG-CLASS            |
-| Version             | BUILD-001                 |
+| Version             | BUILD-007                 |
 | Status              | Accepted                  |
 | Last Updated        | 2026-08-07                |
 | Supersedes          | BUILD-000A classification |
@@ -77,6 +77,9 @@ dependencies, and lifecycle expectations remain explicit.
 | **Owner**                      | Platform Engineering                                                                                                                                                                                                           |
 
 ---
+
+
+**BUILD-007:** Infrastructure owns EPIC-202 Workforce PostgreSQL/Drizzle adapters (Worker, Position, Employment, EmploymentContract, ReportingRelationship).
 
 ## config — Platform Configuration
 

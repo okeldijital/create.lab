@@ -599,6 +599,9 @@ importers:
       '@creative-lab/organization':
         specifier: workspace:*
         version: link:../organization
+      '@creative-lab/workforce':
+        specifier: workspace:*
+        version: link:../workforce
       drizzle-orm:
         specifier: ^0.45.2
         version: 0.45.2(postgres@3.4.9)

@@ -4,7 +4,7 @@
 | ------------------- | ------------------------------------- |
 | Document Title      | Domain Map (Bounded Context Registry) |
 | Document Identifier | ARCH-DOMAIN-MAP                       |
-| Version             | BUILD-001                             |
+| Version             | BUILD-007                             |
 | Status              | Accepted                              |
 | Last Updated        | 2026-08-07                            |
 | Supersedes          | BUILD-000A domain registry            |
@@ -107,7 +107,7 @@ upstream contexts; never reverse). See
 | **Upstream dependencies**      | Organization, Core (EPIC-202 package uses organization + core only).                                |
 | **Downstream dependencies**    | Capacity, Scheduling, Allocation, Operations.                                                       |
 | **Primary aggregates**         | Worker (root for people); Position; Employment; EmploymentContract; ReportingRelationship.          |
-| **Implementation package**     | `@creative-lab/workforce` — pure domain model (EPIC-202).                                           |
+| **Implementation package**     | `@creative-lab/workforce` — pure domain model (EPIC-202). Persistence adapters: BUILD-007 infrastructure. |
 | **Future epics**               | EPIC-202 domain complete; payroll/leave/identity deferred.                                          |
 
 ---

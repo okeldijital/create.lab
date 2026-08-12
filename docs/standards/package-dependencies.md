@@ -192,3 +192,8 @@ Changes to this matrix require:
 3. Update of ADR-008 (or a superseding ADR)
 4. Update of `platform.manifest.json` dependencies section
 5. Scaffold / documentation cross-links as needed
+
+
+## BUILD-007 addendum
+
+`infrastructure` may depend on `workforce` (and organization/crm) for concrete repository adapters. Domain packages must not depend on infrastructure implementations or Drizzle/postgres.js.

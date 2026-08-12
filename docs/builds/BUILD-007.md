@@ -2,7 +2,7 @@
 
 ## Status
 
-Implemented on `build/007-workforce-persistence`; local validation is delegated to the implementation Agent.
+**Completed — locally validated.**
 
 ## Baseline
 
@@ -42,23 +42,11 @@ Implement the PostgreSQL + Drizzle persistence vertical for EPIC-202 Workforce i
 
 ## Database constraints
 
-The migration includes organization tenancy, aggregate relationships, employee number/email uniqueness, employment period checks, active employment uniqueness, active contract uniqueness, reporting self-reference prevention, reporting period checks and one active reporting relationship per worker.
+The migration includes organization tenancy, aggregate relationships, employee number/email uniqueness, employment period checks, active employment uniqueness (`PROBATION`, `ACTIVE`, `SUSPENDED`), active contract uniqueness, reporting self-reference prevention, reporting period checks and one active reporting relationship per worker.
 
 ## Validation
 
-The local Agent must run:
-
-```text
-pnpm install --frozen-lockfile
-pnpm typecheck
-pnpm lint
-pnpm test
-pnpm build
-pnpm exec node scripts/check-deps.mjs
-pnpm exec node scripts/scaffold-check.mjs
-```
-
-Live PostgreSQL integration is reported separately from unit/mapping validation. If PostgreSQL is unavailable, that limitation must be stated explicitly.
+Local monorepo gates have been executed and passed. PostgreSQL live integration was unavailable in the validation environment and is reported as such in `reports/build-007-validation.md`.
 
 ## Non-scope
 

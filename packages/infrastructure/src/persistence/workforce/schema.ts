@@ -1,4 +1,14 @@
-import { boolean, index, integer, pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  index,
+  integer,
+  pgTable,
+  text,
+  timestamp,
+  uniqueIndex,
+  uuid,
+  type AnyPgColumn,
+} from "drizzle-orm/pg-core";
 import { organizations, departments, teams } from "../organization/schema.js";
 
 export const positions = pgTable(
@@ -36,7 +46,8 @@ export const workers = pgTable(
     positionId: uuid("position_id").references(() => positions.id),
     departmentId: uuid("department_id").notNull().references(() => departments.id),
     teamId: uuid("team_id").references(() => teams.id),
-    managerId: uuid("manager_id").references(() => workers.id),
+    // Self-reference requires AnyPgColumn to avoid circular inference (TS7022)
+    managerId: uuid("manager_id").references((): AnyPgColumn => workers.id),
     dateJoined: timestamp("date_joined", { withTimezone: true }).notNull(),
     dateLeft: timestamp("date_left", { withTimezone: true }),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull(),

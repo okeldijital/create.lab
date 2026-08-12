@@ -28,7 +28,7 @@ import {
   ReportingRelationshipMapper,
   WorkerMapper,
 } from "../persistence/workforce/mappers.js";
-import {
+import type {
   employmentContracts,
   employments,
   positions,

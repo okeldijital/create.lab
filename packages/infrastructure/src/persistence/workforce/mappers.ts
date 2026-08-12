@@ -15,8 +15,8 @@ import {
   asReportingRelationshipId,
   asWorkerId,
 } from "@creative-lab/workforce";
-import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
-import {
+import type { InferSelectModel } from "drizzle-orm";
+import type {
   employmentContracts,
   employments,
   positions,
@@ -30,21 +30,15 @@ type EmploymentRow = InferSelectModel<typeof employments>;
 type ContractRow = InferSelectModel<typeof employmentContracts>;
 type ReportingRow = InferSelectModel<typeof reportingRelationships>;
 
-type PositionInsert = InferInsertModel<typeof positions>;
-type WorkerInsert = InferInsertModel<typeof workers>;
-type EmploymentInsert = InferInsertModel<typeof employments>;
-type ContractInsert = InferInsertModel<typeof employmentContracts>;
-type ReportingInsert = InferInsertModel<typeof reportingRelationships>;
-
 export const PositionMapper = {
-  toRow(position: Position): PositionInsert {
+  toRow(position: Position): PositionRow {
     const s = position.toSnapshot();
     return {
       id: s.id,
       organizationId: s.organizationId,
       title: s.title,
-      description: s.description,
-      grade: s.grade,
+      description: s.description ?? null,
+      grade: s.grade ?? null,
       status: s.status,
       createdAt: s.createdAt,
       updatedAt: s.updatedAt,
@@ -66,7 +60,7 @@ export const PositionMapper = {
 };
 
 export const WorkerMapper = {
-  toRow(worker: Worker): WorkerInsert {
+  toRow(worker: Worker): WorkerRow {
     const s = worker.toSnapshot();
     return {
       id: s.id,
@@ -74,20 +68,20 @@ export const WorkerMapper = {
       employeeNumber: s.employeeNumber,
       firstName: s.firstName,
       lastName: s.lastName,
-      preferredName: s.preferredName,
+      preferredName: s.preferredName ?? null,
       email: s.email,
-      phone: s.phone,
+      phone: s.phone ?? null,
       status: s.status,
       employmentType: s.employmentType,
-      positionId: s.positionId,
+      positionId: s.positionId ?? null,
       departmentId: s.departmentId,
-      teamId: s.teamId,
-      managerId: s.managerId,
+      teamId: s.teamId ?? null,
+      managerId: s.managerId ?? null,
       dateJoined: s.dateJoined,
-      dateLeft: s.dateLeft,
+      dateLeft: s.dateLeft ?? null,
       createdAt: s.createdAt,
       updatedAt: s.updatedAt,
-      archivedAt: s.archivedAt,
+      archivedAt: s.archivedAt ?? null,
     };
   },
   fromRow(row: WorkerRow): Worker {
@@ -117,7 +111,7 @@ export const WorkerMapper = {
 };
 
 export const EmploymentMapper = {
-  toRow(employment: Employment): EmploymentInsert {
+  toRow(employment: Employment): EmploymentRow {
     const s = employment.toSnapshot();
     return {
       id: s.id,
@@ -125,7 +119,7 @@ export const EmploymentMapper = {
       organizationId: s.organizationId,
       employmentType: s.employmentType,
       startDate: s.startDate,
-      endDate: s.endDate,
+      endDate: s.endDate ?? null,
       status: s.status,
       workingHoursPerWeek: s.workingHoursPerWeek,
       probationDays: s.probationDays,
@@ -156,7 +150,7 @@ export const EmploymentMapper = {
 };
 
 export const EmploymentContractMapper = {
-  toRow(contract: EmploymentContract): ContractInsert {
+  toRow(contract: EmploymentContract): ContractRow {
     const s = contract.toSnapshot();
     return {
       id: s.id,
@@ -164,7 +158,7 @@ export const EmploymentContractMapper = {
       organizationId: s.organizationId,
       contractType: s.contractType,
       effectiveDate: s.effectiveDate,
-      expiryDate: s.expiryDate,
+      expiryDate: s.expiryDate ?? null,
       noticePeriodDays: s.noticePeriodDays,
       status: s.status,
       createdAt: s.createdAt,
@@ -189,7 +183,7 @@ export const EmploymentContractMapper = {
 };
 
 export const ReportingRelationshipMapper = {
-  toRow(relationship: ReportingRelationship): ReportingInsert {
+  toRow(relationship: ReportingRelationship): ReportingRow {
     const s = relationship.toSnapshot();
     return {
       id: s.id,
@@ -197,7 +191,7 @@ export const ReportingRelationshipMapper = {
       workerId: s.workerId,
       managerId: s.managerId,
       effectiveDate: s.effectiveDate,
-      endDate: s.endDate,
+      endDate: s.endDate ?? null,
       createdAt: s.createdAt,
       updatedAt: s.updatedAt,
     };
