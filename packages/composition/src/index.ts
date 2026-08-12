@@ -14,3 +14,7 @@ export {
   CRM_REPOSITORY_KEYS,
   registerPostgresCrmRepositories,
 } from "./CrmPersistenceComposition.js";
+export {
+  WORKFORCE_REPOSITORY_KEYS,
+  registerPostgresWorkforceRepositories,
+} from "./WorkforcePersistenceComposition.js";
