@@ -1,5 +1,5 @@
 import type { OrganizationId } from "@creative-lab/organization";
-import type { Service, ServiceId, ServiceRepository, ServiceStatus } from "@creative-lab/services";
+import type { Service, ServiceCategoryId, ServiceId, ServiceRepository, ServiceStatus } from "@creative-lab/services";
 import { and, eq } from "drizzle-orm";
 import type { DrizzleDatabase } from "../PostgresDatabase.js";
 import { services } from "./schema.js";
@@ -23,7 +23,7 @@ export class PostgresServiceRepository implements ServiceRepository {
     return rows[0] ? ServiceMapper.fromRow(rows[0]) : null;
   }
 
-  async findByCategory(categoryId: ServiceId extends never ? never : import("@creative-lab/services").ServiceCategoryId): Promise<Service[]> {
+  async findByCategory(categoryId: ServiceCategoryId): Promise<Service[]> {
     const rows = await this.db.select().from(services).where(eq(services.categoryId, categoryId));
     return rows.map(ServiceMapper.fromRow);
   }
@@ -42,7 +42,8 @@ export class PostgresServiceRepository implements ServiceRepository {
   }
 
   async archive(id: ServiceId): Promise<void> {
-    await this.db.update(services).set({ status: "ARCHIVED", archivedAt: new Date(), updatedAt: new Date() }).where(eq(services.id, id));
+    const now = new Date();
+    await this.db.update(services).set({ status: "ARCHIVED", archivedAt: now, updatedAt: now }).where(eq(services.id, id));
   }
 
   async exists(id: ServiceId): Promise<boolean> {
