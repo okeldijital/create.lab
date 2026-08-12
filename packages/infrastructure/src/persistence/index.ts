@@ -66,3 +66,19 @@ export {
   PostgresEmploymentContractRepository,
   PostgresReportingRelationshipRepository,
 } from "./workforce/index.js";
+
+export {
+  serviceCategories,
+  services,
+  priceBooks,
+  priceRules,
+  servicesSchema,
+  ServiceMapper,
+  ServiceCategoryMapper,
+  PriceBookMapper,
+  PriceRuleMapper,
+  PostgresServiceRepository,
+  PostgresCategoryRepository,
+  PostgresPriceBookRepository,
+  PostgresPriceRuleRepository,
+} from "./services/index.js";
