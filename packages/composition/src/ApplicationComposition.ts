@@ -1,7 +1,9 @@
 import type {
   ApplicationContext,
   AuthorizationService,
+  Command,
   CommandHandler,
+  CommandResult,
   EventDispatcher,
   QueryHandler,
   UnitOfWork,
@@ -83,9 +85,9 @@ export function registerQueryHandler(
 
 export async function executeCommand<TResult>(
   composition: ApplicationComposition,
-  command: Parameters<ApplicationComposition["executor"]["executeCommand"]>[0],
+  command: Command,
   context: ApplicationContext,
-  options?: Parameters<ApplicationComposition["executor"]["executeCommand"]>[2],
-): Promise<Awaited<ReturnType<ApplicationComposition["executor"]["executeCommand"]>>> {
+  options?: Parameters<UseCaseExecutor["executeCommand"]>[2],
+): Promise<CommandResult<TResult>> {
   return composition.executor.executeCommand<TResult>(command, context, options);
 }
