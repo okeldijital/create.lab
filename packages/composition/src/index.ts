@@ -22,3 +22,7 @@ export {
   SERVICES_REPOSITORY_KEYS,
   registerPostgresServicesRepositories,
 } from "./ServicesPersistenceComposition.js";
+export {
+  QUOTATION_REPOSITORY_KEYS,
+  registerPostgresQuotationRepositories,
+} from "./QuotationPersistenceComposition.js";
