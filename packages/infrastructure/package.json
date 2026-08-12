@@ -2,7 +2,7 @@
   "name": "@creative-lab/infrastructure",
   "version": "0.0.0",
   "private": true,
-  "description": "Creative Lab infrastructure package — BUILD-008 Services persistence",
+  "description": "Creative Lab infrastructure package — BUILD-009 Quotation persistence",
   "type": "module",
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
@@ -24,6 +24,7 @@
     "@creative-lab/core": "workspace:*",
     "@creative-lab/crm": "workspace:*",
     "@creative-lab/organization": "workspace:*",
+    "@creative-lab/quotation": "workspace:*",
     "@creative-lab/services": "workspace:*",
     "@creative-lab/workforce": "workspace:*",
     "drizzle-orm": "^0.45.2",
