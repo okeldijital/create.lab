@@ -38,19 +38,15 @@ describe("PostgreSQL persistence foundation", () => {
   });
 
   it("binds begin/commit to one reserved connection", async () => {
-    const execute = vi.fn(async () => []);
-    const release = vi.fn(async () => undefined);
-    const reserved = Object.assign(execute, { release });
-    const client = Object.assign(vi.fn(async () => []), {
-      reserve: vi.fn(async () => reserved),
-    }) as unknown as PostgresClient;
-
+    const { client, execute, release } = createReservedClientMock();
     const uow = new PostgresUnitOfWork(client);
     expect(uow.isActive()).toBe(false);
 
     await uow.begin();
     expect(uow.isActive()).toBe(true);
     expect(client.reserve).toHaveBeenCalledOnce();
+    // Drizzle is bound to the reserved connection for repository work in-tx
+    expect(uow.getDatabase()).toBeDefined();
 
     await uow.commit();
     expect(uow.isActive()).toBe(false);
@@ -60,13 +56,7 @@ describe("PostgreSQL persistence foundation", () => {
   });
 
   it("rolls back and releases the reserved connection", async () => {
-    const execute = vi.fn(async () => []);
-    const release = vi.fn(async () => undefined);
-    const reserved = Object.assign(execute, { release });
-    const client = Object.assign(vi.fn(async () => []), {
-      reserve: vi.fn(async () => reserved),
-    }) as unknown as PostgresClient;
-
+    const { client, execute, release } = createReservedClientMock();
     const uow = new PostgresUnitOfWork(client);
     await uow.begin();
     await uow.rollback();
@@ -76,3 +66,32 @@ describe("PostgreSQL persistence foundation", () => {
     expect(execute).toHaveBeenCalledWith(["rollback"]);
   });
 });
+
+/**
+ * postgres.js reserved clients expose tagged-template execution + release().
+ * Drizzle's postgres-js driver also requires options.parsers/serializers on the client.
+ */
+function createReservedClientMock(): {
+  client: PostgresClient;
+  execute: ReturnType<typeof vi.fn>;
+  release: ReturnType<typeof vi.fn>;
+} {
+  const execute = vi.fn(async () => []);
+  const release = vi.fn(async () => undefined);
+  const reserved = Object.assign(execute, {
+    release,
+    options: {
+      parsers: {} as Record<string, unknown>,
+      serializers: {} as Record<string, unknown>,
+    },
+  });
+  const client = Object.assign(vi.fn(async () => []), {
+    reserve: vi.fn(async () => reserved),
+    options: {
+      parsers: {} as Record<string, unknown>,
+      serializers: {} as Record<string, unknown>,
+    },
+  }) as unknown as PostgresClient;
+
+  return { client, execute, release };
+}

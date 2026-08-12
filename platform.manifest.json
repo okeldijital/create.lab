@@ -2,7 +2,7 @@
   "platformVersion": "0.0.0",
   "constitutionVersion": "BUILD-000",
   "engineeringStandardsVersion": "BUILD-000A",
-  "architectureVersion": "BUILD-003",
+  "architectureVersion": "BUILD-004",
   "domainLayerVersion": "EPIC-220",
   "dependencyMatrixVersion": "EPIC-220",
   "documentVersions": {
@@ -14,7 +14,9 @@
     "build003": "BUILD-003",
     "integrationComposition": "BUILD-003",
     "build003DependencyMatrix": "BUILD-003",
-    "build003PackageClassification": "BUILD-003"
+    "build003PackageClassification": "BUILD-003",
+    "build004": "BUILD-004",
+    "build004PersistenceAdr": "docs/adr/ADR-008-postgresql-drizzle-persistence.md"
   },
   "packages": [
     {
@@ -37,9 +39,9 @@
       "path": "packages/infrastructure",
       "version": "0.0.0",
       "classification": "Infrastructure",
-      "implementation": "BUILD-002 infrastructure foundation",
+      "implementation": "BUILD-002 infrastructure foundation + BUILD-004 PostgreSQL/Drizzle persistence foundation",
       "status": "infrastructure-implemented",
-      "notes": "In-memory UnitOfWork, EventDispatcher, AuthorizationService, repository adapter base"
+      "notes": "In-memory UnitOfWork, EventDispatcher, AuthorizationService; PostgreSQL + Drizzle ORM + postgres.js persistence foundation; PostgresUnitOfWork implements application UnitOfWork port; no domain-specific schemas or repository adapters yet"
     },
     {
       "name": "@creative-lab/ui",
@@ -879,6 +881,18 @@
       "path": "packages/composition",
       "document": "docs/builds/BUILD-003.md",
       "report": "reports/build-003-validation.md"
+    },
+    {
+      "id": "BUILD-004",
+      "title": "Persistence Foundation",
+      "status": "Completed",
+      "path": "packages/infrastructure",
+      "document": "docs/builds/BUILD-004.md",
+      "technology": {
+        "database": "PostgreSQL",
+        "orm": "Drizzle ORM",
+        "driver": "postgres.js"
+      }
     },
     {
       "id": "CORE-001",
