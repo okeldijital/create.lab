@@ -1,4 +1,4 @@
-import { bigint, boolean, index, pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
+import { bigint, boolean, doublePrecision, index, pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
 import { customers, opportunities } from "../crm/schema.js";
 import { organizations } from "../organization/schema.js";
 import { services } from "../services/schema.js";
@@ -62,7 +62,7 @@ export const quoteLines = pgTable(
     quoteVersionId: uuid("quote_version_id").notNull().references(() => quoteVersions.id),
     serviceId: uuid("service_id").notNull().references(() => services.id),
     description: text("description").notNull(),
-    quantity: bigint("quantity", { mode: "number" }).notNull(),
+    quantity: doublePrecision("quantity").notNull(),
     unitPriceMinor: bigint("unit_price_minor", { mode: "number" }).notNull(),
     lineTotalMinor: bigint("line_total_minor", { mode: "number" }).notNull(),
     currency: text("currency").notNull(),
