@@ -69,6 +69,25 @@ export {
 } from "./scheduling/index.js";
 
 export {
+  projects,
+  projectPhases,
+  projectObjectives,
+  projectDependencies,
+  deliverables,
+  projectsSchema,
+  ProjectMapper,
+  ProjectPhaseMapper,
+  ProjectObjectiveMapper,
+  ProjectDependencyMapper,
+  DeliverableMapper,
+  PostgresProjectRepository,
+  PostgresProjectPhaseRepository,
+  PostgresProjectObjectiveRepository,
+  PostgresProjectDependencyRepository,
+  PostgresDeliverableRepository,
+} from "./projects/index.js";
+
+export {
   organizations,
   departments,
   teams,

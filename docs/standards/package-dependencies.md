@@ -241,3 +241,13 @@ Changes to this matrix require:
         ↑
 @creative-lab/infrastructure
 ```
+
+## BUILD-014 addendum
+
+`infrastructure` may depend on `projects` for concrete repository adapters implementing EPIC-207 ports (Project, ProjectPhase, ProjectObjective, ProjectDependency, Deliverable). The projects domain must not import infrastructure, Drizzle, or postgres.js. Direction remains:
+
+```text
+@creative-lab/projects
+        ↑
+@creative-lab/infrastructure
+```

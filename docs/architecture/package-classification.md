@@ -91,6 +91,8 @@ dependencies, and lifecycle expectations remain explicit.
 
 **BUILD-013:** Infrastructure owns EPIC-204 Scheduling PostgreSQL/Drizzle adapters (Calendar, Schedule, TimeBlock, Booking, Shift).
 
+**BUILD-014:** Infrastructure owns EPIC-207 Projects PostgreSQL/Drizzle adapters (Project, ProjectPhase, ProjectObjective, ProjectDependency, Deliverable).
+
 ## config — Platform Configuration
 
 | Field                          | Value                                                                                      |

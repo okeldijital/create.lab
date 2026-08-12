@@ -608,6 +608,9 @@ importers:
       '@creative-lab/organization':
         specifier: workspace:*
         version: link:../organization
+      '@creative-lab/projects':
+        specifier: workspace:*
+        version: link:../projects
       '@creative-lab/quotation':
         specifier: workspace:*
         version: link:../quotation

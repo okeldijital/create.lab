@@ -2,7 +2,7 @@
   "platformVersion": "0.0.0",
   "constitutionVersion": "BUILD-000",
   "engineeringStandardsVersion": "BUILD-000A",
-  "architectureVersion": "BUILD-013",
+  "architectureVersion": "BUILD-014",
   "domainLayerVersion": "EPIC-220",
   "dependencyMatrixVersion": "EPIC-220",
   "documentVersions": {
@@ -25,7 +25,8 @@
     "build010": "BUILD-010",
     "build011": "BUILD-011",
     "build012": "BUILD-012",
-    "build013": "BUILD-013"
+    "build013": "BUILD-013",
+    "build014": "BUILD-014"
   },
   "packages": [
     {
@@ -48,9 +49,9 @@
       "path": "packages/infrastructure",
       "version": "0.0.0",
       "classification": "Infrastructure",
-      "implementation": "BUILD-002 foundation + BUILD-004 PostgreSQL/Drizzle + BUILD-005 Organization + BUILD-006 CRM + BUILD-007 Workforce + BUILD-008 Services + BUILD-009 Quotation + BUILD-010 Contracts + BUILD-011 Knowledge + BUILD-012 Capacity + BUILD-013 Scheduling persistence",
+      "implementation": "BUILD-002 foundation + BUILD-004 PostgreSQL/Drizzle + BUILD-005 Organization + BUILD-006 CRM + BUILD-007 Workforce + BUILD-008 Services + BUILD-009 Quotation + BUILD-010 Contracts + BUILD-011 Knowledge + BUILD-012 Capacity + BUILD-013 Scheduling + BUILD-014 Projects persistence",
       "status": "infrastructure-implemented",
-      "notes": "In-memory UnitOfWork/EventDispatcher/AuthorizationService; PostgreSQL + Drizzle + postgres.js; PostgresUnitOfWork; EPIC-201 Organization; EPIC-214 CRM; EPIC-202 Workforce; EPIC-215 Services; EPIC-216 Quotation; EPIC-217 Contracts; EPIC-220 Knowledge; EPIC-203 Capacity; EPIC-204 Scheduling Calendar/Schedule/TimeBlock/Booking/Shift schema, mappers, and repository adapters"
+      "notes": "In-memory UnitOfWork/EventDispatcher/AuthorizationService; PostgreSQL + Drizzle + postgres.js; PostgresUnitOfWork; EPIC-201 Organization; EPIC-214 CRM; EPIC-202 Workforce; EPIC-215 Services; EPIC-216 Quotation; EPIC-217 Contracts; EPIC-220 Knowledge; EPIC-203 Capacity; EPIC-204 Scheduling; EPIC-207 Projects Project/ProjectPhase/ProjectObjective/ProjectDependency/Deliverable schema, mappers, and repository adapters"
     },
     {
       "name": "@creative-lab/ui",
@@ -474,6 +475,7 @@
         "workforce",
         "capacity",
         "scheduling",
+        "projects",
         "services",
         "quotation",
         "contracts",
@@ -1001,6 +1003,16 @@
       "report": "reports/build-013-validation.md",
       "migration": "packages/infrastructure/migrations/0009_scheduling_persistence.sql",
       "domain": "EPIC-204"
+    },
+    {
+      "id": "BUILD-014",
+      "title": "Projects Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/projects",
+      "document": "docs/builds/BUILD-014.md",
+      "report": "reports/build-014-validation.md",
+      "migration": "packages/infrastructure/migrations/0010_projects_persistence.sql",
+      "domain": "EPIC-207"
     },
     {
       "id": "CORE-001",

@@ -42,3 +42,7 @@ export {
   SCHEDULING_REPOSITORY_KEYS,
   registerPostgresSchedulingRepositories,
 } from "./SchedulingPersistenceComposition.js";
+export {
+  PROJECTS_REPOSITORY_KEYS,
+  registerPostgresProjectsRepositories,
+} from "./ProjectsPersistenceComposition.js";

@@ -201,7 +201,7 @@ It references Allocation and Booking identities without mutating planning domain
 | **Upstream dependencies**      | Operations, Scheduling, Capacity, Workforce, Organization, Core.                                                                    |
 | **Downstream dependencies**    | Allocation (commitments); CRM, Billing, Analytics, Portfolio (future).                                                              |
 | **Primary aggregates**         | Project (root); ProjectPhase; Deliverable; ProjectDependency; ProjectObjective.                                                     |
-| **Implementation package**     | `@creative-lab/projects` — pure domain model (EPIC-207).                                                                            |
+| **Implementation package**     | `@creative-lab/projects` — pure domain model (EPIC-207). Persistence adapters: BUILD-014 infrastructure.                            |
 | **Future epics**               | EPIC-207 domain complete; portfolio and CRM consumers deferred.                                                                     |
 
 ### Package note
