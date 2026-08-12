@@ -66,7 +66,7 @@ CREATE INDEX IF NOT EXISTS employments_worker_idx ON employments (worker_id);
 CREATE INDEX IF NOT EXISTS employments_status_idx ON employments (status);
 CREATE UNIQUE INDEX IF NOT EXISTS employments_active_worker_unique
   ON employments (worker_id)
-  WHERE status IN ('PROBATION', 'ACTIVE');
+  WHERE status IN ('PROBATION', 'ACTIVE', 'SUSPENDED');
 
 CREATE TABLE IF NOT EXISTS employment_contracts (
   id uuid PRIMARY KEY,
