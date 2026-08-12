@@ -31,3 +31,19 @@ export {
   PostgresStudioRepository,
   PostgresOrganizationSettingsRepository,
 } from "./organization/index.js";
+
+export {
+  customers,
+  contacts,
+  opportunities,
+  interactions,
+  crmSchema,
+  CustomerMapper,
+  ContactMapper,
+  OpportunityMapper,
+  InteractionMapper,
+  PostgresCustomerRepository,
+  PostgresContactRepository,
+  PostgresOpportunityRepository,
+  PostgresInteractionRepository,
+} from "./crm/index.js";
