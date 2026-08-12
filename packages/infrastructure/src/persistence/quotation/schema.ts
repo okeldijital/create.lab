@@ -1,4 +1,4 @@
-import { bigint, index, pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
+import { bigint, boolean, index, pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
 import { customers, opportunities } from "../crm/schema.js";
 import { organizations } from "../organization/schema.js";
 import { services } from "../services/schema.js";
@@ -42,7 +42,7 @@ export const quoteVersions = pgTable(
     totalMinor: bigint("total_minor", { mode: "number" }).notNull(),
     currency: text("currency").notNull(),
     status: text("status").notNull(),
-    locked: text("locked").notNull(),
+    locked: boolean("locked").notNull(),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
   },
