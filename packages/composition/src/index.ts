@@ -18,3 +18,7 @@ export {
   WORKFORCE_REPOSITORY_KEYS,
   registerPostgresWorkforceRepositories,
 } from "./WorkforcePersistenceComposition.js";
+export {
+  SERVICES_REPOSITORY_KEYS,
+  registerPostgresServicesRepositories,
+} from "./ServicesPersistenceComposition.js";
