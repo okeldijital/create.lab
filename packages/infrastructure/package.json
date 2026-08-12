@@ -2,7 +2,7 @@
   "name": "@creative-lab/infrastructure",
   "version": "0.0.0",
   "private": true,
-  "description": "Creative Lab infrastructure package — BUILD-012 Capacity persistence",
+  "description": "Creative Lab infrastructure package — BUILD-013 Scheduling persistence",
   "type": "module",
   "exports": {
     ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
@@ -28,6 +28,7 @@
     "@creative-lab/knowledge": "workspace:*",
     "@creative-lab/organization": "workspace:*",
     "@creative-lab/quotation": "workspace:*",
+    "@creative-lab/scheduling": "workspace:*",
     "@creative-lab/services": "workspace:*",
     "@creative-lab/workforce": "workspace:*",
     "drizzle-orm": "^0.45.2",

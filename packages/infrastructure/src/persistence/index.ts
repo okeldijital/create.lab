@@ -50,6 +50,25 @@ export {
 } from "./capacity/index.js";
 
 export {
+  calendars,
+  schedules,
+  timeBlocks,
+  bookings,
+  shifts,
+  schedulingSchema,
+  CalendarMapper,
+  ScheduleMapper,
+  TimeBlockMapper,
+  BookingMapper,
+  ShiftMapper,
+  PostgresCalendarRepository,
+  PostgresScheduleRepository,
+  PostgresTimeBlockRepository,
+  PostgresBookingRepository,
+  PostgresShiftRepository,
+} from "./scheduling/index.js";
+
+export {
   organizations,
   departments,
   teams,

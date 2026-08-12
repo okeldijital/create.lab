@@ -38,3 +38,7 @@ export {
   CAPACITY_REPOSITORY_KEYS,
   registerPostgresCapacityRepositories,
 } from "./CapacityPersistenceComposition.js";
+export {
+  SCHEDULING_REPOSITORY_KEYS,
+  registerPostgresSchedulingRepositories,
+} from "./SchedulingPersistenceComposition.js";

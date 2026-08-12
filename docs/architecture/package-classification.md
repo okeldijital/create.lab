@@ -89,6 +89,8 @@ dependencies, and lifecycle expectations remain explicit.
 
 **BUILD-012:** Infrastructure owns EPIC-203 Capacity PostgreSQL/Drizzle adapters (CapacityProfile, Capability, AvailabilityProfile, WorkingPattern, ResourceCapacity).
 
+**BUILD-013:** Infrastructure owns EPIC-204 Scheduling PostgreSQL/Drizzle adapters (Calendar, Schedule, TimeBlock, Booking, Shift).
+
 ## config — Platform Configuration
 
 | Field                          | Value                                                                                      |

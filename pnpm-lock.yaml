@@ -611,6 +611,9 @@ importers:
       '@creative-lab/quotation':
         specifier: workspace:*
         version: link:../quotation
+      '@creative-lab/scheduling':
+        specifier: workspace:*
+        version: link:../scheduling
       '@creative-lab/services':
         specifier: workspace:*
         version: link:../services

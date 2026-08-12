@@ -143,7 +143,7 @@ upstream contexts; never reverse). See
 | **Upstream dependencies**      | Capacity, Workforce, Organization, Core.                                                         |
 | **Downstream dependencies**    | Allocation, Operations.                                                                          |
 | **Primary aggregates**         | Schedule (root of planned time); Calendar; TimeBlock; Booking; Shift.                            |
-| **Implementation package**     | `@creative-lab/scheduling` — pure domain model (EPIC-204).                                       |
+| **Implementation package**     | `@creative-lab/scheduling` — pure domain model (EPIC-204). Persistence adapters: BUILD-013 infrastructure. |
 | **Future epics**               | EPIC-204 domain complete; Allocation consumes bookings/time blocks.                              |
 
 ---

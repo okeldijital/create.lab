@@ -2,7 +2,7 @@
   "platformVersion": "0.0.0",
   "constitutionVersion": "BUILD-000",
   "engineeringStandardsVersion": "BUILD-000A",
-  "architectureVersion": "BUILD-012",
+  "architectureVersion": "BUILD-013",
   "domainLayerVersion": "EPIC-220",
   "dependencyMatrixVersion": "EPIC-220",
   "documentVersions": {
@@ -24,7 +24,8 @@
     "build009": "BUILD-009",
     "build010": "BUILD-010",
     "build011": "BUILD-011",
-    "build012": "BUILD-012"
+    "build012": "BUILD-012",
+    "build013": "BUILD-013"
   },
   "packages": [
     {
@@ -47,9 +48,9 @@
       "path": "packages/infrastructure",
       "version": "0.0.0",
       "classification": "Infrastructure",
-      "implementation": "BUILD-002 foundation + BUILD-004 PostgreSQL/Drizzle + BUILD-005 Organization + BUILD-006 CRM + BUILD-007 Workforce + BUILD-008 Services + BUILD-009 Quotation + BUILD-010 Contracts + BUILD-011 Knowledge + BUILD-012 Capacity persistence",
+      "implementation": "BUILD-002 foundation + BUILD-004 PostgreSQL/Drizzle + BUILD-005 Organization + BUILD-006 CRM + BUILD-007 Workforce + BUILD-008 Services + BUILD-009 Quotation + BUILD-010 Contracts + BUILD-011 Knowledge + BUILD-012 Capacity + BUILD-013 Scheduling persistence",
       "status": "infrastructure-implemented",
-      "notes": "In-memory UnitOfWork/EventDispatcher/AuthorizationService; PostgreSQL + Drizzle + postgres.js; PostgresUnitOfWork; EPIC-201 Organization; EPIC-214 CRM; EPIC-202 Workforce; EPIC-215 Services; EPIC-216 Quotation; EPIC-217 Contracts; EPIC-220 Knowledge; EPIC-203 Capacity CapacityProfile/Capability/AvailabilityProfile/WorkingPattern/ResourceCapacity schema, mappers, and repository adapters"
+      "notes": "In-memory UnitOfWork/EventDispatcher/AuthorizationService; PostgreSQL + Drizzle + postgres.js; PostgresUnitOfWork; EPIC-201 Organization; EPIC-214 CRM; EPIC-202 Workforce; EPIC-215 Services; EPIC-216 Quotation; EPIC-217 Contracts; EPIC-220 Knowledge; EPIC-203 Capacity; EPIC-204 Scheduling Calendar/Schedule/TimeBlock/Booking/Shift schema, mappers, and repository adapters"
     },
     {
       "name": "@creative-lab/ui",
@@ -472,6 +473,7 @@
         "crm",
         "workforce",
         "capacity",
+        "scheduling",
         "services",
         "quotation",
         "contracts",
@@ -989,6 +991,16 @@
       "report": "reports/build-012-validation.md",
       "migration": "packages/infrastructure/migrations/0008_capacity_persistence.sql",
       "domain": "EPIC-203"
+    },
+    {
+      "id": "BUILD-013",
+      "title": "Scheduling Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/scheduling",
+      "document": "docs/builds/BUILD-013.md",
+      "report": "reports/build-013-validation.md",
+      "migration": "packages/infrastructure/migrations/0009_scheduling_persistence.sql",
+      "domain": "EPIC-204"
     },
     {
       "id": "CORE-001",

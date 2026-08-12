@@ -231,3 +231,13 @@ Changes to this matrix require:
         ↑
 @creative-lab/infrastructure
 ```
+
+## BUILD-013 addendum
+
+`infrastructure` may depend on `scheduling` for concrete repository adapters implementing EPIC-204 ports (Calendar, Schedule, TimeBlock, Booking, Shift). The scheduling domain must not import infrastructure, Drizzle, or postgres.js. Direction remains:
+
+```text
+@creative-lab/scheduling
+        ↑
+@creative-lab/infrastructure
+```
