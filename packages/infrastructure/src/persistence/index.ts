@@ -31,6 +31,25 @@ export {
 } from "./knowledge/index.js";
 
 export {
+  capacityProfiles,
+  capabilities,
+  availabilityProfiles,
+  workingPatterns,
+  resourceCapacities,
+  capacitySchema,
+  CapacityProfileMapper,
+  CapabilityMapper,
+  AvailabilityProfileMapper,
+  WorkingPatternMapper,
+  ResourceCapacityMapper,
+  PostgresCapacityProfileRepository,
+  PostgresCapabilityRepository,
+  PostgresAvailabilityProfileRepository,
+  PostgresWorkingPatternRepository,
+  PostgresResourceCapacityRepository,
+} from "./capacity/index.js";
+
+export {
   organizations,
   departments,
   teams,
