@@ -30,3 +30,7 @@ export {
   CONTRACTS_REPOSITORY_KEYS,
   registerPostgresContractsRepositories,
 } from "./ContractsPersistenceComposition.js";
+export {
+  KNOWLEDGE_REPOSITORY_KEYS,
+  registerPostgresKnowledgeRepositories,
+} from "./KnowledgePersistenceComposition.js";
