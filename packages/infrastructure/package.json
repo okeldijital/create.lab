@@ -2,12 +2,16 @@
   "name": "@creative-lab/infrastructure",
   "version": "0.0.0",
   "private": true,
-  "description": "Creative Lab infrastructure package — BUILD-002 foundation",
+  "description": "Creative Lab infrastructure package — BUILD-004 persistence foundation",
   "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
+    },
+    "./persistence": {
+      "types": "./dist/persistence/index.d.ts",
+      "import": "./dist/persistence/index.js"
     }
   },
   "main": "./dist/index.js",
@@ -23,7 +27,9 @@
   },
   "dependencies": {
     "@creative-lab/application": "workspace:*",
-    "@creative-lab/core": "workspace:*"
+    "@creative-lab/core": "workspace:*",
+    "drizzle-orm": "^0.45.2",
+    "postgres": "^3.4.9"
   },
   "devDependencies": {
     "typescript": "^5.7.2",
