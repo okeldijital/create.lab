@@ -54,7 +54,7 @@ CREATE TABLE quote_lines (
   quote_version_id UUID NOT NULL REFERENCES quote_versions(id),
   service_id UUID NOT NULL REFERENCES services(id),
   description TEXT NOT NULL,
-  quantity BIGINT NOT NULL,
+  quantity DOUBLE PRECISION NOT NULL,
   unit_price_minor BIGINT NOT NULL,
   line_total_minor BIGINT NOT NULL,
   currency TEXT NOT NULL,
