@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Verifies required scaffolding files exist for packages and apps.
- * Does not assert domain implementation — foundation only (BUILD-000 / BUILD-000A).
+ * BUILD-003 adds the integration/composition package to the library scaffold.
  */
 
 import { existsSync } from "node:fs";
@@ -35,6 +35,7 @@ const libraryPackages = [
   "portfolio",
   "knowledge",
   "application",
+  "composition",
   "collaboration",
   "assets",
   "test-utils",
