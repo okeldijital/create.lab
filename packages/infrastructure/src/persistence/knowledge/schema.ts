@@ -1,4 +1,4 @@
-import { index, pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
+import { bigint, index, pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
 import { organizations } from "../organization/schema.js";
 
 export const knowledgeCategories = pgTable(
@@ -51,7 +51,7 @@ export const knowledgeVersions = pgTable(
     id: uuid("id").primaryKey(),
     organizationId: uuid("organization_id").notNull().references(() => organizations.id),
     articleId: uuid("article_id").notNull().references(() => knowledgeArticles.id),
-    versionNumber: text("version_number").notNull(),
+    versionNumber: bigint("version_number", { mode: "number" }).notNull(),
     summary: text("summary").notNull(),
     status: text("status").notNull(),
     createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
