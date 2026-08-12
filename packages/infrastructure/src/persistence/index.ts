@@ -12,3 +12,22 @@ export {
   checkPostgresConnection,
 } from "./PostgresDatabase.js";
 export { PostgresUnitOfWork } from "./PostgresUnitOfWork.js";
+
+export {
+  organizations,
+  departments,
+  teams,
+  studios,
+  organizationSettings,
+  organizationSchema,
+  OrganizationMapper,
+  DepartmentMapper,
+  TeamMapper,
+  StudioMapper,
+  OrganizationSettingsMapper,
+  PostgresOrganizationRepository,
+  PostgresDepartmentRepository,
+  PostgresTeamRepository,
+  PostgresStudioRepository,
+  PostgresOrganizationSettingsRepository,
+} from "./organization/index.js";
