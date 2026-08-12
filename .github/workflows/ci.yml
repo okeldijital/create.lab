@@ -2,9 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [main, master]
+    branches: [main, master, build/009-quotation-persistence]
   pull_request:
     branches: [main, master]
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
