@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Dependency graph enforcement for Creative Lab packages.
- * BUILD-007 adds Infrastructure → Workforce repository adapters.
+ * BUILD-008 adds Infrastructure → Services repository adapters.
  */
 
 import { readFileSync, readdirSync, existsSync } from "node:fs";
@@ -16,7 +16,7 @@ const ALLOWED_DEPS = {
   core: new Set([]),
   config: new Set([]),
   ui: new Set(["core", "config"]),
-  infrastructure: new Set(["application", "organization", "crm", "workforce", "core", "config"]),
+  infrastructure: new Set(["application", "organization", "crm", "workforce", "services", "core", "config"]),
   organization: new Set(["core", "infrastructure", "config"]),
   workforce: new Set(["organization", "core", "infrastructure", "config"]),
   capacity: new Set(["workforce", "organization", "core", "infrastructure", "config"]),
@@ -33,7 +33,7 @@ const ALLOWED_DEPS = {
   services: new Set(["crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
   quotation: new Set(["services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
   contracts: new Set(["quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
-  engagement: new Set(["contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
+  engagement: new Set(["contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
   portfolio: new Set(["engagement", "contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
   knowledge: new Set(["portfolio", "engagement", "contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
   application: new Set(["knowledge", "portfolio", "engagement", "contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
