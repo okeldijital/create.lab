@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Dependency graph enforcement for Creative Lab packages.
- * BUILD-002 adds the Infrastructure → Application implementation edge.
+ * BUILD-003 adds the Composition → Application/Infrastructure composition edge.
  */
 
 import { readFileSync, readdirSync, existsSync } from "node:fs";
@@ -37,6 +37,7 @@ const ALLOWED_DEPS = {
   portfolio: new Set(["engagement", "contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
   knowledge: new Set(["portfolio", "engagement", "contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
   application: new Set(["knowledge", "portfolio", "engagement", "contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
+  composition: new Set(["application", "infrastructure"]),
   collaboration: new Set(["core", "organization"]),
   "test-utils": new Set([]),
 };
