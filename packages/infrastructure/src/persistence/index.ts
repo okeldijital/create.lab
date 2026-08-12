@@ -82,3 +82,19 @@ export {
   PostgresPriceBookRepository,
   PostgresPriceRuleRepository,
 } from "./services/index.js";
+
+export {
+  quotes,
+  quoteVersions,
+  quoteLines,
+  quoteApprovals,
+  quotationSchema,
+  QuoteMapper,
+  QuoteVersionMapper,
+  QuoteLineMapper,
+  QuoteApprovalMapper,
+  PostgresQuoteRepository,
+  PostgresQuoteVersionRepository,
+  PostgresQuoteLineRepository,
+  PostgresQuoteApprovalRepository,
+} from "./quotation/index.js";
