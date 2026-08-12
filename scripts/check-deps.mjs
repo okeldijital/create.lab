@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Dependency graph enforcement for Creative Lab packages.
- * BUILD-008 adds Infrastructure → Services repository adapters.
+ * BUILD-009 adds Infrastructure → Quotation repository adapters.
  */
 
 import { readFileSync, readdirSync, existsSync } from "node:fs";
@@ -16,7 +16,7 @@ const ALLOWED_DEPS = {
   core: new Set([]),
   config: new Set([]),
   ui: new Set(["core", "config"]),
-  infrastructure: new Set(["application", "organization", "crm", "workforce", "services", "core", "config"]),
+  infrastructure: new Set(["application", "organization", "crm", "workforce", "services", "quotation", "core", "config"]),
   organization: new Set(["core", "infrastructure", "config"]),
   workforce: new Set(["organization", "core", "infrastructure", "config"]),
   capacity: new Set(["workforce", "organization", "core", "infrastructure", "config"]),
