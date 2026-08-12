@@ -34,3 +34,7 @@ export {
   KNOWLEDGE_REPOSITORY_KEYS,
   registerPostgresKnowledgeRepositories,
 } from "./KnowledgePersistenceComposition.js";
+export {
+  CAPACITY_REPOSITORY_KEYS,
+  registerPostgresCapacityRepositories,
+} from "./CapacityPersistenceComposition.js";
