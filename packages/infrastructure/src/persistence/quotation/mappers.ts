@@ -82,7 +82,7 @@ export const QuoteVersionMapper = {
     const snapshot: QuoteVersionSnapshot = {
       id: asQuoteVersionId(row.id),
       organizationId: row.organizationId as QuoteVersionSnapshot["organizationId"],
-      quoteId: asQuoteVersionId(row.quoteId) as QuoteVersionSnapshot["quoteId"],
+      quoteId: asQuoteId(row.quoteId),
       versionNumber: row.versionNumber,
       lineIds: (row.lineIds ?? []).map(asQuoteLineId),
       subtotalMinor: row.subtotalMinor,
