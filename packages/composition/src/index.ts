@@ -10,3 +10,7 @@ export {
   ORGANIZATION_REPOSITORY_KEYS,
   registerPostgresOrganizationRepositories,
 } from "./OrganizationPersistenceComposition.js";
+export {
+  CRM_REPOSITORY_KEYS,
+  registerPostgresCrmRepositories,
+} from "./CrmPersistenceComposition.js";
