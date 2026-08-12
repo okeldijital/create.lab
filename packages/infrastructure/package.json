@@ -2,7 +2,7 @@
   "name": "@creative-lab/infrastructure",
   "version": "0.0.0",
   "private": true,
-  "description": "Creative Lab infrastructure package — BUILD-004 persistence foundation",
+  "description": "Creative Lab infrastructure package — BUILD-005 organization persistence",
   "type": "module",
   "exports": {
     ".": {
@@ -28,12 +28,14 @@
   "dependencies": {
     "@creative-lab/application": "workspace:*",
     "@creative-lab/core": "workspace:*",
+    "@creative-lab/organization": "workspace:*",
     "drizzle-orm": "^0.45.2",
     "postgres": "^3.4.9"
   },
   "devDependencies": {
     "typescript": "^5.7.2",
     "vitest": "^2.1.8",
-    "eslint": "^9.17.0"
+    "eslint": "^9.17.0",
+    "@creative-lab/organization": "workspace:*"
   }
 }
