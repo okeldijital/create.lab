@@ -1,8 +1,9 @@
 /**
  * @creative-lab/infrastructure
  *
- * BUILD-002 infrastructure foundation. Concrete technical adapters live here;
- * domain and application packages depend only on their ports.
+ * Concrete technical adapters live here; domain and application packages
+ * depend only on their ports. BUILD-004 adds the PostgreSQL/Drizzle
+ * persistence foundation without introducing domain-specific schemas.
  */
 export { InMemoryUnitOfWork } from "./unit-of-work/InMemoryUnitOfWork.js";
 export { InMemoryEventDispatcher } from "./events/InMemoryEventDispatcher.js";
@@ -21,3 +22,4 @@ export {
   EventDispatchError,
   AuthorizationAdapterError,
 } from "./errors/InfrastructureErrors.js";
+export * from "./persistence/index.js";
