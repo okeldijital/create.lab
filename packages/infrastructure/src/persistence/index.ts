@@ -47,3 +47,22 @@ export {
   PostgresOpportunityRepository,
   PostgresInteractionRepository,
 } from "./crm/index.js";
+
+export {
+  positions,
+  workers,
+  employments,
+  employmentContracts,
+  reportingRelationships,
+  workforceSchema,
+  PositionMapper,
+  WorkerMapper,
+  EmploymentMapper,
+  EmploymentContractMapper,
+  ReportingRelationshipMapper,
+  PostgresPositionRepository,
+  PostgresWorkerRepository,
+  PostgresEmploymentRepository,
+  PostgresEmploymentContractRepository,
+  PostgresReportingRelationshipRepository,
+} from "./workforce/index.js";
