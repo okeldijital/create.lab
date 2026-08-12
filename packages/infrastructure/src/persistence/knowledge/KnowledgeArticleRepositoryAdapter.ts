@@ -1,4 +1,4 @@
-import type { KnowledgeArticle, KnowledgeArticleId, KnowledgeArticleRepository, KnowledgeStatus } from "@creative-lab/knowledge";
+import type { KnowledgeArticle, KnowledgeArticleId, KnowledgeArticleRepository, KnowledgeCategoryId, KnowledgeStatus } from "@creative-lab/knowledge";
 import { and, eq } from "drizzle-orm";
 import type { OrganizationId } from "@creative-lab/organization";
 import type { DrizzleDatabase } from "../PostgresDatabase.js";
@@ -18,7 +18,7 @@ export class PostgresKnowledgeArticleRepository implements KnowledgeArticleRepos
     return rows.map(KnowledgeArticleMapper.fromRow);
   }
 
-  async findByCategory(categoryId: string): Promise<KnowledgeArticle[]> {
+  async findByCategory(categoryId: KnowledgeCategoryId): Promise<KnowledgeArticle[]> {
     const rows = await this.db.select().from(knowledgeArticles).where(eq(knowledgeArticles.categoryId, categoryId));
     return rows.map(KnowledgeArticleMapper.fromRow);
   }
