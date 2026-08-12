@@ -15,8 +15,10 @@ import {
   asEmploymentContractId,
   asEmploymentId,
   asOrganizationId,
+  asDepartmentId,
   asPositionId,
   asReportingRelationshipId,
+  asTeamId,
   asWorkerId,
 } from "@creative-lab/workforce";
 import {
@@ -41,8 +43,8 @@ const employmentId = asEmploymentId("00000000-0000-0000-0000-000000000004");
 const contractId = asEmploymentContractId("00000000-0000-0000-0000-000000000005");
 const relationshipId = asReportingRelationshipId("00000000-0000-0000-0000-000000000006");
 const managerId = asWorkerId("00000000-0000-0000-0000-000000000007");
-const departmentId = "00000000-0000-0000-0000-000000000008" as never;
-const teamId = "00000000-0000-0000-0000-000000000009" as never;
+const departmentId = asDepartmentId("00000000-0000-0000-0000-000000000008");
+const teamId = asTeamId("00000000-0000-0000-0000-000000000009");
 const now = new Date("2026-01-15T10:00:00.000Z");
 
 function roundTrip<T>(toRow: (value: T) => unknown, fromRow: (row: unknown) => T, value: T): T {
