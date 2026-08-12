@@ -197,3 +197,17 @@ Changes to this matrix require:
 ## BUILD-007 addendum
 
 `infrastructure` may depend on `workforce` (and organization/crm) for concrete repository adapters. Domain packages must not depend on infrastructure implementations or Drizzle/postgres.js.
+
+## BUILD-009 addendum
+
+`infrastructure` may depend on `quotation` for concrete repository adapters implementing EPIC-216 ports. The quotation domain must not import infrastructure, Drizzle, or postgres.js.
+
+## BUILD-010 addendum
+
+`infrastructure` may depend on `contracts` for concrete repository adapters implementing EPIC-217 ports (Contract, ContractVersion, ContractTerm, ContractAmendment). The contracts domain must not import infrastructure, Drizzle, or postgres.js. Direction remains:
+
+```text
+@creative-lab/contracts
+        ↑
+@creative-lab/infrastructure
+```

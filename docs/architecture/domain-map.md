@@ -350,7 +350,7 @@ identities without owning Operations data.
 | **Upstream dependencies**      | Quotation, Services, CRM, Billing, Delivery, Review, Assets, Production, Allocation, Projects, Operations, Scheduling, Capacity, Workforce, Organization, Core. |
 | **Downstream dependencies**    | Engagement; projects / compliance (future consumers).                                                                               |
 | **Primary aggregates**         | Contract; ContractVersion; ContractTerm; ContractAmendment.                                                                         |
-| **Implementation package**     | `@creative-lab/contracts` — pure domain model (EPIC-217).                                                                           |
+| **Implementation package**     | `@creative-lab/contracts` — pure domain model (EPIC-217). Persistence adapters: BUILD-010 infrastructure.                           |
 | **Future epics**               | EPIC-217 domain complete; signature/document adapters deferred.                                                                     |
 
 ---

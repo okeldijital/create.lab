@@ -1,21 +1,19 @@
-import type {
+import {
   Quote,
   QuoteApproval,
-  QuoteApprovalSnapshot,
   QuoteLine,
-  QuoteLineSnapshot,
-  QuoteSnapshot,
   QuoteVersion,
-  QuoteVersionSnapshot,
-} from "@creative-lab/quotation";
-import {
   asQuoteApprovalId,
   asQuoteId,
   asQuoteLineId,
   asQuoteVersionId,
+  type QuoteApprovalSnapshot,
+  type QuoteLineSnapshot,
+  type QuoteSnapshot,
+  type QuoteVersionSnapshot,
 } from "@creative-lab/quotation";
 import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
-import { quoteApprovals, quoteLines, quoteVersions, quotes } from "./schema.js";
+import type { quoteApprovals, quoteLines, quoteVersions, quotes } from "./schema.js";
 
 type QuoteRow = InferSelectModel<typeof quotes>;
 type QuoteVersionRow = InferSelectModel<typeof quoteVersions>;

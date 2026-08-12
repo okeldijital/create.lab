@@ -81,6 +81,10 @@ dependencies, and lifecycle expectations remain explicit.
 
 **BUILD-007:** Infrastructure owns EPIC-202 Workforce PostgreSQL/Drizzle adapters (Worker, Position, Employment, EmploymentContract, ReportingRelationship).
 
+**BUILD-009:** Infrastructure owns EPIC-216 Quotation PostgreSQL/Drizzle adapters (Quote, QuoteVersion, QuoteLine, QuoteApproval).
+
+**BUILD-010:** Infrastructure owns EPIC-217 Contracts PostgreSQL/Drizzle adapters (Contract, ContractVersion, ContractTerm, ContractAmendment).
+
 ## config — Platform Configuration
 
 | Field                          | Value                                                                                      |

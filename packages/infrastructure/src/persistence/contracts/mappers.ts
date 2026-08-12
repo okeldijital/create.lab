@@ -1,21 +1,19 @@
-import type {
+import {
   Contract,
   ContractAmendment,
-  ContractAmendmentSnapshot,
-  ContractSnapshot,
   ContractTerm,
-  ContractTermSnapshot,
   ContractVersion,
-  ContractVersionSnapshot,
-} from "@creative-lab/contracts";
-import {
   asContractAmendmentId,
   asContractId,
   asContractTermId,
   asContractVersionId,
+  type ContractAmendmentSnapshot,
+  type ContractSnapshot,
+  type ContractTermSnapshot,
+  type ContractVersionSnapshot,
 } from "@creative-lab/contracts";
 import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
-import { contractAmendments, contractTerms, contractVersions, contracts } from "./schema.js";
+import type { contractAmendments, contractTerms, contractVersions, contracts } from "./schema.js";
 
 type ContractRow = InferSelectModel<typeof contracts>;
 type ContractVersionRow = InferSelectModel<typeof contractVersions>;

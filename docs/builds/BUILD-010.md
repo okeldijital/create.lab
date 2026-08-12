@@ -2,7 +2,7 @@
 
 ## Status
 
-**Implementation complete on the BUILD-010 branch; local validation pending.**
+**Completed — locally validated**
 
 ## Scope
 
@@ -65,4 +65,4 @@ Live PostgreSQL integration remains outside the available validation environment
 
 ## Validation
 
-The local validation gates must be executed from the BUILD-010 branch before the build is marked validated. See `reports/build-010-validation.md` for the validation record.
+Local validation gates were executed on `build/010-contracts-persistence`. See `reports/build-010-validation.md` for the measured results.
