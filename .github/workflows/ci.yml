@@ -2,12 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [main, master]
-  # Use pull_request_target so the workflow definition is loaded from the
-  # default/base branch and reliably triggers for PRs even when the PR branch
-  # introduced or repairs the workflow itself.
-  pull_request_target:
-    branches: [main, master]
+    branches:
+      - main
+      - master
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
@@ -15,15 +13,12 @@ concurrency:
 
 jobs:
   quality:
-    name: Install → Typecheck → Lint → Test → Build
+    name: Install, Typecheck, Lint, Test, Build
     runs-on: ubuntu-latest
     timeout-minutes: 20
-
     steps:
-      - name: Checkout PR revision
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
