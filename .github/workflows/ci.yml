@@ -11,6 +11,7 @@ on:
       - master
   workflow_dispatch:
 
+# Canonical CI workflow. Keep this file as the sole active validation workflow.
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
