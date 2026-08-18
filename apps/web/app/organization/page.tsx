@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function OrganizationPage(){return <main><aside><strong>Creative Lab</strong><nav><Link href="/">Overview</Link><Link href="/projects">Projects</Link><Link href="/organization">Organization</Link></nav></aside><section><p>WORKSPACE</p><h1>Organization</h1><article><h2>Demo Organization</h2><p>This shell is tenant-scoped and ready for the existing organization application services.</p></article></section></main>}
