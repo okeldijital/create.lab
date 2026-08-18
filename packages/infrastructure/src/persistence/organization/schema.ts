@@ -89,10 +89,26 @@ export const organizationSettings = pgTable("organization_settings", {
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
 });
 
+export const organizationMemberships = pgTable(
+  "organization_memberships",
+  {
+    actorId: text("actor_id").notNull(),
+    organizationId: uuid("organization_id").notNull().references(() => organizations.id),
+    role: text("role").notNull(),
+    active: integer("active").notNull().default(1),
+    createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
+  },
+  (table) => ({
+    actorOrganizationUnique: uniqueIndex("organization_memberships_actor_org_unique").on(table.actorId, table.organizationId),
+  }),
+);
+
 export const organizationSchema = {
   organizations,
   departments,
   teams,
   studios,
   organizationSettings,
+  organizationMemberships,
 };
