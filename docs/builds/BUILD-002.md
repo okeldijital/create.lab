@@ -3,8 +3,7 @@
 | Field | Value |
 |---|---|
 | Build | BUILD-002 |
-| Status | Implementation in progress — local validation required |
-| Branch | `build/002-infrastructure-foundation` |
+| Status | Completed — validated through cumulative BUILD-003–016 gate |
 | Scope | Infrastructure adapters for application ports |
 | Prerequisites | BUILD-000B, BUILD-001 |
 
@@ -20,20 +19,23 @@ Provide the first concrete infrastructure implementations behind the BUILD-001 a
 - `InMemoryRepository` as an organization-isolated persistence adapter foundation.
 - Infrastructure configuration boundary with explicit in-memory adapter selection.
 - Infrastructure-specific error types.
+- PostgreSQL + Drizzle infrastructure introduced and expanded by BUILD-003–016.
 
 ## Architectural constraints
 
 - Domain packages remain infrastructure-agnostic.
 - Application contracts remain ports/interfaces.
-- No database, ORM, Payload, HTTP, UI, authentication vendor, or external event broker is introduced by BUILD-002.
 - Concrete adapters live under `packages/infrastructure`.
 - Event payloads are not mutated by the dispatcher.
 - Authorization denies missing organization or membership context.
+- Database persistence remains an infrastructure concern and is not imported by domain packages.
 
 ## Validation status
 
-The implementation includes infrastructure unit tests. Full monorepo typecheck, lint, test, build, dependency, and scaffold validation must be executed in the local development environment before this build is considered complete.
+BUILD-002 is considered complete as a foundation. The cumulative BUILD-016 validation gate recorded 1,295/1,295 tests passing with install, typecheck, lint, build, dependency, and scaffold checks passing on the cumulative implementation branch.
+
+Live PostgreSQL integration was not available in the validation environment and remains an explicit integration-readiness item rather than a claimed passing gate.
 
 ## Deliberate limitation
 
-The repository implementation is intentionally generic and in-memory at this stage. Concrete database adapters and vendor integrations belong to later infrastructure work after their persistence/authentication decisions are explicitly established.
+Concrete database adapters are implemented for the current domain persistence vertical slices, while authentication, external event brokers, transport, and vendor integrations remain outside the infrastructure scope until explicitly introduced by later builds.
