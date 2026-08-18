@@ -1,11 +1,11 @@
 # EPIC-222 — Identity, Organization Membership & Authorization Boundary
 
-**Status:** Proposed / governance specification
+**Status:** In Progress
 **Depends on:** EPIC-201, EPIC-221, ADR-005
 
 ## Purpose
 
-Define the identity and organization-membership boundary required to provide tenant-scoped authorization without coupling domain packages to an authentication provider or transport mechanism.
+Define and implement the identity and organization-membership boundary required to provide tenant-scoped authorization without coupling domain packages to an authentication provider or transport mechanism.
 
 ## Scope
 
@@ -38,36 +38,50 @@ Define the identity and organization-membership boundary required to provide ten
 9. Authorization failures must not leak protected resource existence across tenant boundaries.
 10. All authorization behavior is covered by automated tests before production acceptance.
 
-## Initial permission vocabulary
+## Permission vocabulary
 
-The implementation must use the existing `Permission` type as the canonical vocabulary and must not introduce ad-hoc permission strings in applications or web routes.
+The implementation uses the existing `Permission` type as the canonical vocabulary. Applications and web routes must not introduce ad-hoc permission strings.
 
-Initial governed capabilities include the existing authorization port operations:
+The governed capability set is:
 
-- `create_project`
-- `approve_invoice`
-- `archive_asset`
-- `create_organization`
-- `approve_review`
-- `issue_quote`
-- `activate_contract`
+`organization.create`, `organization.archive`, `organization.read`,
+`project.create`, `project.read`, `project.archive`,
+`production.start`, `production.read`,
+`asset.create`, `asset.read`, `asset.archive`,
+`review.approve`, `review.read`,
+`delivery.create`, `delivery.read`,
+`invoice.create`, `invoice.read`, `invoice.approve`,
+`quote.create`, `quote.read`, `quote.issue`,
+`contract.activate`, `contract.read`,
+`engagement.create`, `engagement.read`,
+`portfolio.create`, `portfolio.read`,
+`knowledge.create`, `knowledge.read`, `knowledge.search`.
 
-The final role-to-permission matrix must be explicitly recorded before the concrete policy implementation is accepted.
+## Role-to-permission matrix v1
+
+| Role | Governed access |
+|---|---|
+| `owner` | All permissions in the governed capability set. |
+| `admin` | All permissions except `organization.create` and `organization.archive`. |
+| `member` | Read access to organization/project/production/asset/review/delivery/invoice/quote/contract/engagement/portfolio/knowledge, plus `asset.create` and `knowledge.create`. |
+
+This matrix is the initial policy baseline for EPIC-222 and must be revised through governance documentation if product requirements require additional roles or permissions.
 
 ## Acceptance criteria
 
-- [ ] Actor identity can be represented independently of authentication provider.
-- [ ] Organization membership is represented independently of persistence technology.
-- [ ] Role/permission policy is explicit and testable.
-- [ ] `AuthorizationService` has a production composition-root implementation.
-- [ ] Missing organization membership denies tenant-scoped permissions.
-- [ ] Cross-organization access denies by default.
+- [x] Actor identity can be represented independently of authentication provider.
+- [x] Organization membership is represented independently of persistence technology.
+- [x] Role/permission policy is explicit and testable.
+- [x] `AuthorizationService` has a policy implementation behind its application-layer port.
+- [x] Missing organization membership denies tenant-scoped permissions.
+- [x] Cross-organization access denies by default.
 - [ ] Application use cases enforce authorization before protected operations.
 - [ ] Web routes do not implement authorization rules themselves.
-- [ ] No domain package imports authentication or transport concerns.
-- [ ] Unit and application integration tests cover allow/deny and tenant-isolation cases.
-- [ ] Vercel production deployment passes.
-- [ ] Governance documentation and Notion project tracker are updated.
+- [x] No domain package imports authentication or transport concerns.
+- [x] Unit tests cover allow/deny and tenant-isolation cases.
+- [ ] Persistence-backed membership adapter is wired through the composition root.
+- [ ] Vercel production deployment passes with the authorization implementation.
+- [ ] Governance documentation and Notion project tracker are updated to completion.
 
 ## Governance references
 
