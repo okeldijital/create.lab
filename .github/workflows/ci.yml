@@ -2,21 +2,28 @@ name: CI
 
 on:
   push:
-    branches: [main, master, build/009-quotation-persistence]
+    branches:
+      - main
+      - master
   pull_request:
-    branches: [main, master]
+    branches:
+      - main
+      - master
   workflow_dispatch:
 
+# Canonical CI workflow. Keep this file as the sole active validation workflow.
 concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   quality:
-    name: Install → Typecheck → Lint → Test → Build
+    name: Install, Typecheck, Lint, Test, Build
     runs-on: ubuntu-latest
     timeout-minutes: 20
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
