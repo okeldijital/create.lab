@@ -30,7 +30,7 @@ export { OrganizationName, OrganizationSlug, DepartmentName, TeamName, StudioNam
 export { OrganizationStatus, ORGANIZATION_STATUS_TRANSITIONS, canTransitionOrganizationStatus, DepartmentStatus, TeamStatus, StudioStatus, StudioType } from "./enums/index.js";
 export { DomainEvent, DOMAIN_EVENT_VERSION, OrganizationCreated, OrganizationUpdated, OrganizationArchived, DepartmentCreated, DepartmentUpdated, DepartmentArchived, TeamCreated, TeamUpdated, TeamArchived, StudioCreated, StudioUpdated, StudioArchived, OrganizationSettingsUpdated } from "./events/index.js";
 export type { AnyDomainEvent, DomainEventProps } from "./events/index.js";
-export type { OrganizationRepository, DepartmentRepository, TeamRepository, StudioRepository, OrganizationSettingsRepository } from "./repositories/index.js";
+export type { OrganizationRepository, DepartmentRepository, TeamRepository, StudioRepository, OrganizationSettingsRepository, OrganizationMembershipRepository } from "./repositories/index.js";
 export { OrganizationService, DepartmentService, TeamService, StudioService, OrganizationSettingsService } from "./services/index.js";
 export type { OrganizationServiceDeps, DepartmentServiceDeps, TeamServiceDeps, StudioServiceDeps, OrganizationSettingsServiceDeps } from "./services/index.js";
 export { DepartmentHierarchyPolicy, OrganizationActivationPolicy, StudioAvailabilityPolicy } from "./policies/index.js";
