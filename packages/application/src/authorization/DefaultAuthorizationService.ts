@@ -1,4 +1,5 @@
 import type { OrganizationMembership, MembershipRole } from "@creative-lab/organization";
+import { AuthorizationError } from "../errors/ApplicationErrors.js";
 import type { ApplicationContext } from "../types/context.js";
 import type { Permission } from "../types/ids.js";
 import type { AuthorizationService } from "./AuthorizationService.js";
@@ -36,7 +37,7 @@ export class DefaultAuthorizationService implements AuthorizationService {
   constructor(private readonly memberships: MembershipReader) {}
 
   async can(permission: Permission, context: ApplicationContext): Promise<boolean> {
-    if (!context.organizationId || !context.actorId) return false;
+    if (!context?.organizationId || !context?.actorId) return false;
     const membership = await this.memberships.findMembership(String(context.actorId), String(context.organizationId));
     if (!membership || !membership.active || String(membership.organizationId) !== String(context.organizationId)) return false;
     return ROLE_PERMISSIONS[membership.role].has(permission);
@@ -44,7 +45,7 @@ export class DefaultAuthorizationService implements AuthorizationService {
 
   async assertCan(permission: Permission, context: ApplicationContext): Promise<void> {
     if (!(await this.can(permission, context))) {
-      throw new Error("FORBIDDEN");
+      throw new AuthorizationError();
     }
   }
 
