@@ -2,46 +2,60 @@
 
 This registry is the authoritative index of BUILD-level implementation work in `create.lab`.
 
-BUILD documents remain the detailed source for scope, constraints, acceptance criteria, and validation requirements. This registry reconciles those documents with repository history so implementation status is not inferred from document wording alone.
+BUILD documents remain the detailed source for scope, constraints, acceptance criteria, and validation requirements. This registry reconciles those documents with repository history so implementation status is not inferred from stale branch wording.
 
 ## Current Registry
 
-| Build | Title | Repository Status | Implementation Status | Validation Status | Evidence |
-|---|---|---|---|---|---|
-| BUILD-001 | Application Layer Foundation | Present on `main` | Implemented | Document records acceptance criteria as complete | `docs/builds/BUILD-001.md` |
-| BUILD-002 | Infrastructure Foundation | Merged to `main` | Implemented | Full local validation still explicitly required by BUILD-002 | `docs/builds/BUILD-002.md`, merge commit `43f61398a6ae42f349f198b7ea3cdbf3b988d140` |
+| Build | Repository Status | Validation Status |
+|---|---|---|
+| BUILD-001 | Implemented on `main` | Accepted criteria recorded complete |
+| BUILD-002 | Implemented on `main` | Complete as foundation; cumulative validation evidenced by BUILD-016 |
+| BUILD-003 | Implemented on `main` | Local validation evidenced |
+| BUILD-004 | Implemented on `main` | Local validation evidenced |
+| BUILD-005 | Implemented on `main` | Local validation evidenced |
+| BUILD-006 | Implemented on `main` | Local validation evidenced |
+| BUILD-007 | Implemented on `main` | Local validation evidenced |
+| BUILD-008 | Implemented on `main` | Local validation evidenced |
+| BUILD-009 | Implemented on `main` | Local validation evidenced |
+| BUILD-010 | Implemented on `main` | Local validation evidenced |
+| BUILD-011 | Implemented on `main` | Local validation evidenced |
+| BUILD-012 | Implemented on `main` | Local validation evidenced |
+| BUILD-013 | Implemented on `main` | Local validation evidenced |
+| BUILD-014 | Implemented on `main` | Local validation evidenced |
+| BUILD-015 | Implemented on `main` | Local validation evidenced |
+| BUILD-016 | Implemented on `main` | Local validation evidenced; 1,295/1,295 tests passed |
+
+## Cumulative BUILD-016 Gate
+
+The cumulative `build/016-allocation-persistence` implementation was promoted to `main` through PR #4.
+
+Measured validation:
+
+- 1,295 / 1,295 tests passed.
+- Install gate passed.
+- Typecheck passed.
+- Lint passed.
+- Build passed.
+- Dependency graph check passed.
+- Scaffold integrity check passed.
+- Live PostgreSQL integration was not available and is **not** claimed as passing.
 
 ## Status Rules
 
 - **Planned** — BUILD is defined but implementation has not begun.
 - **In progress** — implementation exists on a working branch or is not yet merged to `main`.
-- **Merged** — implementation has been merged to `main`, but final validation requirements may remain open.
+- **Merged** — implementation has been merged to `main`, but final validation may remain open.
 - **Implemented** — implementation and acceptance criteria are recorded as complete.
 - **Validated** — implementation is merged and required validation has been completed and evidenced.
 
-A BUILD must not be marked **Validated** solely because its implementation was merged. Validation evidence is required.
+## Current Boundary
 
-## Reconciliation Notes
+BUILD-016 establishes the current persistence/composition baseline. The end-user web and CMS applications remain scaffolds. The next implementation phase should therefore move into application/product delivery rather than another persistence vertical slice.
 
-### BUILD-001
+## Hosting Readiness
 
-`BUILD-001.md` declares the Application Layer Foundation **Implemented** and records all listed acceptance criteria as complete. The registry therefore records BUILD-001 as implemented.
+The connected Vercel `create-lab` project currently fails after a successful repository build because its project configuration expects an output directory named `public`. This is a scaffold-era deployment configuration issue; it is not evidence of a failed BUILD-016 repository validation. The configuration should be resolved when the web application establishes its deployable output contract.
 
-### BUILD-002
+## Next Action
 
-`BUILD-002.md` currently says `Implementation in progress — local validation required`. Repository history subsequently records `build: merge BUILD-002 infrastructure foundation` on commit `43f61398a6ae42f349f198b7ea3cdbf3b988d140`, so the repository state is ahead of the BUILD document's status wording.
-
-The registry therefore separates the two facts:
-
-1. **Implementation:** merged to `main`.
-2. **Validation:** not promoted to Validated because the BUILD document explicitly requires full local typecheck, lint, test, build, dependency, and scaffold validation.
-
-This avoids falsely closing BUILD-002 while also avoiding the opposite error of treating an already-merged implementation as merely unstarted.
-
-## Scope Boundary
-
-The BUILD registry tracks platform/build-layer progression only. EPIC implementation status is tracked separately under `docs/epics/`. A BUILD may provide infrastructure required by multiple EPICs; an EPIC completion does not automatically close a BUILD, and a BUILD merge does not automatically complete an EPIC.
-
-## Next Reconciliation Action
-
-Before the next BUILD is declared complete, attach explicit validation evidence to its BUILD record and update this registry from repository history rather than relying on manually remembered status.
+Select and implement the first application/product delivery epic from the reconciled roadmap. Keep GitHub repository validation and Vercel deployment readiness tracked separately so scaffold-era hosting failures do not get conflated with domain/infrastructure correctness.
