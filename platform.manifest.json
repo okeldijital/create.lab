@@ -2,7 +2,7 @@
   "platformVersion": "0.0.0",
   "constitutionVersion": "BUILD-000",
   "engineeringStandardsVersion": "BUILD-000A",
-  "architectureVersion": "BUILD-001",
+  "architectureVersion": "BUILD-016",
   "domainLayerVersion": "EPIC-220",
   "dependencyMatrixVersion": "EPIC-220",
   "documentVersions": {
@@ -10,7 +10,25 @@
     "packageClassification": "BUILD-001",
     "packageDependencies": "BUILD-001",
     "auditDomainStabilization": "BUILD-000B",
-    "build001": "BUILD-001"
+    "build001": "BUILD-001",
+    "build003": "BUILD-003",
+    "integrationComposition": "BUILD-003",
+    "build003DependencyMatrix": "BUILD-003",
+    "build003PackageClassification": "BUILD-003",
+    "build004": "BUILD-004",
+    "build004PersistenceAdr": "docs/adr/ADR-008-postgresql-drizzle-persistence.md",
+    "build005": "BUILD-005",
+    "build006": "BUILD-006",
+    "build007": "BUILD-007",
+    "build008": "BUILD-008",
+    "build009": "BUILD-009",
+    "build010": "BUILD-010",
+    "build011": "BUILD-011",
+    "build012": "BUILD-012",
+    "build013": "BUILD-013",
+    "build014": "BUILD-014",
+    "build015": "BUILD-015",
+    "build016": "BUILD-016"
   },
   "packages": [
     {
@@ -32,7 +50,10 @@
       "name": "@creative-lab/infrastructure",
       "path": "packages/infrastructure",
       "version": "0.0.0",
-      "classification": "Infrastructure"
+      "classification": "Infrastructure",
+      "implementation": "BUILD-002 foundation + BUILD-004 PostgreSQL/Drizzle + BUILD-005 Organization + BUILD-006 CRM + BUILD-007 Workforce + BUILD-008 Services + BUILD-009 Quotation + BUILD-010 Contracts + BUILD-011 Knowledge + BUILD-012 Capacity + BUILD-013 Scheduling + BUILD-014 Projects + BUILD-015 Operations + BUILD-016 Allocation persistence",
+      "status": "infrastructure-implemented",
+      "notes": "In-memory UnitOfWork/EventDispatcher/AuthorizationService; PostgreSQL + Drizzle + postgres.js; PostgresUnitOfWork; EPIC-201 Organization; EPIC-214 CRM; EPIC-202 Workforce; EPIC-215 Services; EPIC-216 Quotation; EPIC-217 Contracts; EPIC-220 Knowledge; EPIC-203 Capacity; EPIC-204 Scheduling; EPIC-207 Projects; EPIC-206 Operations; EPIC-208 Allocation Allocation/AllocationGroup/Reservation schema, mappers, and repository adapters"
     },
     {
       "name": "@creative-lab/ui",
@@ -216,6 +237,15 @@
       "implementation": "BUILD-001 application foundation",
       "status": "application-implemented",
       "notes": "Commands, queries, handlers, DTOs, mappers; UoW/auth/event ports only"
+    },
+    {
+      "name": "@creative-lab/composition",
+      "path": "packages/composition",
+      "version": "0.0.0",
+      "classification": "Integration / Composition Root",
+      "implementation": "BUILD-003 integration and composition foundation",
+      "status": "composition-implemented",
+      "notes": "Outer composition boundary; wires application ports to infrastructure implementations; not imported by domain/application/infrastructure"
     },
     {
       "name": "@creative-lab/test-utils",
@@ -441,6 +471,19 @@
     {
       "from": "infrastructure",
       "to": [
+        "application",
+        "organization",
+        "crm",
+        "workforce",
+        "capacity",
+        "scheduling",
+        "operations",
+        "projects",
+        "allocation",
+        "services",
+        "quotation",
+        "contracts",
+        "knowledge",
         "core",
         "config"
       ]
@@ -805,9 +848,16 @@
         "infrastructure",
         "config"
       ]
+    },
+    {
+      "from": "composition",
+      "to": [
+        "application",
+        "infrastructure"
+      ]
     }
   ],
-  "lastUpdated": "2026-08-07",
+  "lastUpdated": "2026-08-12",
   "audits": [
     {
       "id": "AUDIT-001",
@@ -839,6 +889,154 @@
       "status": "Completed",
       "path": "packages/application",
       "document": "docs/builds/BUILD-001.md"
+    },
+    {
+      "id": "BUILD-002",
+      "title": "Infrastructure Foundation",
+      "status": "Completed",
+      "path": "packages/infrastructure",
+      "document": "docs/builds/BUILD-002.md",
+      "report": "reports/build-002-validation.md"
+    },
+    {
+      "id": "BUILD-003",
+      "title": "Integration & Composition Foundation",
+      "status": "Completed",
+      "path": "packages/composition",
+      "document": "docs/builds/BUILD-003.md",
+      "report": "reports/build-003-validation.md"
+    },
+    {
+      "id": "BUILD-004",
+      "title": "Persistence Foundation",
+      "status": "Completed",
+      "path": "packages/infrastructure",
+      "document": "docs/builds/BUILD-004.md",
+      "technology": {
+        "database": "PostgreSQL",
+        "orm": "Drizzle ORM",
+        "driver": "postgres.js"
+      }
+    },
+    {
+      "id": "BUILD-005",
+      "title": "Organization Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/organization",
+      "document": "docs/builds/BUILD-005.md",
+      "report": "reports/build-005-validation.md",
+      "migration": "packages/infrastructure/migrations/0001_organization_persistence.sql",
+      "domain": "EPIC-201"
+    },
+    {
+      "id": "BUILD-006",
+      "title": "CRM Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/crm",
+      "document": "docs/builds/BUILD-006.md",
+      "report": "reports/build-006-validation.md",
+      "migration": "packages/infrastructure/migrations/0002_crm_persistence.sql",
+      "domain": "EPIC-214"
+    },
+    {
+      "id": "BUILD-007",
+      "title": "Workforce Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/workforce",
+      "document": "docs/builds/BUILD-007.md",
+      "report": "reports/build-007-validation.md",
+      "migration": "packages/infrastructure/migrations/0003_workforce_persistence.sql",
+      "domain": "EPIC-202"
+    },
+    {
+      "id": "BUILD-008",
+      "title": "Services Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/services",
+      "document": "docs/builds/BUILD-008.md",
+      "report": "reports/build-008-validation.md",
+      "migration": "packages/infrastructure/migrations/0004_services_persistence.sql",
+      "domain": "EPIC-215"
+    },
+    {
+      "id": "BUILD-009",
+      "title": "Quotation Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/quotation",
+      "document": "docs/builds/BUILD-009.md",
+      "report": "reports/build-009-validation.md",
+      "migration": "packages/infrastructure/migrations/0005_quotation_persistence.sql",
+      "domain": "EPIC-216"
+    },
+    {
+      "id": "BUILD-010",
+      "title": "Contracts Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/contracts",
+      "document": "docs/builds/BUILD-010.md",
+      "report": "reports/build-010-validation.md",
+      "migration": "packages/infrastructure/migrations/0006_contracts_persistence.sql",
+      "domain": "EPIC-217"
+    },
+    {
+      "id": "BUILD-011",
+      "title": "Knowledge Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/knowledge",
+      "document": "docs/builds/BUILD-011.md",
+      "report": "reports/build-011-validation.md",
+      "migration": "packages/infrastructure/migrations/0007_knowledge_persistence.sql",
+      "domain": "EPIC-220"
+    },
+    {
+      "id": "BUILD-012",
+      "title": "Capacity Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/capacity",
+      "document": "docs/builds/BUILD-012.md",
+      "report": "reports/build-012-validation.md",
+      "migration": "packages/infrastructure/migrations/0008_capacity_persistence.sql",
+      "domain": "EPIC-203"
+    },
+    {
+      "id": "BUILD-013",
+      "title": "Scheduling Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/scheduling",
+      "document": "docs/builds/BUILD-013.md",
+      "report": "reports/build-013-validation.md",
+      "migration": "packages/infrastructure/migrations/0009_scheduling_persistence.sql",
+      "domain": "EPIC-204"
+    },
+    {
+      "id": "BUILD-014",
+      "title": "Projects Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/projects",
+      "document": "docs/builds/BUILD-014.md",
+      "report": "reports/build-014-validation.md",
+      "migration": "packages/infrastructure/migrations/0010_projects_persistence.sql",
+      "domain": "EPIC-207"
+    },
+    {
+      "id": "BUILD-015",
+      "title": "Operations Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/operations",
+      "document": "docs/builds/BUILD-015.md",
+      "report": "reports/build-015-validation.md",
+      "migration": "packages/infrastructure/migrations/0011_operations_persistence.sql",
+      "domain": "EPIC-206"
+    },
+    {
+      "id": "BUILD-016",
+      "title": "Allocation Persistence",
+      "status": "Completed",
+      "path": "packages/infrastructure/src/persistence/allocation",
+      "document": "docs/builds/BUILD-016.md",
+      "report": "reports/build-016-validation.md",
+      "migration": "packages/infrastructure/migrations/0012_allocation_persistence.sql",
+      "domain": "EPIC-208"
     },
     {
       "id": "CORE-001",

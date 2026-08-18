@@ -192,3 +192,86 @@ Changes to this matrix require:
 3. Update of ADR-008 (or a superseding ADR)
 4. Update of `platform.manifest.json` dependencies section
 5. Scaffold / documentation cross-links as needed
+
+
+## BUILD-007 addendum
+
+`infrastructure` may depend on `workforce` (and organization/crm) for concrete repository adapters. Domain packages must not depend on infrastructure implementations or Drizzle/postgres.js.
+
+## BUILD-009 addendum
+
+`infrastructure` may depend on `quotation` for concrete repository adapters implementing EPIC-216 ports. The quotation domain must not import infrastructure, Drizzle, or postgres.js.
+
+## BUILD-010 addendum
+
+`infrastructure` may depend on `contracts` for concrete repository adapters implementing EPIC-217 ports (Contract, ContractVersion, ContractTerm, ContractAmendment). The contracts domain must not import infrastructure, Drizzle, or postgres.js. Direction remains:
+
+```text
+@creative-lab/contracts
+        ↑
+@creative-lab/infrastructure
+```
+
+## BUILD-011 addendum
+
+`infrastructure` may depend on `knowledge` for concrete repository adapters implementing EPIC-220 ports (KnowledgeCategory, KnowledgeArticle, KnowledgeVersion, KnowledgeReference). The knowledge domain must not import infrastructure, Drizzle, or postgres.js. Direction remains:
+
+```text
+@creative-lab/knowledge
+        ↑
+@creative-lab/infrastructure
+```
+
+## BUILD-012 addendum
+
+`infrastructure` may depend on `capacity` for concrete repository adapters implementing EPIC-203 ports (CapacityProfile, Capability, AvailabilityProfile, WorkingPattern, ResourceCapacity). The capacity domain must not import infrastructure, Drizzle, or postgres.js. Direction remains:
+
+```text
+@creative-lab/capacity
+        ↑
+@creative-lab/infrastructure
+```
+
+## BUILD-013 addendum
+
+`infrastructure` may depend on `scheduling` for concrete repository adapters implementing EPIC-204 ports (Calendar, Schedule, TimeBlock, Booking, Shift). The scheduling domain must not import infrastructure, Drizzle, or postgres.js. Direction remains:
+
+```text
+@creative-lab/scheduling
+        ↑
+@creative-lab/infrastructure
+```
+
+## BUILD-014 addendum
+
+`infrastructure` may depend on `projects` for concrete repository adapters implementing EPIC-207 ports (Project, ProjectPhase, ProjectObjective, ProjectDependency, Deliverable). The projects domain must not import infrastructure, Drizzle, or postgres.js. Direction remains:
+
+```text
+@creative-lab/projects
+        ↑
+@creative-lab/infrastructure
+```
+
+## BUILD-015 addendum
+
+`infrastructure` may depend on `operations` for concrete repository adapters implementing EPIC-206 ports (WorkOrder, WorkSession, WorkMilestone, WorkOutput, WorkIncident). The operations domain must not import infrastructure, Drizzle, or postgres.js. Direction remains:
+
+```text
+@creative-lab/operations
+        ↑
+@creative-lab/infrastructure
+```
+
+Operations references Allocation and Booking identities as opaque UUIDs only; BUILD-015 does not create reverse domain dependencies or allocation/booking tables.
+
+## BUILD-016 addendum
+
+`infrastructure` may depend on `allocation` for concrete repository adapters implementing EPIC-208 ports (Allocation, AllocationGroup, Reservation). The allocation domain must not import infrastructure, Drizzle, or postgres.js. Direction remains:
+
+```text
+@creative-lab/allocation
+        ↑
+@creative-lab/infrastructure
+```
+
+Allocation is downstream of Projects and Operations. Project, work-order, and resource identities are stored as opaque references (no new Resource table).

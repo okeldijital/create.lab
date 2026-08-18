@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Dependency graph enforcement for Creative Lab packages.
- * BUILD-002 adds the Infrastructure → Application implementation edge.
+ * BUILD-016 adds Infrastructure → Allocation repository adapters.
  */
 
 import { readFileSync, readdirSync, existsSync } from "node:fs";
@@ -16,7 +16,7 @@ const ALLOWED_DEPS = {
   core: new Set([]),
   config: new Set([]),
   ui: new Set(["core", "config"]),
-  infrastructure: new Set(["application", "core", "config"]),
+  infrastructure: new Set(["application", "organization", "crm", "workforce", "capacity", "scheduling", "operations", "projects", "allocation", "services", "quotation", "contracts", "knowledge", "core", "config"]),
   organization: new Set(["core", "infrastructure", "config"]),
   workforce: new Set(["organization", "core", "infrastructure", "config"]),
   capacity: new Set(["workforce", "organization", "core", "infrastructure", "config"]),
@@ -36,9 +36,10 @@ const ALLOWED_DEPS = {
   engagement: new Set(["contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
   portfolio: new Set(["engagement", "contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
   knowledge: new Set(["portfolio", "engagement", "contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
-  application: new Set(["knowledge", "portfolio", "engagement", "contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
   collaboration: new Set(["core", "organization"]),
   "test-utils": new Set([]),
+  application: new Set(["knowledge", "portfolio", "engagement", "contracts", "quotation", "services", "crm", "billing", "delivery", "review", "assets", "production", "allocation", "projects", "operations", "scheduling", "capacity", "workforce", "organization", "core", "infrastructure", "config"]),
+  composition: new Set(["application", "infrastructure"]),
 };
 
 const REGISTERED = new Set(Object.keys(ALLOWED_DEPS));

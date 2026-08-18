@@ -4,7 +4,7 @@
 | ------------------- | ------------------------------------- |
 | Document Title      | Domain Map (Bounded Context Registry) |
 | Document Identifier | ARCH-DOMAIN-MAP                       |
-| Version             | BUILD-001                             |
+| Version             | BUILD-007                             |
 | Status              | Accepted                              |
 | Last Updated        | 2026-08-07                            |
 | Supersedes          | BUILD-000A domain registry            |
@@ -107,7 +107,7 @@ upstream contexts; never reverse). See
 | **Upstream dependencies**      | Organization, Core (EPIC-202 package uses organization + core only).                                |
 | **Downstream dependencies**    | Capacity, Scheduling, Allocation, Operations.                                                       |
 | **Primary aggregates**         | Worker (root for people); Position; Employment; EmploymentContract; ReportingRelationship.          |
-| **Implementation package**     | `@creative-lab/workforce` — pure domain model (EPIC-202).                                           |
+| **Implementation package**     | `@creative-lab/workforce` — pure domain model (EPIC-202). Persistence adapters: BUILD-007 infrastructure. |
 | **Future epics**               | EPIC-202 domain complete; payroll/leave/identity deferred.                                          |
 
 ---
@@ -125,7 +125,7 @@ upstream contexts; never reverse). See
 | **Upstream dependencies**      | Workforce, Organization, Core (package uses core + organization + workforce).                            |
 | **Downstream dependencies**    | Scheduling, Allocation, Operations.                                                                      |
 | **Primary aggregates**         | CapacityProfile (root per resource); Capability; AvailabilityProfile; WorkingPattern; ResourceCapacity.  |
-| **Implementation package**     | `@creative-lab/capacity` — pure domain model (EPIC-203).                                                 |
+| **Implementation package**     | `@creative-lab/capacity` — pure domain model (EPIC-203). Persistence adapters: BUILD-012 infrastructure. |
 | **Future epics**               | EPIC-203 domain complete; equipment resource types; scheduling consumption.                              |
 
 ---
@@ -143,7 +143,7 @@ upstream contexts; never reverse). See
 | **Upstream dependencies**      | Capacity, Workforce, Organization, Core.                                                         |
 | **Downstream dependencies**    | Allocation, Operations.                                                                          |
 | **Primary aggregates**         | Schedule (root of planned time); Calendar; TimeBlock; Booking; Shift.                            |
-| **Implementation package**     | `@creative-lab/scheduling` — pure domain model (EPIC-204).                                       |
+| **Implementation package**     | `@creative-lab/scheduling` — pure domain model (EPIC-204). Persistence adapters: BUILD-013 infrastructure. |
 | **Future epics**               | EPIC-204 domain complete; Allocation consumes bookings/time blocks.                              |
 
 ---
@@ -161,7 +161,7 @@ upstream contexts; never reverse). See
 | **Upstream dependencies**      | Projects, Operations, Scheduling, Capacity, Workforce, Organization, Core.                                                          |
 | **Downstream dependencies**    | Production; reporting / analytics / billing consumers of commitment history.                                                        |
 | **Primary aggregates**         | Allocation; AllocationGroup; Reservation.                                                                                           |
-| **Implementation package**     | `@creative-lab/allocation` — pure domain model (EPIC-208).                                                                          |
+| **Implementation package**     | `@creative-lab/allocation` — pure domain model (EPIC-208). Persistence adapters: BUILD-016 infrastructure.                          |
 | **Future epics**               | EPIC-208 domain complete; adapters deferred.                                                                                        |
 
 
@@ -178,7 +178,7 @@ upstream contexts; never reverse). See
 | **Upstream dependencies**      | Scheduling, Capacity, Workforce, Organization, Core.                                                                                |
 | **Downstream dependencies**    | Reporting / Analytics / Billing (future consumers of execution history).                                                            |
 | **Primary aggregates**         | WorkOrder (root); WorkSession; WorkMilestone; WorkOutput (metadata); WorkIncident.                                                  |
-| **Implementation package**     | `@creative-lab/operations` — pure domain model (EPIC-206).                                                                          |
+| **Implementation package**     | `@creative-lab/operations` — pure domain model (EPIC-206). Persistence adapters: BUILD-015 infrastructure.                          |
 | **Future epics**               | EPIC-206 domain complete; adapters and reporting consumers deferred.                                                                |
 
 ### Package note
@@ -201,7 +201,7 @@ It references Allocation and Booking identities without mutating planning domain
 | **Upstream dependencies**      | Operations, Scheduling, Capacity, Workforce, Organization, Core.                                                                    |
 | **Downstream dependencies**    | Allocation (commitments); CRM, Billing, Analytics, Portfolio (future).                                                              |
 | **Primary aggregates**         | Project (root); ProjectPhase; Deliverable; ProjectDependency; ProjectObjective.                                                     |
-| **Implementation package**     | `@creative-lab/projects` — pure domain model (EPIC-207).                                                                            |
+| **Implementation package**     | `@creative-lab/projects` — pure domain model (EPIC-207). Persistence adapters: BUILD-014 infrastructure.                            |
 | **Future epics**               | EPIC-207 domain complete; portfolio and CRM consumers deferred.                                                                     |
 
 ### Package note
@@ -350,7 +350,7 @@ identities without owning Operations data.
 | **Upstream dependencies**      | Quotation, Services, CRM, Billing, Delivery, Review, Assets, Production, Allocation, Projects, Operations, Scheduling, Capacity, Workforce, Organization, Core. |
 | **Downstream dependencies**    | Engagement; projects / compliance (future consumers).                                                                               |
 | **Primary aggregates**         | Contract; ContractVersion; ContractTerm; ContractAmendment.                                                                         |
-| **Implementation package**     | `@creative-lab/contracts` — pure domain model (EPIC-217).                                                                           |
+| **Implementation package**     | `@creative-lab/contracts` — pure domain model (EPIC-217). Persistence adapters: BUILD-010 infrastructure.                           |
 | **Future epics**               | EPIC-217 domain complete; signature/document adapters deferred.                                                                     |
 
 ---
@@ -404,7 +404,7 @@ identities without owning Operations data.
 | **Upstream dependencies**      | Portfolio, Engagement, Contracts, Quotation, Services, CRM, Billing, Delivery, Review, Assets, Production, Allocation, Projects, Operations, Scheduling, Capacity, Workforce, Organization, Core. |
 | **Downstream dependencies**    | _(none — terminal business domain)_                                                                                                 |
 | **Primary aggregates**         | KnowledgeArticle; KnowledgeVersion; KnowledgeCategory; KnowledgeReference.                                                          |
-| **Implementation package**     | `@creative-lab/knowledge` — pure domain model (EPIC-220).                                                                           |
+| **Implementation package**     | `@creative-lab/knowledge` — pure domain model (EPIC-220). Persistence adapters: BUILD-011 infrastructure.                           |
 | **Future epics**               | EPIC-220 domain complete; content/search adapters deferred to infrastructure.                                                       |
 
 ---

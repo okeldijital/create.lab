@@ -2,13 +2,11 @@
   "name": "@creative-lab/infrastructure",
   "version": "0.0.0",
   "private": true,
-  "description": "Creative Lab infrastructure package — BUILD-002 foundation",
+  "description": "Creative Lab infrastructure package — BUILD-016 Allocation persistence",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    }
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./persistence": { "types": "./dist/persistence/index.d.ts", "import": "./dist/persistence/index.js" }
   },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -22,8 +20,22 @@
     "clean": "rm -rf dist coverage .turbo *.tsbuildinfo"
   },
   "dependencies": {
+    "@creative-lab/allocation": "workspace:*",
     "@creative-lab/application": "workspace:*",
-    "@creative-lab/core": "workspace:*"
+    "@creative-lab/capacity": "workspace:*",
+    "@creative-lab/contracts": "workspace:*",
+    "@creative-lab/core": "workspace:*",
+    "@creative-lab/crm": "workspace:*",
+    "@creative-lab/knowledge": "workspace:*",
+    "@creative-lab/operations": "workspace:*",
+    "@creative-lab/organization": "workspace:*",
+    "@creative-lab/projects": "workspace:*",
+    "@creative-lab/quotation": "workspace:*",
+    "@creative-lab/scheduling": "workspace:*",
+    "@creative-lab/services": "workspace:*",
+    "@creative-lab/workforce": "workspace:*",
+    "drizzle-orm": "^0.45.2",
+    "postgres": "^3.4.9"
   },
   "devDependencies": {
     "typescript": "^5.7.2",
