@@ -141,7 +141,12 @@ export {
   validateQueryRequired,
 } from "./validators/index.js";
 
-export type { ApplicationContext, ActorId, Permission } from "./types/index.js";
+export type {
+  ApplicationContext,
+  ApplicationContextProvider,
+  ActorId,
+  Permission,
+} from "./types/index.js";
 export { asActorId } from "./types/index.js";
 
 export {
