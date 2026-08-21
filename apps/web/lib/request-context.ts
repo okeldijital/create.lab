@@ -1,4 +1,8 @@
-import { asActorId, type ApplicationContext } from "@creative-lab/application";
+import {
+  asActorId,
+  type ApplicationContext,
+  type ApplicationContextProvider,
+} from "@creative-lab/application";
 import { asOrganizationId } from "@creative-lab/organization";
 import { headers } from "next/headers";
 
@@ -9,17 +13,42 @@ export class MissingRequestContextError extends Error {
   }
 }
 
-/** Translates trusted upstream identity metadata into ApplicationContext. */
-export async function getApplicationContext(): Promise<ApplicationContext> {
-  const requestHeaders = await headers();
-  const organizationId = requestHeaders.get("x-creative-lab-organization-id");
-  const actorId = requestHeaders.get("x-creative-lab-actor-id");
+type TrustedRequestContext = {
+  organizationId: string | null;
+  actorId: string | null;
+  correlationId?: string | null;
+};
 
-  if (!organizationId || !actorId) throw new MissingRequestContextError();
+/**
+ * Converts trusted upstream identity metadata into the application context.
+ * This adapter intentionally knows nothing about a specific identity vendor.
+ */
+export function toApplicationContext(
+  input: TrustedRequestContext,
+): ApplicationContext {
+  if (!input.organizationId || !input.actorId) {
+    throw new MissingRequestContextError();
+  }
 
   return {
-    organizationId: asOrganizationId(organizationId),
-    actorId: asActorId(actorId),
-    correlationId: requestHeaders.get("x-correlation-id") ?? undefined,
+    organizationId: asOrganizationId(input.organizationId),
+    actorId: asActorId(input.actorId),
+    correlationId: input.correlationId ?? undefined,
   };
+}
+
+/** Next.js adapter for the provider-agnostic application context port. */
+export const requestContextProvider: ApplicationContextProvider = {
+  async getContext(): Promise<ApplicationContext> {
+    const requestHeaders = await headers();
+    return toApplicationContext({
+      organizationId: requestHeaders.get("x-creative-lab-organization-id"),
+      actorId: requestHeaders.get("x-creative-lab-actor-id"),
+      correlationId: requestHeaders.get("x-correlation-id"),
+    });
+  },
+};
+
+export async function getApplicationContext(): Promise<ApplicationContext> {
+  return requestContextProvider.getContext();
 }
