@@ -6,10 +6,11 @@ import {
 import { AuthorizationError } from "../../errors/ApplicationErrors.js";
 import { getOrganizationQuery } from "../../queries/GetOrganizationQuery.js";
 import type { ApplicationContext } from "../../types/context.js";
+import { asOrganizationId } from "@creative-lab/organization";
 
 const context: ApplicationContext = {
   actorId: "actor-001",
-  organizationId: "org-001",
+  organizationId: asOrganizationId("org-001"),
   correlationId: "corr-001",
 };
 
