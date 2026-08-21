@@ -3,6 +3,7 @@ import {
   DefaultAuthorizationService,
   GetOrganizationHandler,
   UseCaseExecutor,
+  getOrganizationQuery,
   type OrganizationDto,
   type ApplicationContext,
 } from "@creative-lab/application";
@@ -65,7 +66,7 @@ export async function getOrganization(
 ): Promise<OrganizationDto> {
   const executor = await getApplicationRuntime();
   const result = await executor.executeQuery<OrganizationDto>(
-    { type: "GetOrganization", organizationId: String(context.organizationId) },
+    getOrganizationQuery(context.organizationId),
     context,
   );
   return result.data;
