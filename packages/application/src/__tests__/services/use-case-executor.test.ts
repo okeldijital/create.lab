@@ -20,6 +20,8 @@ import {
 
 type Ping = Command<"Ping"> & { value: string };
 type Pong = Query<"Pong"> & { id: string };
+type CreateProject = Command<"CreateProject"> & { name: string };
+type GetProject = Query<"GetProject"> & { id: string };
 
 class PingHandler implements CommandHandler<Ping, { ok: boolean }> {
   readonly commandType = "Ping" as const;
@@ -32,6 +34,20 @@ class PingHandler implements CommandHandler<Ping, { ok: boolean }> {
 class PongHandler implements QueryHandler<Pong, string> {
   readonly queryType = "Pong" as const;
   async handle(query: Pong): Promise<string> {
+    return query.id;
+  }
+}
+
+class CreateProjectHandler implements CommandHandler<CreateProject, { id: string }> {
+  readonly commandType = "CreateProject" as const;
+  async handle(): Promise<{ id: string }> {
+    return { id: "project-1" };
+  }
+}
+
+class GetProjectHandler implements QueryHandler<GetProject, string> {
+  readonly queryType = "GetProject" as const;
+  async handle(query: GetProject): Promise<string> {
     return query.id;
   }
 }
@@ -94,6 +110,39 @@ describe("UseCaseExecutor", () => {
       ),
     ).rejects.toThrow(AuthorizationError);
     expect(uow.began).toBe(0);
+  });
+
+  it("applies the governed command permission without caller-supplied options", async () => {
+    const denied = new UseCaseExecutor({
+      unitOfWork: uow,
+      eventDispatcher: events,
+      authorization: new DenyAllAuthorization(),
+    });
+    denied.registerCommandHandler(new CreateProjectHandler() as never);
+
+    await expect(
+      denied.executeCommand(
+        { type: "CreateProject", name: "Denied" } as CreateProject,
+        ctx,
+      ),
+    ).rejects.toThrow(AuthorizationError);
+    expect(uow.began).toBe(0);
+  });
+
+  it("applies the governed query permission without caller-supplied options", async () => {
+    const denied = new UseCaseExecutor({
+      unitOfWork: uow,
+      eventDispatcher: events,
+      authorization: new DenyAllAuthorization(),
+    });
+    denied.registerQueryHandler(new GetProjectHandler() as never);
+
+    await expect(
+      denied.executeQuery(
+        { type: "GetProject", id: "project-1" } as GetProject,
+        ctx,
+      ),
+    ).rejects.toThrow(AuthorizationError);
   });
 
   it("executes query without transaction", async () => {
