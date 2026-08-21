@@ -1,5 +1,5 @@
 {
-  "framework":"nextjs",
-  "installCommand":"pnpm install --no-frozen-lockfile",
-  "buildCommand":"pnpm --filter @creative-lab/web... build && pnpm --filter @creative-lab/web build"
+  "framework": "nextjs",
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "buildCommand": "pnpm --filter @creative-lab/web... build"
 }
