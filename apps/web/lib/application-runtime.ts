@@ -34,7 +34,7 @@ async function createRuntime(): Promise<UseCaseExecutor> {
   const authorization = new DefaultAuthorizationService(
     new MembershipReaderAdapter(membershipRepository),
   );
-  const unitOfWork = new PostgresUnitOfWork(database.db);
+  const unitOfWork = new PostgresUnitOfWork(database.client);
   const eventDispatcher = new InMemoryEventDispatcher();
   const eventPublisher = new CollectingEventPublisher(eventDispatcher);
 
