@@ -20,7 +20,6 @@ const deps = {
     existsBySlug: async () => false,
     save: async () => undefined,
     update: async () => undefined,
-    archive: async () => undefined,
     findBySlug: async () => undefined,
     findAll: async () => [],
   },
@@ -37,7 +36,7 @@ describe("GetOrganizationHandler tenant boundary", () => {
     const handler = new GetOrganizationHandler(deps);
 
     await expect(
-      handler.handle(getOrganizationQuery("org-002"), context),
+      handler.handle(getOrganizationQuery(asOrganizationId("org-002")), context),
     ).rejects.toBeInstanceOf(AuthorizationError);
   });
 });
