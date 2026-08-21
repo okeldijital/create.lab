@@ -1,5 +1,7 @@
 export {
   createApplicationComposition,
+  createPostgresApplicationComposition,
+  createPostgresAuthorizationService,
   executeCommand,
   registerCommandHandler,
   registerQueryHandler,

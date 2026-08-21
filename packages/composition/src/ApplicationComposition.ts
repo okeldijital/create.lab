@@ -9,12 +9,17 @@ import type {
   UnitOfWork,
   UseCaseExecutor,
 } from "@creative-lab/application";
-import { UseCaseExecutor as Executor } from "@creative-lab/application";
+import {
+  DefaultAuthorizationService,
+  UseCaseExecutor as Executor,
+} from "@creative-lab/application";
 import {
   createInfrastructureConfiguration,
   InMemoryAuthorizationService,
   InMemoryEventDispatcher,
   InMemoryUnitOfWork,
+  PostgresOrganizationMembershipRepository,
+  type DrizzleDatabase,
   type InfrastructureConfiguration,
 } from "@creative-lab/infrastructure";
 import { RepositoryRegistry } from "./RepositoryRegistry.js";
@@ -66,6 +71,31 @@ export function createApplicationComposition(
     authorization,
     executor,
     repositories: new RepositoryRegistry(),
+  });
+}
+
+/**
+ * Production authorization composition for EPIC-222.
+ * Authentication remains outside the composition root; this factory only
+ * binds the application authorization port to the PostgreSQL membership
+ * adapter and therefore preserves the domain/application dependency rule.
+ */
+export function createPostgresAuthorizationService(
+  database: DrizzleDatabase,
+): AuthorizationService {
+  return new DefaultAuthorizationService(
+    new PostgresOrganizationMembershipRepository(database),
+  );
+}
+
+/** Creates the application composition with PostgreSQL-backed authorization. */
+export function createPostgresApplicationComposition(
+  database: DrizzleDatabase,
+  options: Omit<ApplicationCompositionOptions, "authorization"> = {},
+): ApplicationComposition {
+  return createApplicationComposition({
+    ...options,
+    authorization: createPostgresAuthorizationService(database),
   });
 }
 

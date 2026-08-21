@@ -22,9 +22,39 @@ export type UseCaseExecutorDeps = {
   authorization: AuthorizationService;
 };
 
+const COMMAND_PERMISSIONS: Readonly<Record<string, Permission>> = {
+  CreateOrganization: "organization.create",
+  ArchiveOrganization: "organization.archive",
+  CreateProject: "project.create",
+  StartProduction: "production.start",
+  CreateInvoice: "invoice.create",
+  CreateQuote: "quote.create",
+  IssueQuote: "quote.issue",
+  ActivateContract: "contract.activate",
+  CreateEngagement: "engagement.create",
+  CreatePortfolio: "portfolio.create",
+  CreateKnowledgeArticle: "knowledge.create",
+  CreateAsset: "asset.create",
+  ApproveReview: "review.approve",
+  DeliverProject: "delivery.create",
+};
+
+const QUERY_PERMISSIONS: Readonly<Record<string, Permission>> = {
+  GetProject: "project.read",
+  FindInvoices: "invoice.read",
+  SearchKnowledge: "knowledge.search",
+  ListAssets: "asset.read",
+  GetOrganization: "organization.read",
+};
+
 /**
  * Coordinates validation, authorization, transactions, handler execution,
  * and event publication. Contains no domain business rules.
+ *
+ * EPIC-222: governed application use cases are deny-by-default. A caller may
+ * supply an explicit permission only when a use case is intentionally more
+ * restrictive than its governed baseline; callers cannot omit authorization
+ * for a protected command/query.
  */
 export class UseCaseExecutor {
   private readonly commandHandlers = new Map<
@@ -54,8 +84,9 @@ export class UseCaseExecutor {
       collectDomainEvents?: () => readonly AnyDomainEvent[];
     },
   ): Promise<CommandResult<TResult>> {
-    if (options?.permission) {
-      await this.deps.authorization.assertCan(options.permission, context);
+    const permission = options?.permission ?? COMMAND_PERMISSIONS[command.type];
+    if (permission) {
+      await this.deps.authorization.assertCan(permission, context);
     }
 
     const handler = this.commandHandlers.get(command.type);
@@ -95,9 +126,10 @@ export class UseCaseExecutor {
     context: ApplicationContext,
     options?: { permission?: Permission },
   ): Promise<QueryResult<TResult>> {
-    if (options?.permission) {
+    const permission = options?.permission ?? QUERY_PERMISSIONS[query.type];
+    if (permission) {
       const allowed = await this.deps.authorization.can(
-        options.permission,
+        permission,
         context,
       );
       if (!allowed) {
