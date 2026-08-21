@@ -1,5 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { GetOrganizationHandler } from "../../handlers/organization/GetOrganizationHandler.js";
+import {
+  GetOrganizationHandler,
+  type GetOrganizationHandlerDeps,
+} from "../../handlers/organization/GetOrganizationHandler.js";
 import { AuthorizationError } from "../../errors/ApplicationErrors.js";
 import { getOrganizationQuery } from "../../queries/GetOrganizationQuery.js";
 import type { ApplicationContext } from "../../types/context.js";
@@ -26,7 +29,7 @@ const deps = {
   eventPublisher: {
     publish: async () => undefined,
   },
-};
+} as unknown as GetOrganizationHandlerDeps;
 
 describe("GetOrganizationHandler tenant boundary", () => {
   it("rejects an organization outside the request context", async () => {
