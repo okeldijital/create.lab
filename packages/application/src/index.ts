@@ -28,8 +28,6 @@ export type {
   ArchiveOrganizationCommand,
   CreateProjectCommand,
   StartProductionCommand,
-  CreateProjectCommand,
-  StartProductionCommand,
   CreateInvoiceCommand,
   CreateQuoteCommand,
   IssueQuoteCommand,
