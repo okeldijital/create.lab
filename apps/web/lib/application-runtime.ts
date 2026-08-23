@@ -37,7 +37,7 @@ async function createRuntime(): Promise<UseCaseExecutor> {
   );
   const unitOfWork = new PostgresUnitOfWork(database.client);
   const eventDispatcher = new InMemoryEventDispatcher();
-  const eventPublisher = new CollectingEventPublisher(eventDispatcher);
+  const eventPublisher = new CollectingEventPublisher();
 
   const executor = new UseCaseExecutor({
     unitOfWork,
