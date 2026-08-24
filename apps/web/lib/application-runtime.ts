@@ -2,15 +2,19 @@ import {
   CollectingEventPublisher,
   DefaultAuthorizationService,
   GetOrganizationHandler,
+  GetProjectHandler,
   UseCaseExecutor,
   getOrganizationQuery,
+  getProjectQuery,
   type OrganizationDto,
+  type ProjectDto,
   type ApplicationContext,
 } from "@creative-lab/application";
 import {
   PostgresOrganizationMembershipRepository,
   PostgresOrganizationRepository,
   PostgresOrganizationSettingsRepository,
+  PostgresProjectRepository,
   PostgresUnitOfWork,
   createPostgresDatabase,
   postgresConfigurationFromEnvironment,
@@ -32,6 +36,7 @@ async function createRuntime(): Promise<UseCaseExecutor> {
   const organizationRepository = new PostgresOrganizationRepository(database.db);
   const settingsRepository = new PostgresOrganizationSettingsRepository(database.db);
   const membershipRepository = new PostgresOrganizationMembershipRepository(database.db);
+  const projectRepository = new PostgresProjectRepository(database.db);
   const authorization = new DefaultAuthorizationService(
     new MembershipReaderAdapter(membershipRepository),
   );
@@ -53,6 +58,15 @@ async function createRuntime(): Promise<UseCaseExecutor> {
     }),
   );
 
+  executor.registerQueryHandler(
+    new GetProjectHandler({
+      projectRepository,
+      organizationRepository,
+      authorization,
+      eventPublisher,
+    }),
+  );
+
   return executor;
 }
 
@@ -67,6 +81,18 @@ export async function getOrganization(
   const executor = await getApplicationRuntime();
   const result = await executor.executeQuery<OrganizationDto>(
     getOrganizationQuery(context.organizationId),
+    context,
+  );
+  return result.data;
+}
+
+export async function getProject(
+  projectId: string,
+  context: ApplicationContext,
+): Promise<ProjectDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeQuery<ProjectDto>(
+    getProjectQuery(projectId),
     context,
   );
   return result.data;
