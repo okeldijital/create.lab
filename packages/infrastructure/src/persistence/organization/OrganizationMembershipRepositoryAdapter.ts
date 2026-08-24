@@ -1,3 +1,4 @@
+import { asOrganizationId } from "@creative-lab/organization";
 import type { OrganizationMembershipRepository, OrganizationMembership, MembershipRole } from "@creative-lab/organization";
 import { and, eq } from "drizzle-orm";
 import type { DrizzleDatabase } from "../PostgresDatabase.js";
@@ -20,7 +21,7 @@ export class PostgresOrganizationMembershipRepository implements OrganizationMem
 
     return {
       actorId: row.actorId,
-      organizationId: row.organizationId,
+      organizationId: asOrganizationId(row.organizationId),
       role: row.role as MembershipRole,
       active: row.active === 1,
     };

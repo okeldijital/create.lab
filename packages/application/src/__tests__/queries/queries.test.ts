@@ -6,6 +6,7 @@ import {
   listAssetsQuery,
   searchKnowledgeQuery,
 } from "../../queries/index.js";
+import { asOrganizationId } from "@creative-lab/organization";
 
 describe("Queries", () => {
   it("getProjectQuery", () => {
@@ -36,7 +37,7 @@ describe("Queries", () => {
   });
 
   it("getOrganizationQuery", () => {
-    expect(getOrganizationQuery("o1").organizationId).toBe("o1");
+    expect(getOrganizationQuery(asOrganizationId("o1")).organizationId).toBe("o1");
   });
 
   it("queries never mutate — frozen shape", () => {

@@ -136,6 +136,7 @@ export {
   PostgresTeamRepository,
   PostgresStudioRepository,
   PostgresOrganizationSettingsRepository,
+  PostgresOrganizationMembershipRepository,
 } from "./organization/index.js";
 
 export {

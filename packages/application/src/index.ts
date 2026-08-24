@@ -90,7 +90,8 @@ export type { UnitOfWork } from "./transactions/index.js";
 export type { EventDispatcher } from "./events/index.js";
 export type { IntegrationEvent } from "./events/index.js";
 export { INTEGRATION_EVENT_VERSION } from "./events/index.js";
-export type { AuthorizationService } from "./authorization/index.js";
+export type { AuthorizationService, MembershipReader } from "./authorization/index.js";
+export { DefaultAuthorizationService } from "./authorization/index.js";
 
 export type { CommandHandler, QueryHandler } from "./interfaces/index.js";
 
