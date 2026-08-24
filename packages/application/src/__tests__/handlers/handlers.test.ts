@@ -115,6 +115,7 @@ describe("Handlers orchestration", () => {
       projectRepository: projects,
       organizationRepository: orgs,
       eventPublisher: events,
+      authorization: new AllowAllAuthorization(),
     });
     const createPortfolio = new CreatePortfolioHandler({
       portfolioRepository: portfolios,
