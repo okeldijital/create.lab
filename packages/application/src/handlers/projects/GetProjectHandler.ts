@@ -5,6 +5,8 @@ import {
 } from "@creative-lab/projects";
 import type { ProjectDto } from "../../dto/common.js";
 import type { QueryHandler } from "../../interfaces/Handler.js";
+import type { AuthorizationService } from "../../authorization/AuthorizationService.js";
+import { AuthorizationError } from "../../errors/ApplicationErrors.js";
 import { ProjectMapper } from "../../mappers/ProjectMapper.js";
 import type { GetProjectQuery } from "../../queries/GetProjectQuery.js";
 import type { CollectingEventPublisher } from "../../services/CollectingEventPublisher.js";
@@ -16,6 +18,7 @@ export type GetProjectHandlerDeps = Omit<
   "eventPublisher"
 > & {
   eventPublisher: CollectingEventPublisher;
+  authorization: AuthorizationService;
 };
 
 export class GetProjectHandler
@@ -23,17 +26,26 @@ export class GetProjectHandler
 {
   readonly queryType = "GetProject" as const;
   private readonly service: ProjectService;
+  private readonly authorization: AuthorizationService;
 
   constructor(deps: GetProjectHandlerDeps) {
-    this.service = new ProjectService(deps);
+    const { authorization, ...serviceDeps } = deps;
+    this.service = new ProjectService(serviceDeps);
+    this.authorization = authorization;
   }
 
   async handle(
     query: GetProjectQuery,
-    _context: ApplicationContext,
+    context: ApplicationContext,
   ): Promise<ProjectDto> {
     validateQueryRequired(query, ["projectId"]);
+    await this.authorization.assertCan("project.read", context);
+
     const project = await this.service.getById(asProjectId(query.projectId));
+    if (String(project.organizationId) !== String(context.organizationId)) {
+      throw new AuthorizationError();
+    }
+
     return ProjectMapper.toDto(project);
   }
 }
