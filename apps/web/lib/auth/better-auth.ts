@@ -6,13 +6,63 @@ import {
   PostgresOrganizationMembershipRepository,
 } from "@creative-lab/infrastructure";
 
-let runtime:
-  | {
-      auth: ReturnType<typeof betterAuth>;
-      database: ReturnType<typeof createPostgresDatabase>;
-      memberships: PostgresOrganizationMembershipRepository;
-    }
-  | undefined;
+function createBetterAuthRuntime() {
+  const database = createPostgresDatabase(postgresConfigurationFromEnvironment());
+  const auth = betterAuth({
+    database: drizzleAdapter(database.db, { provider: "pg" }),
+    secret: process.env.BETTER_AUTH_SECRET,
+    baseURL: process.env.BETTER_AUTH_URL,
+    emailAndPassword: {
+      enabled: true,
+    },
+    user: {
+      fields: {
+        emailVerified: "email_verified",
+        createdAt: "created_at",
+        updatedAt: "updated_at",
+      },
+    },
+    session: {
+      fields: {
+        userId: "user_id",
+        expiresAt: "expires_at",
+        ipAddress: "ip_address",
+        userAgent: "user_agent",
+        createdAt: "created_at",
+        updatedAt: "updated_at",
+      },
+    },
+    account: {
+      fields: {
+        userId: "user_id",
+        accountId: "account_id",
+        providerId: "provider_id",
+        accessToken: "access_token",
+        refreshToken: "refresh_token",
+        accessTokenExpiresAt: "access_token_expires_at",
+        refreshTokenExpiresAt: "refresh_token_expires_at",
+        idToken: "id_token",
+        createdAt: "created_at",
+        updatedAt: "updated_at",
+      },
+    },
+    verification: {
+      fields: {
+        expiresAt: "expires_at",
+        createdAt: "created_at",
+        updatedAt: "updated_at",
+      },
+    },
+  });
+
+  return {
+    auth,
+    database,
+    memberships: new PostgresOrganizationMembershipRepository(database.db),
+  };
+}
+
+let runtime: ReturnType<typeof createBetterAuthRuntime> | undefined;
 
 /**
  * Provider boundary for Better Auth.
@@ -21,62 +71,7 @@ let runtime:
  * authorization remains in the application/infrastructure membership boundary.
  */
 export function getBetterAuthRuntime() {
-  if (!runtime) {
-    const database = createPostgresDatabase(postgresConfigurationFromEnvironment());
-    const auth = betterAuth({
-      database: drizzleAdapter(database.db, { provider: "pg" }),
-      secret: process.env.BETTER_AUTH_SECRET,
-      baseURL: process.env.BETTER_AUTH_URL,
-      emailAndPassword: {
-        enabled: true,
-      },
-      user: {
-        fields: {
-          emailVerified: "email_verified",
-          createdAt: "created_at",
-          updatedAt: "updated_at",
-        },
-      },
-      session: {
-        fields: {
-          userId: "user_id",
-          expiresAt: "expires_at",
-          ipAddress: "ip_address",
-          userAgent: "user_agent",
-          createdAt: "created_at",
-          updatedAt: "updated_at",
-        },
-      },
-      account: {
-        fields: {
-          userId: "user_id",
-          accountId: "account_id",
-          providerId: "provider_id",
-          accessToken: "access_token",
-          refreshToken: "refresh_token",
-          accessTokenExpiresAt: "access_token_expires_at",
-          refreshTokenExpiresAt: "refresh_token_expires_at",
-          idToken: "id_token",
-          createdAt: "created_at",
-          updatedAt: "updated_at",
-        },
-      },
-      verification: {
-        fields: {
-          expiresAt: "expires_at",
-          createdAt: "created_at",
-          updatedAt: "updated_at",
-        },
-      },
-    });
-
-    runtime = {
-      auth,
-      database,
-      memberships: new PostgresOrganizationMembershipRepository(database.db),
-    };
-  }
-
+  runtime ??= createBetterAuthRuntime();
   return runtime;
 }
 
