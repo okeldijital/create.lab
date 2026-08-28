@@ -1,7 +1,7 @@
 import type { ApplicationContext } from "@creative-lab/application";
 import { createBetterAuthApplicationContextProvider } from "@creative-lab/infrastructure";
 import { headers } from "next/headers";
-import { getBetterAuth, getBetterAuthMemberships } from "./better-auth.js";
+import { getBetterAuth, getBetterAuthMemberships } from "./better-auth";
 
 export class MissingAuthenticatedContextError extends Error {
   constructor() {
