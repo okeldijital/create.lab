@@ -25,6 +25,7 @@ CREATE INDEX session_expires_idx ON "session"("expires_at");
 CREATE TABLE account (
   id TEXT PRIMARY KEY,
   "user_id" TEXT NOT NULL REFERENCES "user"(id) ON DELETE CASCADE,
+  issuer TEXT NOT NULL,
   "account_id" TEXT NOT NULL,
   "provider_id" TEXT NOT NULL,
   "access_token" TEXT,
@@ -36,7 +37,7 @@ CREATE TABLE account (
   password TEXT,
   "created_at" TIMESTAMPTZ NOT NULL,
   "updated_at" TIMESTAMPTZ NOT NULL,
-  CONSTRAINT account_provider_identity_unique UNIQUE (provider_id, "account_id")
+  CONSTRAINT account_provider_identity_unique UNIQUE (issuer, "account_id")
 );
 
 CREATE INDEX account_user_idx ON account("user_id");
