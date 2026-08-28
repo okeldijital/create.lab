@@ -1,5 +1,5 @@
 import { toNextJsHandler } from "better-auth/next-js";
-import { getBetterAuth } from "@/lib/auth/better-auth.js";
+import { getBetterAuth } from "@/lib/auth/better-auth";
 
 export const runtime = "nodejs";
 
