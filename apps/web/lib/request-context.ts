@@ -4,7 +4,7 @@ import {
   type ApplicationContextProvider,
 } from "@creative-lab/application";
 import { asOrganizationId } from "@creative-lab/organization";
-import { getAuthenticatedApplicationContext } from "./auth/session.js";
+import { getAuthenticatedApplicationContext } from "./auth/session";
 
 export class MissingRequestContextError extends Error {
   constructor() {
