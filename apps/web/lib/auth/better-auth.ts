@@ -69,6 +69,8 @@ let runtime: ReturnType<typeof createBetterAuthRuntime> | undefined;
  *
  * Better Auth owns authentication/session verification. Application
  * authorization remains in the application/infrastructure membership boundary.
+ * Runtime configuration remains lazy so deployment environment variables are
+ * resolved when the provider boundary is first invoked.
  */
 export function getBetterAuthRuntime() {
   runtime ??= createBetterAuthRuntime();
