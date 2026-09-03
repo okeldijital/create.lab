@@ -15,7 +15,7 @@
     "test": "turbo run test",
     "test:coverage": "turbo run test:coverage",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,mjs,cjs,json,md,yml,yaml}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yml,yaml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,mjs,cjs,json,md,yml,yaml}\"",
     "check": "pnpm run lint:deps && pnpm run typecheck && pnpm run lint && pnpm run test && pnpm run build",
     "clean": "turbo run clean && rm -rf node_modules"
   },
