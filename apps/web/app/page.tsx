@@ -1,15 +1,6 @@
 import Link from "next/link";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
-import { getBetterAuth } from "../lib/auth/better-auth";
 
-export default async function HomePage() {
-  const session = await getBetterAuth().api.getSession({ headers: await headers() });
-
-  if (session?.user?.id) {
-    redirect("/projects");
-  }
-
+export default function HomePage() {
   return (
     <main className="auth-landing">
       <section className="auth-landing__card" aria-labelledby="landing-title">
