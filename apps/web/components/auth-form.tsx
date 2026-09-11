@@ -28,8 +28,8 @@ export function AuthForm({ mode }: { mode: Mode }) {
         credentials: "include",
         body: JSON.stringify(
           isSignUp
-            ? { name, email, password, callbackURL: "/" }
-            : { email, password, callbackURL: "/" },
+            ? { name, email, password, callbackURL: "/projects" }
+            : { email, password, callbackURL: "/projects" },
         ),
       });
 
@@ -41,7 +41,7 @@ export function AuthForm({ mode }: { mode: Mode }) {
         throw new Error(payload?.error?.message ?? payload?.message ?? "Authentication failed.");
       }
 
-      router.push("/");
+      router.push("/projects");
       router.refresh();
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "Authentication failed.");
