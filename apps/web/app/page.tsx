@@ -1,5 +1,23 @@
 import Link from "next/link";
 
 export default function HomePage() {
-  return <main><aside><strong>Creative Lab</strong><nav><Link href="/">Overview</Link><Link href="/projects">Projects</Link><Link href="/organization">Organization</Link></nav></aside><section><p>WORKSPACE</p><h1>Overview</h1><article><p>APPLICATION SHELL</p><h2>Your creative operations, in one workspace.</h2><p>The deployable foundation for organizations, projects and production workflows.</p><Link href="/projects">View projects</Link></article></section></main>;
+  return (
+    <main className="auth-landing">
+      <section className="auth-landing__card" aria-labelledby="landing-title">
+        <div className="auth-landing__brand">Create Lab</div>
+        <h1 id="landing-title">Creative work, organized.</h1>
+        <p className="auth-landing__description">
+          Sign in to your workspace or create an account to get started.
+        </p>
+        <div className="auth-landing__actions">
+          <Link className="auth-landing__primary" href="/signup">
+            Create Account
+          </Link>
+          <Link className="auth-landing__secondary" href="/login">
+            Sign In
+          </Link>
+        </div>
+      </section>
+    </main>
+  );
 }

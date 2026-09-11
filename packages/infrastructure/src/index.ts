@@ -5,6 +5,12 @@
  * depend only on their ports. BUILD-004 adds the PostgreSQL/Drizzle
  * persistence foundation without introducing domain-specific schemas.
  */
+export { CurrentIdentityService } from "./auth/CurrentIdentityService.js";
+export type { BetterAuthRuntimeSession, CurrentIdentity } from "./auth/CurrentIdentityService.js";
+export { createBetterAuthApplicationContextProvider } from "./auth/BetterAuthApplicationContextProvider.js";
+export type { BetterAuthSessionResolver } from "./auth/BetterAuthApplicationContextProvider.js";
+export { toAuthenticatedIdentity } from "./auth/BetterAuthIdentity.js";
+export type { AuthenticatedIdentity, BetterAuthSessionUser } from "./auth/BetterAuthIdentity.js";
 export { InMemoryUnitOfWork } from "./unit-of-work/InMemoryUnitOfWork.js";
 export { InMemoryEventDispatcher } from "./events/InMemoryEventDispatcher.js";
 export { InMemoryAuthorizationService } from "./authorization/InMemoryAuthorizationService.js";
