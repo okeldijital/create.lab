@@ -1,6 +1,15 @@
 import Link from "next/link";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
+import { getBetterAuth } from "../lib/auth/better-auth";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const session = await getBetterAuth().api.getSession({ headers: await headers() });
+
+  if (!session?.user?.id) {
+    redirect("/login");
+  }
+
   return (
     <main>
       <aside>
@@ -19,12 +28,6 @@ export default function HomePage() {
           <h2>Your creative operations, in one workspace.</h2>
           <p>The deployable foundation for organizations, projects and production workflows.</p>
           <Link href="/projects">View projects</Link>
-          <span style={{ marginLeft: 12 }}>
-            <Link href="/login">Sign in</Link>
-          </span>
-          <span style={{ marginLeft: 12 }}>
-            <Link href="/signup">Create account</Link>
-          </span>
         </article>
       </section>
     </main>
