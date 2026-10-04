@@ -15,7 +15,7 @@ export type CreateProjectHandlerDeps = Omit<
   "eventPublisher"
 > & {
   eventPublisher: CollectingEventPublisher;
-  /** Application may supply owner from actor when command omits it. */
+  /** Used only when the application context has no actor. */
   defaultOwnerId?: string;
 };
 
@@ -41,7 +41,7 @@ export class CreateProjectHandler
       organizationId: context.organizationId,
       name: command.name,
       description: command.description,
-      ownerId: this.defaultOwnerId,
+      ownerId: context.actorId || this.defaultOwnerId,
       startDate: command.startDate ? new Date(command.startDate) : null,
       targetEndDate: command.targetEndDate
         ? new Date(command.targetEndDate)

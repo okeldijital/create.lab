@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CreateProjectForm } from "../../components/create-project-form";
 import { WorkspaceShell } from "../../components/workspace-shell";
 import { listProjects } from "../../lib/application-runtime";
 import {
@@ -13,6 +14,10 @@ export default async function ProjectsPage() {
 
     return (
       <WorkspaceShell eyebrow="WORKSPACE" title="Projects">
+        <article>
+          <h2>New project</h2>
+          <CreateProjectForm />
+        </article>
         <article>
           <h2>Project workspace</h2>
           {projects.length === 0 ? (

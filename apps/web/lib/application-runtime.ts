@@ -1,10 +1,12 @@
 import {
   CollectingEventPublisher,
+  CreateProjectHandler,
   DefaultAuthorizationService,
   GetOrganizationHandler,
   GetProjectHandler,
   ListProjectsHandler,
   UseCaseExecutor,
+  createProjectCommand,
   getOrganizationQuery,
   getProjectQuery,
   listProjectsQuery,
@@ -78,6 +80,14 @@ async function createRuntime(): Promise<UseCaseExecutor> {
     }),
   );
 
+  executor.registerCommandHandler(
+    new CreateProjectHandler({
+      projectRepository,
+      organizationRepository,
+      eventPublisher,
+    }),
+  );
+
   return executor;
 }
 
@@ -115,6 +125,19 @@ export async function listProjects(
   const executor = await getApplicationRuntime();
   const result = await executor.executeQuery<ProjectDto[]>(
     listProjectsQuery(),
+    context,
+  );
+  return result.data;
+}
+
+export async function createProject(
+  name: string,
+  description: string | null,
+  context: ApplicationContext,
+): Promise<ProjectDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<ProjectDto>(
+    createProjectCommand({ name, description }),
     context,
   );
   return result.data;
