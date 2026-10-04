@@ -4,7 +4,10 @@ import {
   type ApplicationContextProvider,
 } from "@creative-lab/application";
 import { asOrganizationId } from "@creative-lab/organization";
-import { getAuthenticatedApplicationContext } from "./auth/session";
+import {
+  getAuthenticatedApplicationContext,
+  MissingAuthenticatedContextError,
+} from "./auth/session";
 
 export class MissingRequestContextError extends Error {
   constructor() {
@@ -41,7 +44,14 @@ export function toApplicationContext(
 /** Next.js adapter for the provider-agnostic application context port. */
 export const requestContextProvider: ApplicationContextProvider = {
   async getContext(): Promise<ApplicationContext> {
-    return getAuthenticatedApplicationContext();
+    try {
+      return await getAuthenticatedApplicationContext();
+    } catch (error) {
+      if (error instanceof MissingAuthenticatedContextError) {
+        throw new MissingRequestContextError();
+      }
+      throw error;
+    }
   },
 };
 

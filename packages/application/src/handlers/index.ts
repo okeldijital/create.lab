@@ -19,6 +19,10 @@ export {
   type GetProjectHandlerDeps,
 } from "./projects/GetProjectHandler.js";
 export {
+  ListProjectsHandler,
+  type ListProjectsHandlerDeps,
+} from "./projects/ListProjectsHandler.js";
+export {
   CreatePortfolioHandler,
   type CreatePortfolioHandlerDeps,
 } from "./portfolio/CreatePortfolioHandler.js";
