@@ -2,8 +2,16 @@ import { toNextJsHandler } from "better-auth/next-js";
 import { getBetterAuth } from "../../../../lib/auth/better-auth";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
-const handler = toNextJsHandler(getBetterAuth());
+function handler() {
+  return toNextJsHandler(getBetterAuth());
+}
 
-export const GET = handler.GET;
-export const POST = handler.POST;
+export function GET(request: Request) {
+  return handler().GET(request);
+}
+
+export function POST(request: Request) {
+  return handler().POST(request);
+}
