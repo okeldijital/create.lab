@@ -18,6 +18,8 @@ export function WorkspaceShell({
           <Link href="/">Overview</Link>
           <Link href="/projects">Projects</Link>
           <Link href="/organization">Organization</Link>
+          <Link href="/login">Sign in</Link>
+          <Link href="/signup">Create account</Link>
         </nav>
       </aside>
       <section>
