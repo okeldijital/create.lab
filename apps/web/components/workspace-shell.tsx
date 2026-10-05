@@ -22,6 +22,7 @@ export async function WorkspaceShell({
       nav={
         <>
           <Link href="/">Overview</Link>
+          <Link href="/clients">Clients</Link>
           <Link href="/projects">Projects</Link>
           <Link href="/organization">Organization</Link>
         </>
