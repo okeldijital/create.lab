@@ -3,6 +3,7 @@ import type { ReactNode } from "react";
 import { AppShell } from "@creative-lab/ui";
 import { signOutAction } from "../actions/sign-out";
 import { getOptionalSession } from "../lib/auth/session";
+import { WorkspaceNav } from "./workspace-nav";
 
 export async function WorkspaceShell({
   eyebrow,
@@ -19,13 +20,7 @@ export async function WorkspaceShell({
       brand="Creative Lab"
       eyebrow={eyebrow}
       title={title}
-      nav={
-        <>
-          <Link href="/">Overview</Link>
-          <Link href="/projects">Projects</Link>
-          <Link href="/organization">Organization</Link>
-        </>
-      }
+      nav={<WorkspaceNav />}
       account={
         session ? (
           <form action={signOutAction}>
