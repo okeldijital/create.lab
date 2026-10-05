@@ -1,6 +1,6 @@
 "use server";
 
-import { redirect } from "next/navigation";
+import { isRedirectError, redirect } from "next/navigation";
 import { createProject } from "../lib/application-runtime";
 import { getApplicationContext } from "../lib/request-context";
 
@@ -14,7 +14,7 @@ export async function createProjectAction(formData: FormData): Promise<{ error?:
     const project = await createProject(name, description || null, context);
     redirect(`/projects/${project.id}`);
   } catch (cause) {
-    if (cause instanceof Error && cause.message === "NEXT_REDIRECT") throw cause;
+    if (isRedirectError(cause)) throw cause;
     return { error: cause instanceof Error ? cause.message : "Could not create project." };
   }
 }
