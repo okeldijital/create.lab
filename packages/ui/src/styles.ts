@@ -18,6 +18,7 @@ export const creativeLabStyles = `
 body{margin:0;background:var(--cl-porcelain);color:var(--cl-ink)}
 .cl-shell{min-height:100vh;display:grid;grid-template-columns:240px 1fr;background:var(--cl-porcelain)}
 .cl-side{position:sticky;top:0;height:100vh;background:var(--cl-graphite);color:#F8F7F4;padding:28px 18px;display:flex;flex-direction:column;gap:28px}
+.cl-side-head{display:contents}
 .cl-brand{font-size:13px;letter-spacing:.16em;text-transform:uppercase;font-weight:650}
 .cl-nav{display:grid;gap:4px}
 .cl-nav a,.cl-nav button{color:#D9D4CC;text-decoration:none;background:transparent;border:0;text-align:left;font:inherit;padding:11px 12px;border-radius:8px;cursor:pointer}
@@ -51,8 +52,8 @@ dd{margin:0}
   .cl-nav{grid-auto-flow:column;grid-auto-columns:max-content;overflow:auto;gap:6px}
   .cl-nav a{white-space:nowrap}
   .cl-account{margin-top:0;border-top:0;padding-top:0}
-  .cl-account form{grid-auto-flow:column;align-items:center;justify-content:end}
-  .cl-account p{font-size:13px}
+  .cl-account form{display:flex;align-items:center;gap:10px}
+  .cl-account p{font-size:13px;max-width:42vw;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .cl-main{padding:24px 16px 48px}
   .cl-main h1{font-size:32px}
 }
