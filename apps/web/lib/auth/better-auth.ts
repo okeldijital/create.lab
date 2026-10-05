@@ -66,6 +66,31 @@ CREATE INDEX IF NOT EXISTS verification_identifier_idx ON verification(identifie
 CREATE INDEX IF NOT EXISTS verification_expires_idx ON verification("expires_at");
 `;
 
+
+function trustedAuthOrigins(request?: Request) {
+  const configured = [
+    process.env.BETTER_AUTH_URL,
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
+    process.env.VERCEL_BRANCH_URL ? `https://${process.env.VERCEL_BRANCH_URL}` : undefined,
+    process.env.VERCEL_PROJECT_PRODUCTION_URL
+      ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+      : undefined,
+    "https://create.okeldijital.africa",
+  ].filter((value): value is string => Boolean(value));
+  const origin = request?.headers.get("origin");
+  if (!origin) return configured;
+  try {
+    const host = new URL(origin).hostname;
+    const allowedHost =
+      host === "create.okeldijital.africa" ||
+      host === "localhost" ||
+      host.endsWith(".vercel.app");
+    return allowedHost ? [...configured, origin] : configured;
+  } catch {
+    return configured;
+  }
+}
+
 function createBetterAuthRuntime() {
   const database = createPostgresDatabase(postgresConfigurationFromEnvironment());
   const auth = betterAuth({
@@ -75,6 +100,7 @@ function createBetterAuthRuntime() {
     }),
     secret: process.env.BETTER_AUTH_SECRET,
     baseURL: process.env.BETTER_AUTH_URL,
+    trustedOrigins: (request) => trustedAuthOrigins(request),
     emailAndPassword: {
       enabled: true,
     },
