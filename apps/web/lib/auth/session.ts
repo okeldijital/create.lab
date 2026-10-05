@@ -55,3 +55,10 @@ export async function getAuthenticatedApplicationContext(): Promise<ApplicationC
     correlationId: requestHeaders.get("x-correlation-id") ?? undefined,
   };
 }
+
+export async function getOptionalSession() {
+  const requestHeaders = await headers();
+  const session = await getBetterAuth().api.getSession({ headers: requestHeaders });
+  if (!session?.user?.id) return null;
+  return { id: session.user.id, name: session.user.name || session.user.email };
+}
