@@ -42,7 +42,7 @@ export default async function ProjectsPage() {
       <WorkspaceShell eyebrow="WORKSPACE" title="Projects">
         <article>
           <h2>Sign in required</h2>
-          <p>An authenticated organization membership is required before projects can be listed.</p>
+          <p>Your session was not found. Sign in again to open this workspace.</p>
           <Link href="/login">Sign in</Link>
         </article>
       </WorkspaceShell>
