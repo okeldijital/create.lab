@@ -7,16 +7,16 @@ export function AppShell({brand,workspace="Workspace",nav,account,eyebrow,title,
         <div className="cl-sidebar__header">
           <span className="cl-brand-mark" aria-hidden="true">C</span>
           <div><strong className="cl-brand">{brand}</strong><span className="cl-workspace-name">{workspace}</span></div>
+          <details className="cl-mobile-menu">
+            <summary aria-label="Open menu">Menu</summary>
+            <div className="cl-mobile-menu__panel">
+              <nav className="cl-nav" aria-label="Primary navigation">{nav}</nav>
+              <div className="cl-account">{account}</div>
+            </div>
+          </details>
         </div>
         <nav className="cl-nav cl-nav--desktop" aria-label="Primary navigation">{nav}</nav>
         <div className="cl-account cl-account--desktop">{account}</div>
-        <details className="cl-mobile-menu">
-          <summary>Menu</summary>
-          <div className="cl-mobile-menu__panel">
-            <nav className="cl-nav" aria-label="Primary navigation">{nav}</nav>
-            <div className="cl-account">{account}</div>
-          </div>
-        </details>
       </aside>
       <div className="cl-content">
         <header className="cl-topbar">
