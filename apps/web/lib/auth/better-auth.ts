@@ -138,3 +138,18 @@ export function ensureBetterAuthSchema() {
     .then(() => undefined);
   return schemaReady;
 }
+
+export async function repairIncompleteSignup(email: string) {
+  const normalized = email.trim().toLowerCase();
+  if (!normalized) return;
+  await getBetterAuthRuntime().database.client`
+    delete from "user" u
+    where lower(u.email) = ${normalized}
+      and not exists (
+        select 1 from account a
+        where a.user_id = u.id
+          and a.provider_id = 'credential'
+          and a.password is not null
+      )
+  `;
+}
