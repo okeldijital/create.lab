@@ -76,8 +76,10 @@ export async function addProjectClient(input: {
   const client = await database();
   const customerId = randomUUID();
   const contactId = randomUUID();
-  const [firstName, ...rest] = input.name.split(/\s+/);
-  const lastName = rest.join(" ") || firstName;
+  const parts = input.name.trim().split(/\s+/);
+  const firstName = parts[0] || input.name;
+  const lastName = parts.slice(1).join(" ") || firstName;
+  const phone = input.phone ?? "";
   await client`
     insert into customers (
       id, organization_id, customer_number, name, status, created_at, updated_at
@@ -89,7 +91,7 @@ export async function addProjectClient(input: {
     insert into contacts (
       id, organization_id, customer_id, first_name, last_name, email, phone, is_primary, status, created_at, updated_at
     ) values (
-      ${contactId}, ${input.organizationId}, ${customerId}, ${firstName}, ${lastName}, ${input.email}, ${input.phone}, true, 'active', now(), now()
+      ${contactId}, ${input.organizationId}, ${customerId}, ${firstName}, ${lastName}, ${input.email}, ${phone}, true, 'active', now(), now()
     )
   `;
   await client`
