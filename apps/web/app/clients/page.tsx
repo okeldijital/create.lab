@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Card } from "@creative-lab/ui";
 import { WorkspaceShell } from "../../components/workspace-shell";
 import { listProjects } from "../../lib/application-runtime";
-import { listProjectClients, type ProjectClient } from "../../lib/project-clients";
+import { listProjectClients } from "../../lib/project-clients";
 import { getApplicationContext, MissingRequestContextError } from "../../lib/request-context";
 
 
