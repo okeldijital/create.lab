@@ -6,11 +6,11 @@
 | Document Identifier | EPIC-INDEX                     |
 | Version             | MVP-001                        |
 | Status              | Accepted                       |
-| Last Updated        | 2026-10-04                     |
+| Last Updated        | 2026-10-05                     |
 | Supersedes          | BUILD-000A index               |
 | Owner               | Product & Platform Engineering |
 | Approved By         | Repository state               |
-| Effective Date      | 2026-10-04                     |
+| Effective Date      | 2026-10-05                     |
 
 ---
 
@@ -29,7 +29,7 @@ older status line until reconciled.
 | EPIC-207–220 | EPIC-207.md – EPIC-220.md | Domain packages present; product surface not wired |
 | EPIC-221 | [EPIC-221.md](./EPIC-221.md) | Implemented (runtime tenant context)        |
 | EPIC-222 | [EPIC-222.md](./EPIC-222.md) | In progress (authorization boundary)        |
-| AUTH-002 | PR #13                       | In progress (Better Auth session boundary)  |
+| AUTH-002 | PR #13 plus `mvp/auth-002-project-list` | Session works on the branch; not merged. Personal workspace is created on first sign-in. |
 
 ## Authority
 
@@ -44,6 +44,10 @@ Repositories, Services, Events, Activity, RBAC, UI, Testing, Acceptance Criteria
 
 ## Current MVP boundary
 
-Do not add another domain package. The product path is AUTH-002 onto `main`,
-a successful CI run, tenant project list, then one write path (create project
-or client intake).
+Do not add another domain package. As of 2026-10-05 the branch
+`mvp/auth-002-project-list` (`ae8174f`) has session sign-up, sign-in, a
+personal workspace, and a project list plus create form. Create has not been
+confirmed after the transaction fix. GitHub Actions is not the gate. The next
+product path is a created project that can be opened, then the shell session
+state, then client intake. `main` and `create.okeldijital.africa` do not have
+this slice.
