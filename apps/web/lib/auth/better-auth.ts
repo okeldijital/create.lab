@@ -50,6 +50,9 @@ CREATE TABLE IF NOT EXISTS account (
 );
 
 CREATE INDEX IF NOT EXISTS account_user_idx ON account("user_id");
+ALTER TABLE account ALTER COLUMN issuer DROP NOT NULL;
+ALTER TABLE account DROP CONSTRAINT IF EXISTS account_provider_identity_unique;
+DROP INDEX IF EXISTS account_provider_identity_unique;
 CREATE UNIQUE INDEX IF NOT EXISTS account_provider_identity_unique
   ON account (provider_id, account_id);
 
