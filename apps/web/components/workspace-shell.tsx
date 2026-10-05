@@ -24,6 +24,7 @@ export async function WorkspaceShell({
           <Link href="/">Overview</Link>
           <Link href="/clients">Clients</Link>
           <Link href="/projects">Projects</Link>
+          <Link href="/schedule">Schedule</Link>
           <Link href="/organization">Organization</Link>
         </>
       }
