@@ -38,7 +38,8 @@ export function AuthForm({ mode }: { mode: Mode }) {
         | null;
 
       if (!response.ok) {
-        throw new Error(payload?.error?.message ?? payload?.message ?? "Authentication failed.");
+        const detail = payload?.error?.message ?? payload?.message;
+        throw new Error(detail ? `${detail} (${response.status})` : `Authentication failed (${response.status}).`);
       }
 
       router.push("/projects");
