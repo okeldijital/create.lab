@@ -1,2 +1,3 @@
 export { creativeLabStyles } from "./styles.js";
-export { AppShell, Button, Card, TextField } from "./components/AppShell.js";
+export { createLabTokens } from "./tokens.js";
+export { AppShell, Button, Card, PageHeader, TextField } from "./components/AppShell.js";
