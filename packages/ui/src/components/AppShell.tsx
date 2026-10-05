@@ -18,9 +18,11 @@ export function AppShell({
   return (
     <div className="cl-shell">
       <aside className="cl-side">
-        <strong className="cl-brand">{brand}</strong>
+        <div className="cl-side-head">
+          <strong className="cl-brand">{brand}</strong>
+          <div className="cl-account">{account}</div>
+        </div>
         <nav className="cl-nav">{nav}</nav>
-        <div className="cl-account">{account}</div>
       </aside>
       <main className="cl-main">
         <p className="cl-kicker">{eyebrow}</p>
