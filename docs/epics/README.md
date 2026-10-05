@@ -45,9 +45,9 @@ Repositories, Services, Events, Activity, RBAC, UI, Testing, Acceptance Criteria
 ## Current MVP boundary
 
 Do not add another domain package. As of 2026-10-05 the branch
-`mvp/auth-002-project-list` (`ae8174f`) has session sign-up, sign-in, a
-personal workspace, and a project list plus create form. Create has not been
-confirmed after the transaction fix. GitHub Actions is not the gate. The next
+`mvp/auth-002-project-list` (`6b60612`) has session sign-up, sign-in, a
+personal workspace, project list, and create. Create-and-open was verified
+on 2026-10-05: project Dodo opened with status CREATED. GitHub Actions is not the gate. The next
 product path is a created project that can be opened, then the shell session
 state, then client intake. `main` and `create.okeldijital.africa` do not have
 this slice.

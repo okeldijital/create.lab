@@ -4,7 +4,7 @@
 M² Lab is the flagship tenant. GitHub is the implementation authority.
 
 This is not an MVP yet. The first workspace slice is on
-`mvp/auth-002-project-list` at `ae8174f`. It is not merged, and it is not
+`mvp/auth-002-project-list` at `6b60612`. It is not merged, and it is not
 what `create.okeldijital.africa` serves. Production is still `main` at
 `0f88b26`.
 
@@ -15,8 +15,9 @@ Verified on Vercel previews of this branch, through 2026-10-05:
 1. Sign up and sign in with Better Auth email and password.
 2. A session resolves the actor. No identity header is trusted.
 3. The first sign-in creates a personal organization and owner membership when none exists.
-4. `/projects` lists that organization's projects and can submit a create.
-5. Authorization stays in the application executor. `project.read` and `project.create` are enforced.
+4. `/projects` lists that organization's projects and creates one.
+5. Creating a project redirects to `/projects/[projectId]` and reads it back. Verified 2026-10-05: project Dodo, status CREATED.
+6. Authorization stays in the application executor. `project.read` and `project.create` are enforced.
 
 Missing session fails closed. A signed-in user without a workspace is no longer shown the same screen as a signed-out user.
 
@@ -33,7 +34,7 @@ Missing session fails closed. A signed-in user without a workspace is no longer 
 ## What is not done
 
 - AUTH-002 and this branch are not merged. [PR #13](https://github.com/okeldijital/create.lab/pull/13) does not contain this branch.
-- A created project has not yet been opened on `ae8174f`. The previous preview died before the insert.
+- A created project has not yet been opened on `6b60612`. The previous preview died before the insert.
 - The shell still shows Sign in after a session.
 - No client intake, deposit gate, or delivery flow.
 - `@creative-lab/ui` and `apps/cms` are scaffolds.
