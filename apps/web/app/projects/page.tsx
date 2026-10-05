@@ -7,6 +7,10 @@ import {
   MissingRequestContextError,
 } from "../../lib/request-context";
 
+function projectStatusLabel(status: string) {
+  return status.replace(/_/g, " ");
+}
+
 export default async function ProjectsPage() {
   try {
     const context = await getApplicationContext();
@@ -14,25 +18,65 @@ export default async function ProjectsPage() {
 
     return (
       <WorkspaceShell eyebrow="WORKSPACE" title="Projects">
-        <article>
-          <h2>New project</h2>
-          <CreateProjectForm />
-        </article>
-        <article>
-          <h2>Project workspace</h2>
+        <section className="cl-page-intro">
+          <div>
+            <p className="cl-page-intro__eyebrow">PROJECT WORKSPACE</p>
+            <h2>Active work, clearly organised.</h2>
+            <p>
+              Projects are the operational centre of Create Lab. Open a project
+              to see its client, status, work and next action.
+            </p>
+          </div>
+          <div className="cl-page-intro__action">
+            <CreateProjectForm />
+          </div>
+        </section>
+
+        <section className="cl-projects" aria-labelledby="projects-heading">
+          <div className="cl-section-heading">
+            <div>
+              <p className="cl-section-heading__eyebrow">WORK</p>
+              <h2 id="projects-heading">Projects</h2>
+            </div>
+            <span className="cl-status-note">
+              {projects.length} {projects.length === 1 ? "project" : "projects"}
+            </span>
+          </div>
+
           {projects.length === 0 ? (
-            <p>No projects in this organization yet.</p>
+            <div className="cl-empty-state">
+              <strong>No projects yet.</strong>
+              <p>Create the first project to start the workspace.</p>
+            </div>
           ) : (
-            <ul>
+            <div className="cl-project-list">
               {projects.map((project) => (
-                <li key={project.id}>
-                  <Link href={`/projects/${project.id}`}>{project.name}</Link>
-                  <span> {project.status}</span>
-                </li>
+                <Link
+                  key={project.id}
+                  href={`/projects/${project.id}`}
+                  className="cl-project-row"
+                >
+                  <span className="cl-project-row__main">
+                    <strong>{project.name}</strong>
+                    {project.description ? (
+                      <span>{project.description}</span>
+                    ) : (
+                      <span>No project description</span>
+                    )}
+                  </span>
+                  <span className="cl-project-row__meta">
+                    <span className="cl-status-badge">
+                      {projectStatusLabel(project.status)}
+                    </span>
+                    <span className="cl-project-row__arrow" aria-hidden="true">
+                      →
+                    </span>
+                  </span>
+                </Link>
               ))}
-            </ul>
+            </div>
           )}
-        </article>
+        </section>
       </WorkspaceShell>
     );
   } catch (error) {
