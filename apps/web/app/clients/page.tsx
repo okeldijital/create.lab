@@ -5,7 +5,6 @@ import { listProjects } from "../../lib/application-runtime";
 import { listProjectClients, type ProjectClient } from "../../lib/project-clients";
 import { getApplicationContext, MissingRequestContextError } from "../../lib/request-context";
 
-type ClientRow = ProjectClient & { projectId: string; projectName: string };
 
 export default async function ClientsPage() {
   try {
