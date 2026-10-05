@@ -102,3 +102,26 @@ export async function addProjectClient(input: {
     )
   `;
 }
+
+export async function getProjectClient(organizationId: string, clientId: string): Promise<ProjectClient | null> {
+  const client = await database();
+  const rows = await client<ProjectClient[]>`
+    select c.id, c.name, t.email, t.phone
+    from customers c
+    join contacts t on t.customer_id = c.id and t.is_primary = true
+    where c.organization_id = ${organizationId} and c.id = ${clientId}
+    limit 1
+  `;
+  return rows[0] ?? null;
+}
+
+export async function listClientProjects(organizationId: string, clientId: string): Promise<string[]> {
+  const client = await database();
+  const rows = await client<{ id: string }[]>`
+    select project_id as id
+    from project_clients
+    where organization_id = ${organizationId} and customer_id = ${clientId}
+    order by created_at desc
+  `;
+  return rows.map((row) => row.id);
+}
