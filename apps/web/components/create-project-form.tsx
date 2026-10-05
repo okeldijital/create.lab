@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { Button, TextField } from "@creative-lab/ui";
 import { createProjectAction } from "../actions/create-project";
 
 export function CreateProjectForm() {
@@ -22,18 +23,10 @@ export function CreateProjectForm() {
 
   return (
     <form action={submit}>
-      <label>
-        Name
-        <input name="name" required minLength={2} maxLength={120} />
-      </label>
-      <label>
-        Description
-        <input name="description" maxLength={500} />
-      </label>
-      {error ? <p role="alert">{error}</p> : null}
-      <button type="submit" disabled={pending}>
-        {pending ? "Creating…" : "Create project"}
-      </button>
+      <TextField label="Name" name="name" required />
+      <TextField label="Description" name="description" />
+      {error ? <p className="cl-alert" role="alert">{error}</p> : null}
+      <Button disabled={pending}>{pending ? "Creating…" : "Create project"}</Button>
     </form>
   );
 }
