@@ -11,9 +11,11 @@ export function CreateProjectForm() {
     setError(null);
     setPending(true);
     try {
-      await createProjectAction(formData);
+      const result = await createProjectAction(formData);
+      if (result?.error) setError(result.error);
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : "Could not create project.");
+    } finally {
       setPending(false);
     }
   }

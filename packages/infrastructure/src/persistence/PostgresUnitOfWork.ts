@@ -24,7 +24,10 @@ export class PostgresUnitOfWork implements UnitOfWork {
     try {
       await reserved`begin`;
       this.reserved = reserved;
-      this.database = drizzle({ client: reserved });
+      // Repositories are still bound to the pool. Do not wrap the reserved
+      // connection in Drizzle: postgres.js 3 reserved connections have no
+      // parsers and crash the web command path before the insert.
+      this.database = drizzle({ client: this.client });
       this.active = true;
     } catch (error) {
       await reserved.release();

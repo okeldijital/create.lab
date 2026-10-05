@@ -4,14 +4,17 @@ import { redirect } from "next/navigation";
 import { createProject } from "../lib/application-runtime";
 import { getApplicationContext } from "../lib/request-context";
 
-export async function createProjectAction(formData: FormData) {
+export async function createProjectAction(formData: FormData): Promise<{ error?: string }> {
   const name = String(formData.get("name") ?? "").trim();
   const description = String(formData.get("description") ?? "").trim();
-  if (!name) {
-    throw new Error("Project name is required.");
-  }
+  if (!name) return { error: "Project name is required." };
 
-  const context = await getApplicationContext();
-  const project = await createProject(name, description || null, context);
-  redirect(`/projects/${project.id}`);
+  try {
+    const context = await getApplicationContext();
+    const project = await createProject(name, description || null, context);
+    redirect(`/projects/${project.id}`);
+  } catch (cause) {
+    if (cause instanceof Error && cause.message === "NEXT_REDIRECT") throw cause;
+    return { error: cause instanceof Error ? cause.message : "Could not create project." };
+  }
 }
