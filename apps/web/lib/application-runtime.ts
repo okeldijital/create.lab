@@ -7,6 +7,10 @@ import {
   CreateServiceCategoryHandler,
   ListServicesHandler,
   ListServiceCategoriesHandler,
+  CreateQuoteHandler,
+  IssueQuoteHandler,
+  ListQuotesHandler,
+  GetQuoteHandler,
   ListCustomersHandler,
   ListContactsHandler,
   DefaultAuthorizationService,
@@ -26,12 +30,17 @@ import {
   listContactsQuery,
   listServicesQuery,
   listServiceCategoriesQuery,
+  createQuoteCommand,
+  issueQuoteCommand,
+  listQuotesQuery,
+  getQuoteQuery,
   type OrganizationDto,
   type ProjectDto,
   type CustomerDto,
   type ContactDto,
   type ServiceDto,
   type ServiceCategoryDto,
+  type QuoteDto,
   type ApplicationContext,
 } from "@creative-lab/application";
 import {
@@ -43,6 +52,9 @@ import {
   PostgresContactRepository,
   PostgresServiceRepository,
   PostgresCategoryRepository,
+  PostgresQuoteRepository,
+  PostgresQuoteVersionRepository,
+  PostgresQuoteLineRepository,
   PostgresUnitOfWork,
   createPostgresDatabase,
   postgresConfigurationFromEnvironment,
@@ -69,6 +81,9 @@ async function createRuntime(): Promise<UseCaseExecutor> {
   const contactRepository = new PostgresContactRepository(database.db);
   const serviceRepository = new PostgresServiceRepository(database.db);
   const categoryRepository = new PostgresCategoryRepository(database.db);
+  const quoteRepository = new PostgresQuoteRepository(database.db);
+  const quoteVersionRepository = new PostgresQuoteVersionRepository(database.db);
+  const quoteLineRepository = new PostgresQuoteLineRepository(database.db);
   const authorization = new DefaultAuthorizationService(
     new MembershipReaderAdapter(membershipRepository),
   );
@@ -183,6 +198,39 @@ async function createRuntime(): Promise<UseCaseExecutor> {
     new CreateServiceCategoryHandler({
       categoryRepository,
       serviceRepository,
+      organizationRepository,
+      eventPublisher,
+    }),
+  );
+
+  executor.registerQueryHandler(
+    new ListQuotesHandler({
+      quoteRepository,
+    }),
+  );
+
+  executor.registerQueryHandler(
+    new GetQuoteHandler({
+      quoteRepository,
+    }),
+  );
+
+  executor.registerCommandHandler(
+    new CreateQuoteHandler({
+      quoteRepository,
+      quoteVersionRepository,
+      quoteLineRepository,
+      organizationRepository,
+      eventPublisher,
+      customerRepository,
+    }),
+  );
+
+  executor.registerCommandHandler(
+    new IssueQuoteHandler({
+      quoteRepository,
+      quoteVersionRepository,
+      quoteLineRepository,
       organizationRepository,
       eventPublisher,
     }),
@@ -342,5 +390,60 @@ export async function createServiceCategory(
 ): Promise<ServiceCategoryDto> {
   const executor = await getApplicationRuntime();
   const result = await executor.executeCommand<ServiceCategoryDto>(createServiceCategoryCommand(input), context);
+  return result.data;
+}
+
+
+export async function listQuotes(
+  context: ApplicationContext,
+  filters: { customerId?: string; status?: string } = {},
+): Promise<QuoteDto[]> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeQuery<QuoteDto[]>(
+    listQuotesQuery(filters),
+    context,
+  );
+  return result.data;
+}
+
+export async function getQuote(
+  quoteId: string,
+  context: ApplicationContext,
+): Promise<QuoteDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeQuery<QuoteDto>(
+    getQuoteQuery(quoteId),
+    context,
+  );
+  return result.data;
+}
+
+export async function createQuote(
+  input: {
+    customerId: string;
+    opportunityId?: string | null;
+    currency?: string;
+    quoteNumber?: string;
+    validUntil?: Date | null;
+  },
+  context: ApplicationContext,
+): Promise<QuoteDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<QuoteDto>(
+    createQuoteCommand(input),
+    context,
+  );
+  return result.data;
+}
+
+export async function issueQuote(
+  quoteId: string,
+  context: ApplicationContext,
+): Promise<QuoteDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<QuoteDto>(
+    issueQuoteCommand(quoteId),
+    context,
+  );
   return result.data;
 }
