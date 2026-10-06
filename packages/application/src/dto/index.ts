@@ -1,6 +1,8 @@
 export type {
   OrganizationDto,
   ProjectDto,
+  CustomerDto,
+  ContactDto,
   InvoiceDto,
   QuoteDto,
   ContractDto,
