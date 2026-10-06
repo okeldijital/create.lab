@@ -11,6 +11,11 @@ import {
   IssueQuoteHandler,
   ListQuotesHandler,
   GetQuoteHandler,
+  CreateContractHandler,
+  MarkContractPendingSignatureHandler,
+  ListContractsHandler,
+  GetContractHandler,
+  ActivateContractHandler,
   ListCustomersHandler,
   ListContactsHandler,
   DefaultAuthorizationService,
@@ -34,6 +39,11 @@ import {
   issueQuoteCommand,
   listQuotesQuery,
   getQuoteQuery,
+  createContractCommand,
+  markContractPendingSignatureCommand,
+  activateContractCommand,
+  listContractsQuery,
+  getContractQuery,
   type OrganizationDto,
   type ProjectDto,
   type CustomerDto,
@@ -41,6 +51,7 @@ import {
   type ServiceDto,
   type ServiceCategoryDto,
   type QuoteDto,
+  type ContractDto,
   type ApplicationContext,
 } from "@creative-lab/application";
 import {
@@ -55,6 +66,9 @@ import {
   PostgresQuoteRepository,
   PostgresQuoteVersionRepository,
   PostgresQuoteLineRepository,
+  PostgresContractRepository,
+  PostgresContractVersionRepository,
+  PostgresContractTermRepository,
   PostgresUnitOfWork,
   createPostgresDatabase,
   postgresConfigurationFromEnvironment,
@@ -84,6 +98,9 @@ async function createRuntime(): Promise<UseCaseExecutor> {
   const quoteRepository = new PostgresQuoteRepository(database.db);
   const quoteVersionRepository = new PostgresQuoteVersionRepository(database.db);
   const quoteLineRepository = new PostgresQuoteLineRepository(database.db);
+  const contractRepository = new PostgresContractRepository(database.db);
+  const contractVersionRepository = new PostgresContractVersionRepository(database.db);
+  const contractTermRepository = new PostgresContractTermRepository(database.db);
   const authorization = new DefaultAuthorizationService(
     new MembershipReaderAdapter(membershipRepository),
   );
@@ -234,6 +251,38 @@ async function createRuntime(): Promise<UseCaseExecutor> {
       organizationRepository,
       eventPublisher,
     }),
+  );
+
+  executor.registerQueryHandler(
+    new ListContractsHandler({ contractRepository }),
+  );
+
+  executor.registerQueryHandler(
+    new GetContractHandler({ contractRepository }),
+  );
+
+  const contractServiceDeps = {
+    contractRepository,
+    contractVersionRepository,
+    contractTermRepository,
+    organizationRepository,
+    eventPublisher,
+  };
+
+  executor.registerCommandHandler(
+    new CreateContractHandler({
+      ...contractServiceDeps,
+      customerRepository,
+      quoteRepository,
+    }),
+  );
+
+  executor.registerCommandHandler(
+    new MarkContractPendingSignatureHandler(contractServiceDeps),
+  );
+
+  executor.registerCommandHandler(
+    new ActivateContractHandler(contractServiceDeps),
   );
 
   return executor;
@@ -442,6 +491,73 @@ export async function issueQuote(
   const executor = await getApplicationRuntime();
   const result = await executor.executeCommand<QuoteDto>(
     issueQuoteCommand(quoteId),
+    context,
+  );
+  return result.data;
+}
+
+
+export async function listContracts(
+  context: ApplicationContext,
+  filters: { customerId?: string; status?: string } = {},
+): Promise<ContractDto[]> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeQuery<ContractDto[]>(
+    listContractsQuery(filters),
+    context,
+  );
+  return result.data;
+}
+
+export async function getContract(
+  contractId: string,
+  context: ApplicationContext,
+): Promise<ContractDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeQuery<ContractDto>(
+    getContractQuery(contractId),
+    context,
+  );
+  return result.data;
+}
+
+export async function createContract(
+  input: {
+    customerId: string;
+    quotationId: string;
+    contractNumber?: string;
+    effectiveDate: Date;
+    expiryDate?: Date | null;
+  },
+  context: ApplicationContext,
+): Promise<ContractDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<ContractDto>(
+    createContractCommand(input),
+    context,
+  );
+  return result.data;
+}
+
+export async function markContractPendingSignature(
+  contractId: string,
+  context: ApplicationContext,
+): Promise<ContractDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<ContractDto>(
+    markContractPendingSignatureCommand(contractId),
+    context,
+  );
+  return result.data;
+}
+
+export async function activateContract(
+  contractId: string,
+  context: ApplicationContext,
+): Promise<ContractDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<ContractDto>(
+    activateContractCommand(contractId),
     context,
   );
   return result.data;
