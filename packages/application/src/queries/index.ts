@@ -6,6 +6,8 @@ export {
 export {
   type ListProjectsQuery,
   listProjectsQuery,
+  listServicesQuery,
+  listServiceCategoriesQuery,
 } from "./ListProjectsQuery.js";
 export {
   type ListCustomersQuery,
