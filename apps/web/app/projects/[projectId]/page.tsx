@@ -14,6 +14,25 @@ function statusLabel(status: string) {
   return status.replace(/_/g, " ");
 }
 
+function statusTone(status: string) {
+  const normalized = status.toLowerCase();
+  if (normalized === "completed") return "success";
+  if (normalized === "blocked") return "danger";
+  if (normalized === "review" || normalized === "pending") return "warning";
+  if (normalized === "in_progress" || normalized === "in-progress") return "info";
+  return "neutral";
+}
+
+function nextAction(status: string) {
+  const normalized = status.toLowerCase();
+  if (normalized === "completed") return "Project complete.";
+  if (normalized === "blocked") return "Resolve the blocker before continuing.";
+  if (normalized === "review") return "Review the current work before proceeding.";
+  if (normalized === "pending") return "Move the project into its next workflow state.";
+  if (normalized === "in_progress" || normalized === "in-progress") return "Continue the current project work.";
+  return "Advance the project into its next workflow state.";
+}
+
 export default async function ProjectPage({
   params,
 }: {
@@ -44,7 +63,7 @@ export default async function ProjectPage({
               <h2>{project.name}</h2>
               <p>{project.description ?? "No project description yet."}</p>
             </div>
-            <span className="cl-status-badge cl-status-badge--hero">
+            <span className={`cl-status-badge cl-status-badge--hero cl-status-badge--${statusTone(project.status)}`}>
               {statusLabel(project.status)}
             </span>
           </section>
@@ -52,10 +71,10 @@ export default async function ProjectPage({
           <div className="cl-project-workspace__grid">
             <Card>
               <p className="cl-section-heading__eyebrow">NEXT ACTION</p>
-              <h2>Define the next piece of work.</h2>
+              <h2>{nextAction(project.status)}</h2>
               <p className="cl-detail-copy">
-                This project is ready for the workflow to be connected to
-                scheduling, production and review.
+                The workspace is showing the next workflow-level decision
+                without inventing task data that is not yet connected.
               </p>
             </Card>
 
