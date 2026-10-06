@@ -10,6 +10,11 @@ export class ContractMapper {
       customerId: contract.customerId,
       status: contract.status,
       quotationId: contract.quotationId,
+      effectiveDate: contract.effectiveDate.toISOString(),
+      expiryDate: contract.expiryDate?.toISOString() ?? null,
+      currentVersionId: contract.currentVersionId,
+      createdAt: contract.createdAt.toISOString(),
+      updatedAt: contract.updatedAt.toISOString(),
     };
   }
 }
