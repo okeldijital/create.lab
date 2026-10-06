@@ -12,7 +12,6 @@ export type Permission =
   | "customer.read"
   | "contact.create"
   | "contact.read"
-  | "project.archive"
   | "production.start"
   | "production.read"
   | "asset.create"
