@@ -213,3 +213,13 @@ export { createPostgresDatabase, checkPostgresConnection } from "./PostgresDatab
 export { PostgresUnitOfWork } from "./PostgresUnitOfWork.js";
 
 export { user, session, account, verification, authSchema } from "./auth/auth-schema.js";
+
+export {
+  invoices,
+  invoiceLines,
+  billingSchema,
+  InvoiceMapper as BillingInvoiceMapper,
+  InvoiceLineMapper as BillingInvoiceLineMapper,
+  PostgresInvoiceRepository,
+  PostgresInvoiceLineRepository,
+} from "./billing/index.js";
