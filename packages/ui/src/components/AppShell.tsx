@@ -1,11 +1,20 @@
 import type { ReactNode } from "react";
 
+function CreateLabMark() {
+  return (
+    <svg className="cl-brand-mark" viewBox="0 0 100 100" role="img" aria-label="Create Lab">
+      <path fill="currentColor" d="M16 29c0-4 2-7 6-9L74 4c6-2 11 2 11 8v24c0 5-2 8-6 11L43 64v27c0 5-3 8-8 8H24c-5 0-8-3-8-8V29z" />
+      <path className="cl-brand-mark__accent" fill="var(--cl-accent)" d="M48 48v-4l15-8v-6l25-14c6-3 11 1 11 7v29c0 5-2 9-7 11L48 91V48z" />
+    </svg>
+  );
+}
+
 export function AppShell({brand,workspace="Workspace",nav,account,eyebrow,title,actions,children}:{brand:string;workspace?:string;nav:ReactNode;account:ReactNode;eyebrow:string;title:string;actions?:ReactNode;children:ReactNode;}) {
   return (
     <div className="cl-shell">
       <aside className="cl-sidebar">
         <div className="cl-sidebar__header">
-          <span className="cl-brand-mark" aria-hidden="true"><i /><i /></span>
+          <CreateLabMark />
           <div><strong className="cl-brand">{brand}</strong><span className="cl-workspace-name">{workspace}</span></div>
           <details className="cl-mobile-menu">
             <summary aria-label="Open menu">Menu</summary>
