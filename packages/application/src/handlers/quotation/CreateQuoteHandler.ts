@@ -1,8 +1,8 @@
 import {
   QuoteService,
   type QuoteServiceDeps,
-  asCustomerId,
 } from "@creative-lab/quotation";
+import { asCustomerId, type CustomerRepository } from "@creative-lab/crm";
 import type { CreateQuoteCommand } from "../../commands/quotation/CreateQuoteCommand.js";
 import type { QuoteDto } from "../../dto/common.js";
 import { AuthorizationError } from "../../errors/ApplicationErrors.js";
@@ -14,9 +14,7 @@ import { validateRequired } from "../../validators/CommandValidator.js";
 
 export type CreateQuoteHandlerDeps = Omit<QuoteServiceDeps, "eventPublisher"> & {
   eventPublisher: CollectingEventPublisher;
-  customerRepository: QuoteServiceDeps["organizationRepository"] extends never
-    ? never
-    : import("@creative-lab/crm").CustomerRepository;
+  customerRepository: CustomerRepository;
 };
 
 export class CreateQuoteHandler
@@ -24,7 +22,7 @@ export class CreateQuoteHandler
 {
   readonly commandType = "CreateQuote" as const;
   private readonly service: QuoteService;
-  private readonly customerRepository: CreateQuoteHandlerDeps["customerRepository"];
+  private readonly customerRepository: CustomerRepository;
 
   constructor(deps: CreateQuoteHandlerDeps) {
     const { customerRepository, ...serviceDeps } = deps;
@@ -51,7 +49,7 @@ export class CreateQuoteHandler
     const quote = await this.service.create({
       organizationId: context.organizationId,
       customerId: asCustomerId(command.customerId),
-      opportunityId: command.opportunityId as never,
+      opportunityId: command.opportunityId,
       currency: command.currency,
       quoteNumber: command.quoteNumber,
       validUntil: command.validUntil,
