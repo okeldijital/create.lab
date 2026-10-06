@@ -10,6 +10,8 @@ export {
 export {
   type CreateProjectCommand,
   createProjectCommand,
+  createServiceCommand,
+  createServiceCategoryCommand,
 } from "./projects/CreateProjectCommand.js";
 export {
   type CreateCustomerCommand,
