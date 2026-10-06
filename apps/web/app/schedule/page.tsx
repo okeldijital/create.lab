@@ -7,6 +7,7 @@ export default async function SchedulePage() {
   try {
     const context = await getApplicationContext();
     const projects = await listProjects(context);
+    const activeProjects = projects.filter((project) => project.status.toLowerCase() !== "completed");
 
     return (
       <WorkspaceShell eyebrow="WORKSPACE" title="Schedule">
@@ -20,7 +21,7 @@ export default async function SchedulePage() {
         <section className="cl-schedule" aria-labelledby="schedule-heading">
           <div className="cl-section-heading">
             <div><p className="cl-section-heading__eyebrow">UPCOMING WORK</p><h2 id="schedule-heading">This week</h2></div>
-            <span className="cl-status-note">Scheduling ready</span>
+            <span className="cl-status-note">No events</span>
           </div>
           <div className="cl-schedule__grid">
             {["Mon","Tue","Wed","Thu","Fri"].map((day) => (
@@ -34,13 +35,13 @@ export default async function SchedulePage() {
         <section className="cl-schedule__projects">
           <div className="cl-section-heading">
             <div><p className="cl-section-heading__eyebrow">WORK CONTEXT</p><h2>Projects awaiting scheduling</h2></div>
-            <span className="cl-status-note">{projects.length}</span>
+            <span className="cl-status-note">{activeProjects.length} active</span>
           </div>
-          {projects.length === 0 ? (
+          {activeProjects.length === 0 ? (
             <div className="cl-empty-state"><strong>No projects require scheduling.</strong><p>Create a project to make it available to the scheduling workflow.</p></div>
           ) : (
             <div className="cl-project-list">
-              {projects.map((project) => (
+              {activeProjects.map((project) => (
                 <Link key={project.id} href={`/projects/${project.id}`} className="cl-project-row">
                   <span className="cl-project-row__main"><strong>{project.name}</strong><span>{project.description ?? "No project description"}</span></span>
                   <span className="cl-project-row__meta"><span className="cl-status-badge">{project.status.replace(/_/g, " ")}</span><span className="cl-project-row__arrow" aria-hidden="true">→</span></span>
