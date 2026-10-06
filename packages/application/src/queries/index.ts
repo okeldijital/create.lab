@@ -6,13 +6,19 @@ export {
 export {
   type ListProjectsQuery,
   listProjectsQuery,
-  listServicesQuery,
-  listServiceCategoriesQuery,
 } from "./ListProjectsQuery.js";
 export {
   type ListCustomersQuery,
   listCustomersQuery,
 } from "./ListCustomersQuery.js";
+export {
+  type ListServicesQuery,
+  listServicesQuery,
+} from "./ListServicesQuery.js";
+export {
+  type ListServiceCategoriesQuery,
+  listServiceCategoriesQuery,
+} from "./ListServiceCategoriesQuery.js";
 export {
   type ListContactsQuery,
   listContactsQuery,
