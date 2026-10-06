@@ -26,6 +26,8 @@ const COMMAND_PERMISSIONS: Readonly<Record<string, Permission>> = {
   CreateOrganization: "organization.create",
   ArchiveOrganization: "organization.archive",
   CreateProject: "project.create",
+  CreateCustomer: "customer.create",
+  AddContact: "contact.create",
   StartProduction: "production.start",
   CreateInvoice: "invoice.create",
   CreateQuote: "quote.create",
@@ -42,6 +44,8 @@ const COMMAND_PERMISSIONS: Readonly<Record<string, Permission>> = {
 const QUERY_PERMISSIONS: Readonly<Record<string, Permission>> = {
   GetProject: "project.read",
   ListProjects: "project.read",
+  ListCustomers: "customer.read",
+  ListContacts: "contact.read",
   FindInvoices: "invoice.read",
   SearchKnowledge: "knowledge.search",
   ListAssets: "asset.read",
