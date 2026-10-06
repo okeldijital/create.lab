@@ -1,6 +1,10 @@
 import {
   CollectingEventPublisher,
   CreateProjectHandler,
+  CreateCustomerHandler,
+  AddContactHandler,
+  ListCustomersHandler,
+  ListContactsHandler,
   DefaultAuthorizationService,
   GetOrganizationHandler,
   GetProjectHandler,
@@ -10,8 +14,12 @@ import {
   getOrganizationQuery,
   getProjectQuery,
   listProjectsQuery,
+  listCustomersQuery,
+  listContactsQuery,
   type OrganizationDto,
   type ProjectDto,
+  type CustomerDto,
+  type ContactDto,
   type ApplicationContext,
 } from "@creative-lab/application";
 import {
@@ -19,6 +27,8 @@ import {
   PostgresOrganizationRepository,
   PostgresOrganizationSettingsRepository,
   PostgresProjectRepository,
+  PostgresCustomerRepository,
+  PostgresContactRepository,
   PostgresUnitOfWork,
   createPostgresDatabase,
   postgresConfigurationFromEnvironment,
@@ -41,6 +51,8 @@ async function createRuntime(): Promise<UseCaseExecutor> {
   const settingsRepository = new PostgresOrganizationSettingsRepository(database.db);
   const membershipRepository = new PostgresOrganizationMembershipRepository(database.db);
   const projectRepository = new PostgresProjectRepository(database.db);
+  const customerRepository = new PostgresCustomerRepository(database.db);
+  const contactRepository = new PostgresContactRepository(database.db);
   const authorization = new DefaultAuthorizationService(
     new MembershipReaderAdapter(membershipRepository),
   );
@@ -84,6 +96,40 @@ async function createRuntime(): Promise<UseCaseExecutor> {
     new CreateProjectHandler({
       projectRepository,
       organizationRepository,
+      eventPublisher,
+    }),
+  );
+
+  executor.registerQueryHandler(
+    new ListCustomersHandler({
+      customerRepository,
+      organizationRepository,
+      eventPublisher,
+      authorization,
+    }),
+  );
+
+  executor.registerQueryHandler(
+    new ListContactsHandler({
+      contactRepository,
+      customerRepository,
+      eventPublisher,
+      authorization,
+    }),
+  );
+
+  executor.registerCommandHandler(
+    new CreateCustomerHandler({
+      customerRepository,
+      organizationRepository,
+      eventPublisher,
+    }),
+  );
+
+  executor.registerCommandHandler(
+    new AddContactHandler({
+      contactRepository,
+      customerRepository,
       eventPublisher,
     }),
   );
@@ -138,6 +184,29 @@ export async function createProject(
   const executor = await getApplicationRuntime();
   const result = await executor.executeCommand<ProjectDto>(
     createProjectCommand({ name, description }),
+    context,
+  );
+  return result.data;
+}
+
+export async function listCustomers(
+  context: ApplicationContext,
+): Promise<CustomerDto[]> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeQuery<CustomerDto[]>(
+    listCustomersQuery(),
+    context,
+  );
+  return result.data;
+}
+
+export async function listContacts(
+  customerId: string,
+  context: ApplicationContext,
+): Promise<ContactDto[]> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeQuery<ContactDto[]>(
+    listContactsQuery(customerId),
     context,
   );
   return result.data;
