@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const commands = [
   { label: "Overview", href: "/" },
@@ -19,6 +20,7 @@ export function CommandSearch() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter();
   const filtered = useMemo(() => {
     const value = query.trim().toLowerCase();
     return value ? commands.filter((item) => item.label.toLowerCase().includes(value)) : commands;
@@ -44,7 +46,8 @@ export function CommandSearch() {
   }, [open]);
 
   function navigate(href: string) {
-    window.location.href = href;
+    router.push(href);
+    setOpen(false);
   }
 
   return (
@@ -56,7 +59,7 @@ export function CommandSearch() {
       </button>
       {open ? (
         <div className="cl-command-backdrop" role="presentation" onMouseDown={() => setOpen(false)}>
-          <section className="cl-command" role="dialog" aria-modal="true" aria-label="Workspace command">
+          <section className="cl-command" role="dialog" aria-modal="true" aria-label="Workspace command" onMouseDown={(event) => event.stopPropagation()}>
             <div className="cl-command__input">
               <span aria-hidden="true">⌕</span>
               <input ref={inputRef} value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search workspace" aria-label="Search workspace" />
