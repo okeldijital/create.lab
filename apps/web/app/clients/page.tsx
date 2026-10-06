@@ -48,13 +48,13 @@ export default async function ClientsPage() {
           ) : (
             <section className="cl-client-list" aria-label="Clients">
               {clients.map((client) => (
-                <article className="cl-client-row" key={client.id}>
+                <Link className="cl-client-row" href={`/clients/${client.id}`} key={client.id} aria-label={`Open client ${client.name}`}>
                   <div className="cl-client-row__identity">
                     <span className="cl-avatar" aria-hidden="true">{client.name.slice(0, 1).toUpperCase()}</span>
                     <div><h2>{client.name}</h2><p>{client.email}{client.phone ? ` · ${client.phone}` : ""}</p></div>
                   </div>
                   <div className="cl-client-row__meta"><span>Project</span><Link href={`/projects/${client.projectId}`}>{client.projectName}</Link></div>
-                </article>
+                </Link>
               ))}
             </section>
           )}
