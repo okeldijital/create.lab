@@ -5,6 +5,7 @@ import {
 } from "@creative-lab/crm";
 import type { AddContactCommand } from "../../commands/crm/AddContactCommand.js";
 import type { ContactDto } from "../../dto/common.js";
+import { AuthorizationError } from "../../errors/ApplicationErrors.js";
 import type { CommandHandler } from "../../interfaces/Handler.js";
 import { ContactMapper } from "../../mappers/ContactMapper.js";
 import type { CollectingEventPublisher } from "../../services/CollectingEventPublisher.js";
@@ -30,6 +31,13 @@ export class AddContactHandler
     context: ApplicationContext,
   ): Promise<ContactDto> {
     validateRequired(command, ["customerId", "firstName", "lastName", "email"]);
+    const customer = await this.service["deps"].customerRepository.findById(
+      asCustomerId(command.customerId),
+    );
+    if (!customer || String(customer.organizationId) !== String(context.organizationId)) {
+      throw new AuthorizationError();
+    }
+
     const contact = await this.service.add({
       organizationId: context.organizationId,
       customerId: asCustomerId(command.customerId),
