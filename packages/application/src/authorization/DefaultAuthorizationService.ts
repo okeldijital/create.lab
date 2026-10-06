@@ -17,7 +17,7 @@ const ROLE_PERMISSIONS: Record<MembershipRole, ReadonlySet<Permission>> = {
     "production.start", "production.read", "asset.create", "asset.read", "asset.archive",
     "review.approve", "review.read", "delivery.create", "delivery.read",
     "invoice.create", "invoice.read", "invoice.approve", "quote.create", "quote.read", "quote.issue",
-    "contract.activate", "contract.read", "engagement.create", "engagement.read",
+    "contract.create", "contract.activate", "contract.read", "engagement.create", "engagement.read",
     "portfolio.create", "portfolio.read", "knowledge.create", "knowledge.read", "knowledge.search",
   ]),
   admin: new Set([
@@ -26,7 +26,7 @@ const ROLE_PERMISSIONS: Record<MembershipRole, ReadonlySet<Permission>> = {
     "production.start", "production.read", "asset.create", "asset.read", "asset.archive",
     "review.approve", "review.read", "delivery.create", "delivery.read",
     "invoice.create", "invoice.read", "invoice.approve", "quote.create", "quote.read", "quote.issue",
-    "contract.activate", "contract.read", "engagement.create", "engagement.read",
+    "contract.create", "contract.activate", "contract.read", "engagement.create", "engagement.read",
     "portfolio.create", "portfolio.read", "knowledge.create", "knowledge.read", "knowledge.search",
   ]),
   member: new Set([
