@@ -34,6 +34,8 @@ const COMMAND_PERMISSIONS: Readonly<Record<string, Permission>> = {
   CreateInvoice: "invoice.create",
   CreateQuote: "quote.create",
   IssueQuote: "quote.issue",
+  CreateContract: "contract.create",
+  MarkContractPendingSignature: "contract.activate",
   ActivateContract: "contract.activate",
   CreateEngagement: "engagement.create",
   CreatePortfolio: "portfolio.create",
@@ -56,6 +58,8 @@ const QUERY_PERMISSIONS: Readonly<Record<string, Permission>> = {
   GetOrganization: "organization.read",
   ListQuotes: "quote.read",
   GetQuote: "quote.read",
+  ListContracts: "contract.read",
+  GetContract: "contract.read",
 };
 
 /**
