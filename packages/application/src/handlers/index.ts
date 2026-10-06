@@ -23,6 +23,22 @@ export {
   type ListProjectsHandlerDeps,
 } from "./projects/ListProjectsHandler.js";
 export {
+  CreateCustomerHandler,
+  type CreateCustomerHandlerDeps,
+} from "./crm/CreateCustomerHandler.js";
+export {
+  AddContactHandler,
+  type AddContactHandlerDeps,
+} from "./crm/AddContactHandler.js";
+export {
+  ListCustomersHandler,
+  type ListCustomersHandlerDeps,
+} from "./crm/ListCustomersHandler.js";
+export {
+  ListContactsHandler,
+  type ListContactsHandlerDeps,
+} from "./crm/ListContactsHandler.js";
+export {
   CreatePortfolioHandler,
   type CreatePortfolioHandlerDeps,
 } from "./portfolio/CreatePortfolioHandler.js";
