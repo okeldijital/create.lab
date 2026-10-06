@@ -1,73 +1,21 @@
 export type { Command, CommandResult } from "./Command.js";
-export {
-  type CreateOrganizationCommand,
-  createOrganizationCommand,
-} from "./organization/CreateOrganizationCommand.js";
-export {
-  type ArchiveOrganizationCommand,
-  archiveOrganizationCommand,
-} from "./organization/ArchiveOrganizationCommand.js";
-export {
-  type CreateProjectCommand,
-  createProjectCommand,
-} from "./projects/CreateProjectCommand.js";
-export {
-  type CreateCustomerCommand,
-  createCustomerCommand,
-} from "./crm/CreateCustomerCommand.js";
-export {
-  type AddContactCommand,
-  addContactCommand,
-} from "./crm/AddContactCommand.js";
-export {
-  type CreateServiceCommand,
-  createServiceCommand,
-} from "./services/CreateServiceCommand.js";
-export {
-  type CreateServiceCategoryCommand,
-  createServiceCategoryCommand,
-} from "./services/CreateServiceCategoryCommand.js";
-export {
-  type StartProductionCommand,
-  startProductionCommand,
-} from "./production/StartProductionCommand.js";
-export {
-  type CreateInvoiceCommand,
-  createInvoiceCommand,
-} from "./billing/CreateInvoiceCommand.js";
-export {
-  type CreateQuoteCommand,
-  createQuoteCommand,
-} from "./quotation/CreateQuoteCommand.js";
-export {
-  type IssueQuoteCommand,
-  issueQuoteCommand,
-} from "./quotation/IssueQuoteCommand.js";
-export {
-  type ActivateContractCommand,
-  activateContractCommand,
-} from "./contracts/ActivateContractCommand.js";
-export {
-  type CreateEngagementCommand,
-  createEngagementCommand,
-} from "./engagement/CreateEngagementCommand.js";
-export {
-  type CreatePortfolioCommand,
-  createPortfolioCommand,
-} from "./portfolio/CreatePortfolioCommand.js";
-export {
-  type CreateKnowledgeArticleCommand,
-  createKnowledgeArticleCommand,
-} from "./knowledge/CreateKnowledgeArticleCommand.js";
-export {
-  type CreateAssetCommand,
-  createAssetCommand,
-} from "./assets/CreateAssetCommand.js";
-export {
-  type ApproveReviewCommand,
-  approveReviewCommand,
-} from "./review/ApproveReviewCommand.js";
-export {
-  type DeliverProjectCommand,
-  deliverProjectCommand,
-} from "./delivery/DeliverProjectCommand.js";
+export { type CreateOrganizationCommand, createOrganizationCommand } from "./organization/CreateOrganizationCommand.js";
+export { type ArchiveOrganizationCommand, archiveOrganizationCommand } from "./organization/ArchiveOrganizationCommand.js";
+export { type CreateProjectCommand, createProjectCommand } from "./projects/CreateProjectCommand.js";
+export { type CreateCustomerCommand, createCustomerCommand } from "./crm/CreateCustomerCommand.js";
+export { type AddContactCommand, addContactCommand } from "./crm/AddContactCommand.js";
+export { type CreateServiceCommand, createServiceCommand } from "./services/CreateServiceCommand.js";
+export { type CreateServiceCategoryCommand, createServiceCategoryCommand } from "./services/CreateServiceCategoryCommand.js";
+export { type StartProductionCommand, startProductionCommand } from "./production/StartProductionCommand.js";
+export { type CreateInvoiceCommand, createInvoiceCommand } from "./billing/CreateInvoiceCommand.js";
+export { type CreateQuoteCommand, createQuoteCommand } from "./quotation/CreateQuoteCommand.js";
+export { type IssueQuoteCommand, issueQuoteCommand } from "./quotation/IssueQuoteCommand.js";
+export { type CreateContractCommand, createContractCommand } from "./contracts/CreateContractCommand.js";
+export { type MarkContractPendingSignatureCommand, markContractPendingSignatureCommand } from "./contracts/MarkContractPendingSignatureCommand.js";
+export { type ActivateContractCommand, activateContractCommand } from "./contracts/ActivateContractCommand.js";
+export { type CreateEngagementCommand, createEngagementCommand } from "./engagement/CreateEngagementCommand.js";
+export { type CreatePortfolioCommand, createPortfolioCommand } from "./portfolio/CreatePortfolioCommand.js";
+export { type CreateKnowledgeArticleCommand, createKnowledgeArticleCommand } from "./knowledge/CreateKnowledgeArticleCommand.js";
+export { type CreateAssetCommand, createAssetCommand } from "./assets/CreateAssetCommand.js";
+export { type ApproveReviewCommand, approveReviewCommand } from "./review/ApproveReviewCommand.js";
+export { type DeliverProjectCommand, deliverProjectCommand } from "./delivery/DeliverProjectCommand.js";
