@@ -8,6 +8,8 @@ export type Permission =
   | "project.create"
   | "project.read"
   | "project.archive"
+  | "service.create"
+  | "service.read"
   | "customer.create"
   | "customer.read"
   | "contact.create"
