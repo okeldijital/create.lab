@@ -42,6 +42,26 @@ export type ContactDto = {
   status: string;
 };
 
+export type ServiceCategoryDto = {
+  id: string;
+  organizationId: string;
+  name: string;
+  description: string | null;
+  status: string;
+};
+
+export type ServiceDto = {
+  id: string;
+  organizationId: string;
+  serviceCode: string;
+  name: string;
+  description: string | null;
+  categoryId: string;
+  defaultPriceBookId: string | null;
+  pricingModel: string;
+  status: string;
+};
+
 export type InvoiceDto = {
   id: string;
   organizationId: string;
