@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useRouter } from "next/navigation";
 
 const commands = [
   { label: "Overview", href: "/" },
@@ -20,7 +19,6 @@ export function CommandSearch() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
   const filtered = useMemo(() => {
     const value = query.trim().toLowerCase();
     return value ? commands.filter((item) => item.label.toLowerCase().includes(value)) : commands;
@@ -46,8 +44,7 @@ export function CommandSearch() {
   }, [open]);
 
   function navigate(href: string) {
-    router.push(href);
-    setOpen(false);
+    window.location.assign(href);
   }
 
   return (
@@ -68,7 +65,7 @@ export function CommandSearch() {
             <div className="cl-command__body">
               <p className="cl-command__label">Go to</p>
               {filtered.length ? filtered.map((item) => (
-                <button key={item.href} type="button" onClick={() => navigate(item.href)}>{item.label}<span>↵</span></button>
+                <a key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}<span>↵</span></a>
               )) : <p className="cl-command__empty">No matching workspace destination.</p>}
             </div>
           </section>
