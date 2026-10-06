@@ -6,7 +6,10 @@ import { getApplicationContext, MissingRequestContextError } from "../../lib/req
 export default async function DeliveriesPage() {
   try {
     const context = await getApplicationContext();
-    const projects = await listProjects(context);
+    const deliveryProjects = (await listProjects(context)).filter((project) => {
+      const status = project.status.toLowerCase();
+      return status === "approved" || status === "balance";
+    });
     return <WorkspaceShell eyebrow="WORKSPACE" title="Deliveries">
       <section className="cl-page-intro">
         <div>
@@ -18,10 +21,10 @@ export default async function DeliveriesPage() {
       <section className="cl-deliveries" aria-labelledby="deliveries-heading">
         <div className="cl-section-heading">
           <div><p className="cl-section-heading__eyebrow">DELIVERY QUEUE</p><h2 id="deliveries-heading">Ready for delivery</h2></div>
-          <span className="cl-status-note">{projects.length} projects</span>
+          <span className="cl-status-note">{deliveryProjects.length} projects</span>
         </div>
-        {projects.length === 0 ? <div className="cl-empty-state"><strong>No deliveries waiting.</strong><p>Projects will appear here when work is approved and ready to hand off.</p></div> :
-          <div className="cl-deliveries-list">{projects.map(project => <Link key={project.id} href={`/projects/${project.id}`} className="cl-delivery-row"><span><strong>{project.name}</strong><small>{project.description ?? "No project description"}</small></span><span className="cl-status-badge">{project.status.replace(/_/g, " ")}</span></Link>)}</div>}
+        {deliveryProjects.length === 0 ? <div className="cl-empty-state"><strong>No deliveries waiting.</strong><p>Projects will appear here when work is approved and ready to hand off.</p></div> :
+          <div className="cl-deliveries-list">{deliveryProjects.map(project => <Link key={project.id} href={`/projects/${project.id}`} className="cl-delivery-row"><span><strong>{project.name}</strong><small>{project.description ?? "No project description"}</small></span><span className="cl-status-badge">{project.status.replace(/_/g, " ")}</span></Link>)}</div>}
       </section>
     </WorkspaceShell>;
   } catch (error) {
