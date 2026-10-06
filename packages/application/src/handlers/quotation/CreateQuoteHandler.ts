@@ -2,11 +2,7 @@ import {
   QuoteService,
   type QuoteServiceDeps,
 } from "@creative-lab/quotation";
-import {
-  asCustomerId,
-  type CustomerRepository,
-  type OpportunityId,
-} from "@creative-lab/crm";
+import { asCustomerId, type CustomerRepository } from "@creative-lab/crm";
 import type { CreateQuoteCommand } from "../../commands/quotation/CreateQuoteCommand.js";
 import type { QuoteDto } from "../../dto/common.js";
 import { AuthorizationError } from "../../errors/ApplicationErrors.js";
@@ -53,7 +49,6 @@ export class CreateQuoteHandler
     const quote = await this.service.create({
       organizationId: context.organizationId,
       customerId: asCustomerId(command.customerId),
-      opportunityId: command.opportunityId as OpportunityId | null | undefined,
       currency: command.currency,
       quoteNumber: command.quoteNumber,
       validUntil: command.validUntil,
