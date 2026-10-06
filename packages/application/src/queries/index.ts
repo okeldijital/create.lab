@@ -39,3 +39,11 @@ export {
   type GetOrganizationQuery,
   getOrganizationQuery,
 } from "./GetOrganizationQuery.js";
+export {
+  type ListQuotesQuery,
+  listQuotesQuery,
+} from "./ListQuotesQuery.js";
+export {
+  type GetQuoteQuery,
+  getQuoteQuery,
+} from "./GetQuoteQuery.js";
