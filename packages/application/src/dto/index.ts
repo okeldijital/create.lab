@@ -3,6 +3,8 @@ export type {
   ProjectDto,
   CustomerDto,
   ContactDto,
+  ServiceCategoryDto,
+  ServiceDto,
   InvoiceDto,
   QuoteDto,
   ContractDto,
