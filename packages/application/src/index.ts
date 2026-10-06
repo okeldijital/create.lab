@@ -214,8 +214,6 @@ export type {
   OrganizationRepository,
   ProjectRepository,
   CustomerRepository,
-  ServiceRepository,
-  CategoryRepository,
   ContactRepository,
   InvoiceRepository,
   QuoteRepository,
