@@ -5,6 +5,7 @@ import {
 } from "@creative-lab/contracts";
 import type { ActivateContractCommand } from "../../commands/contracts/ActivateContractCommand.js";
 import type { ContractDto } from "../../dto/common.js";
+import { AuthorizationError } from "../../errors/ApplicationErrors.js";
 import type { CommandHandler } from "../../interfaces/Handler.js";
 import { ContractMapper } from "../../mappers/ContractMapper.js";
 import type { CollectingEventPublisher } from "../../services/CollectingEventPublisher.js";
@@ -30,12 +31,14 @@ export class ActivateContractHandler
 
   async handle(
     command: ActivateContractCommand,
-    _context: ApplicationContext,
+    context: ApplicationContext,
   ): Promise<ContractDto> {
     validateRequired(command, ["contractId"]);
-    const contract = await this.service.activate(
-      asContractId(command.contractId),
-    );
-    return ContractMapper.toDto(contract);
+    const contractId = asContractId(command.contractId);
+    const existing = await this.service.getById(contractId);
+    if (String(existing.organizationId) !== String(context.organizationId)) {
+      throw new AuthorizationError();
+    }
+    return ContractMapper.toDto(await this.service.activate(contractId));
   }
 }
