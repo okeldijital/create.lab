@@ -54,6 +54,8 @@ const QUERY_PERMISSIONS: Readonly<Record<string, Permission>> = {
   SearchKnowledge: "knowledge.search",
   ListAssets: "asset.read",
   GetOrganization: "organization.read",
+  ListQuotes: "quote.read",
+  GetQuote: "quote.read",
 };
 
 /**
