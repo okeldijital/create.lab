@@ -5,7 +5,7 @@ export function AppShell({brand,workspace="Workspace",nav,account,eyebrow,title,
     <div className="cl-shell">
       <aside className="cl-sidebar">
         <div className="cl-sidebar__header">
-          <span className="cl-brand-mark" aria-hidden="true">C</span>
+          <span className="cl-brand-mark" aria-hidden="true"><i /><i /></span>
           <div><strong className="cl-brand">{brand}</strong><span className="cl-workspace-name">{workspace}</span></div>
           <details className="cl-mobile-menu">
             <summary aria-label="Open menu">Menu</summary>
@@ -20,7 +20,7 @@ export function AppShell({brand,workspace="Workspace",nav,account,eyebrow,title,
       </aside>
       <div className="cl-content">
         <header className="cl-topbar">
-          <button className="cl-search" type="button" aria-label="Search workspace"><span aria-hidden="true">⌕</span><span>Search</span><kbd>⌘ K</kbd></button>
+          <button className="cl-search" type="button" aria-label="Search workspace"><span className="cl-search__icon" aria-hidden="true">⌕</span><span className="cl-search__label">Search workspace</span><kbd>⌘ K</kbd></button>
           <div className="cl-topbar__actions">{actions}</div>
         </header>
         <main className="cl-main">
