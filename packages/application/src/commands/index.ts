@@ -10,8 +10,6 @@ export {
 export {
   type CreateProjectCommand,
   createProjectCommand,
-  createServiceCommand,
-  createServiceCategoryCommand,
 } from "./projects/CreateProjectCommand.js";
 export {
   type CreateCustomerCommand,
@@ -21,6 +19,14 @@ export {
   type AddContactCommand,
   addContactCommand,
 } from "./crm/AddContactCommand.js";
+export {
+  type CreateServiceCommand,
+  createServiceCommand,
+} from "./services/CreateServiceCommand.js";
+export {
+  type CreateServiceCategoryCommand,
+  createServiceCategoryCommand,
+} from "./services/CreateServiceCategoryCommand.js";
 export {
   type StartProductionCommand,
   startProductionCommand,
