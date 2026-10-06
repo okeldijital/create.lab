@@ -58,6 +58,11 @@ describe("DTO shapes", () => {
       customerId: "c",
       status: "DRAFT",
       currency: "USD",
+      opportunityId: null,
+      currentVersionId: null,
+      validUntil: null,
+      createdAt: "2026-01-01T00:00:00.000Z",
+      updatedAt: "2026-01-01T00:00:00.000Z",
     };
     const contract: ContractDto = {
       id: "c",
@@ -66,6 +71,11 @@ describe("DTO shapes", () => {
       customerId: "cu",
       status: "DRAFT",
       quotationId: "q",
+      effectiveDate: "2026-01-01",
+      expiryDate: null,
+      currentVersionId: null,
+      createdAt: "2026-01-01T00:00:00.000Z",
+      updatedAt: "2026-01-01T00:00:00.000Z",
     };
     const engagement: EngagementDto = {
       id: "e",
