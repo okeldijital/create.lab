@@ -5,6 +5,7 @@ import {
 } from "@creative-lab/quotation";
 import type { IssueQuoteCommand } from "../../commands/quotation/IssueQuoteCommand.js";
 import type { QuoteDto } from "../../dto/common.js";
+import { AuthorizationError } from "../../errors/ApplicationErrors.js";
 import type { CommandHandler } from "../../interfaces/Handler.js";
 import { QuoteMapper } from "../../mappers/QuoteMapper.js";
 import type { CollectingEventPublisher } from "../../services/CollectingEventPublisher.js";
@@ -27,10 +28,15 @@ export class IssueQuoteHandler
 
   async handle(
     command: IssueQuoteCommand,
-    _context: ApplicationContext,
+    context: ApplicationContext,
   ): Promise<QuoteDto> {
     validateRequired(command, ["quoteId"]);
-    const quote = await this.service.issue(asQuoteId(command.quoteId));
+    const quoteId = asQuoteId(command.quoteId);
+    const existing = await this.service.getById(quoteId);
+    if (String(existing.organizationId) !== String(context.organizationId)) {
+      throw new AuthorizationError();
+    }
+    const quote = await this.service.issue(quoteId);
     return QuoteMapper.toDto(quote);
   }
 }
