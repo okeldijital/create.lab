@@ -18,6 +18,30 @@ export type ProjectDto = {
   description: string | null;
 };
 
+export type CustomerDto = {
+  id: string;
+  organizationId: string;
+  customerNumber: string;
+  name: string;
+  legalName: string | null;
+  status: string;
+  industry: string | null;
+  billingAddress: string | null;
+};
+
+export type ContactDto = {
+  id: string;
+  organizationId: string;
+  customerId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string | null;
+  role: string | null;
+  isPrimary: boolean;
+  status: string;
+};
+
 export type InvoiceDto = {
   id: string;
   organizationId: string;
