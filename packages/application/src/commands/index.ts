@@ -12,6 +12,14 @@ export {
   createProjectCommand,
 } from "./projects/CreateProjectCommand.js";
 export {
+  type CreateCustomerCommand,
+  createCustomerCommand,
+} from "./crm/CreateCustomerCommand.js";
+export {
+  type AddContactCommand,
+  addContactCommand,
+} from "./crm/AddContactCommand.js";
+export {
   type StartProductionCommand,
   startProductionCommand,
 } from "./production/StartProductionCommand.js";
