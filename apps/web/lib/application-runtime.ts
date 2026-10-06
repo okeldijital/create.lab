@@ -16,6 +16,7 @@ import {
   ListContractsHandler,
   GetContractHandler,
   ActivateContractHandler,
+  FindInvoicesHandler,
   ListCustomersHandler,
   ListContactsHandler,
   DefaultAuthorizationService,
