@@ -93,6 +93,11 @@ export type ContractDto = {
   customerId: string;
   status: string;
   quotationId: string;
+  effectiveDate: string;
+  expiryDate: string | null;
+  currentVersionId: string | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type EngagementDto = {
