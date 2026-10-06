@@ -11,6 +11,8 @@ import {
   ListProjectsHandler,
   UseCaseExecutor,
   createProjectCommand,
+  createCustomerCommand,
+  addContactCommand,
   getOrganizationQuery,
   getProjectQuery,
   listProjectsQuery,
@@ -207,6 +209,44 @@ export async function listContacts(
   const executor = await getApplicationRuntime();
   const result = await executor.executeQuery<ContactDto[]>(
     listContactsQuery(customerId),
+    context,
+  );
+  return result.data;
+}
+
+export async function createCustomer(
+  input: {
+    name: string;
+    customerNumber?: string;
+    legalName?: string | null;
+    industry?: string | null;
+    billingAddress?: string | null;
+  },
+  context: ApplicationContext,
+): Promise<CustomerDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<CustomerDto>(
+    createCustomerCommand(input),
+    context,
+  );
+  return result.data;
+}
+
+export async function addContact(
+  input: {
+    customerId: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    phone?: string | null;
+    role?: string | null;
+    isPrimary?: boolean;
+  },
+  context: ApplicationContext,
+): Promise<ContactDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<ContactDto>(
+    addContactCommand(input),
     context,
   );
   return result.data;
