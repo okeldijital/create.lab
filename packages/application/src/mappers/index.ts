@@ -1,5 +1,7 @@
 export { OrganizationMapper } from "./OrganizationMapper.js";
 export { ProjectMapper } from "./ProjectMapper.js";
+export { CustomerMapper } from "./CustomerMapper.js";
+export { ContactMapper } from "./ContactMapper.js";
 export { InvoiceMapper } from "./InvoiceMapper.js";
 export { QuoteMapper } from "./QuoteMapper.js";
 export { ContractMapper } from "./ContractMapper.js";
