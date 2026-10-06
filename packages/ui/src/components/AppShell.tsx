@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { CommandSearch } from "./CommandSearch";
+import { CommandSearch } from "./CommandSearch.js";
 
 function CreateLabMark() {
   return (
