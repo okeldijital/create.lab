@@ -21,9 +21,11 @@ export class AddContactHandler
 {
   readonly commandType = "AddContact" as const;
   private readonly service: ContactService;
+  private readonly customerRepository: ContactServiceDeps["customerRepository"];
 
   constructor(deps: AddContactHandlerDeps) {
     this.service = new ContactService(deps);
+    this.customerRepository = deps.customerRepository;
   }
 
   async handle(
@@ -31,7 +33,7 @@ export class AddContactHandler
     context: ApplicationContext,
   ): Promise<ContactDto> {
     validateRequired(command, ["customerId", "firstName", "lastName", "email"]);
-    const customer = await this.service["deps"].customerRepository.findById(
+    const customer = await this.customerRepository.findById(
       asCustomerId(command.customerId),
     );
     if (!customer || String(customer.organizationId) !== String(context.organizationId)) {
