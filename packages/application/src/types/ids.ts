@@ -29,6 +29,7 @@ export type Permission =
   | "quote.create"
   | "quote.read"
   | "quote.issue"
+  | "contract.create"
   | "contract.activate"
   | "contract.read"
   | "engagement.create"
