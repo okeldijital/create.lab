@@ -421,7 +421,6 @@ export async function getQuote(
 export async function createQuote(
   input: {
     customerId: string;
-    opportunityId?: string | null;
     currency?: string;
     quoteNumber?: string;
     validUntil?: Date | null;
