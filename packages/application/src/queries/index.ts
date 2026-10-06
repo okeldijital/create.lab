@@ -8,6 +8,14 @@ export {
   listProjectsQuery,
 } from "./ListProjectsQuery.js";
 export {
+  type ListCustomersQuery,
+  listCustomersQuery,
+} from "./ListCustomersQuery.js";
+export {
+  type ListContactsQuery,
+  listContactsQuery,
+} from "./ListContactsQuery.js";
+export {
   type FindInvoicesQuery,
   findInvoicesQuery,
 } from "./FindInvoicesQuery.js";
