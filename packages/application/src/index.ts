@@ -19,6 +19,8 @@ export {
   createInvoiceCommand,
   createQuoteCommand,
   issueQuoteCommand,
+  createContractCommand,
+  markContractPendingSignatureCommand,
   activateContractCommand,
   createEngagementCommand,
   createPortfolioCommand,
@@ -39,6 +41,8 @@ export type {
   CreateInvoiceCommand,
   CreateQuoteCommand,
   IssueQuoteCommand,
+  CreateContractCommand,
+  MarkContractPendingSignatureCommand,
   ActivateContractCommand,
   CreateEngagementCommand,
   CreatePortfolioCommand,
@@ -62,6 +66,8 @@ export {
   getOrganizationQuery,
   listQuotesQuery,
   getQuoteQuery,
+  listContractsQuery,
+  getContractQuery,
 } from "./queries/index.js";
 export type {
   GetProjectQuery,
@@ -76,6 +82,8 @@ export type {
   GetOrganizationQuery,
   ListQuotesQuery,
   GetQuoteQuery,
+  ListContractsQuery,
+  GetContractQuery,
 } from "./queries/index.js";
 
 export type {
@@ -160,6 +168,10 @@ export {
   IssueQuoteHandler,
   ListQuotesHandler,
   GetQuoteHandler,
+  CreateContractHandler,
+  MarkContractPendingSignatureHandler,
+  ListContractsHandler,
+  GetContractHandler,
   ActivateContractHandler,
   FindInvoicesHandler,
   ListAssetsHandler,
