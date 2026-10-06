@@ -60,6 +60,8 @@ export {
   searchKnowledgeQuery,
   listAssetsQuery,
   getOrganizationQuery,
+  listQuotesQuery,
+  getQuoteQuery,
 } from "./queries/index.js";
 export type {
   GetProjectQuery,
@@ -72,6 +74,8 @@ export type {
   SearchKnowledgeQuery,
   ListAssetsQuery,
   GetOrganizationQuery,
+  ListQuotesQuery,
+  GetQuoteQuery,
 } from "./queries/index.js";
 
 export type {
@@ -152,7 +156,10 @@ export {
   CreateKnowledgeArticleHandler,
   SearchKnowledgeHandler,
   StartProductionHandler,
+  CreateQuoteHandler,
   IssueQuoteHandler,
+  ListQuotesHandler,
+  GetQuoteHandler,
   ActivateContractHandler,
   FindInvoicesHandler,
   ListAssetsHandler,
