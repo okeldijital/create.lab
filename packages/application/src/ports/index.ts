@@ -7,6 +7,7 @@
 
 export type { OrganizationRepository } from "@creative-lab/organization";
 export type { ProjectRepository } from "@creative-lab/projects";
+export type { CustomerRepository, ContactRepository } from "@creative-lab/crm";
 export type { InvoiceRepository } from "@creative-lab/billing";
 export type { QuoteRepository } from "@creative-lab/quotation";
 export type { ContractRepository } from "@creative-lab/contracts";
