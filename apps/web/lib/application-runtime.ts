@@ -16,6 +16,8 @@ import {
   UseCaseExecutor,
   createProjectCommand,
   createCustomerCommand,
+  createServiceCommand,
+  createServiceCategoryCommand,
   addContactCommand,
   getOrganizationQuery,
   getProjectQuery,
@@ -315,5 +317,30 @@ export async function listServiceCategories(
 ): Promise<ServiceCategoryDto[]> {
   const executor = await getApplicationRuntime();
   const result = await executor.executeQuery<ServiceCategoryDto[]>(listServiceCategoriesQuery(), context);
+  return result.data;
+}
+
+export async function createService(
+  input: {
+    serviceCode: string;
+    name: string;
+    description?: string | null;
+    categoryId: string;
+    defaultPriceBookId?: string | null;
+    pricingModel?: string;
+  },
+  context: ApplicationContext,
+): Promise<ServiceDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<ServiceDto>(createServiceCommand(input), context);
+  return result.data;
+}
+
+export async function createServiceCategory(
+  input: { name: string; description?: string | null },
+  context: ApplicationContext,
+): Promise<ServiceCategoryDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<ServiceCategoryDto>(createServiceCategoryCommand(input), context);
   return result.data;
 }
