@@ -46,7 +46,7 @@ describe("Commands", () => {
 
   it("createQuoteCommand", () => {
     expect(
-      createQuoteCommand({ customerId: "c", title: "T" }).type,
+      createQuoteCommand({ customerId: "c" }).type,
     ).toBe("CreateQuote");
   });
 
