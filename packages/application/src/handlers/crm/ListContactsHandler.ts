@@ -4,6 +4,7 @@ import {
   type ContactServiceDeps,
 } from "@creative-lab/crm";
 import type { ContactDto } from "../../dto/common.js";
+import { AuthorizationError } from "../../errors/ApplicationErrors.js";
 import type { QueryHandler } from "../../interfaces/Handler.js";
 import { ContactMapper } from "../../mappers/ContactMapper.js";
 import type { ListContactsQuery } from "../../queries/ListContactsQuery.js";
@@ -22,11 +23,13 @@ export class ListContactsHandler
   readonly queryType = "ListContacts" as const;
   private readonly service: ContactService;
   private readonly authorization: AuthorizationService;
+  private readonly customerRepository: ContactServiceDeps["customerRepository"];
 
   constructor(deps: ListContactsHandlerDeps) {
     const { authorization, ...serviceDeps } = deps;
     this.service = new ContactService(serviceDeps);
     this.authorization = authorization;
+    this.customerRepository = serviceDeps.customerRepository;
   }
 
   async handle(
@@ -34,6 +37,10 @@ export class ListContactsHandler
     context: ApplicationContext,
   ): Promise<ContactDto[]> {
     await this.authorization.assertCan("contact.read", context);
+    const customer = await this.customerRepository.findById(asCustomerId(query.customerId));
+    if (!customer || String(customer.organizationId) !== String(context.organizationId)) {
+      throw new AuthorizationError();
+    }
     const contacts = await this.service.listByCustomer(asCustomerId(query.customerId));
     return contacts
       .filter((contact) => String(contact.organizationId) === String(context.organizationId))
