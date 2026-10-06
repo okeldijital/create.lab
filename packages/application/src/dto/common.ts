@@ -77,8 +77,13 @@ export type QuoteDto = {
   organizationId: string;
   quoteNumber: string;
   customerId: string;
+  opportunityId: string | null;
   status: string;
   currency: string;
+  currentVersionId: string | null;
+  validUntil: string | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type ContractDto = {
