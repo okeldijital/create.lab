@@ -1,9 +1,8 @@
-import type { OpportunityId } from "@creative-lab/crm";
 import type { Command } from "../Command.js";
 
 export type CreateQuoteCommand = Command<"CreateQuote"> & {
   readonly customerId: string;
-  readonly opportunityId?: OpportunityId | null;
+  readonly opportunityId?: string | null;
   readonly currency?: string;
   readonly quoteNumber?: string;
   readonly validUntil?: Date | null;
