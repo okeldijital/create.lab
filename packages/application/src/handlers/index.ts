@@ -20,10 +20,6 @@ export {
 } from "./projects/GetProjectHandler.js";
 export {
   ListProjectsHandler,
-  CreateServiceHandler,
-  CreateServiceCategoryHandler,
-  ListServicesHandler,
-  ListServiceCategoriesHandler,
   type ListProjectsHandlerDeps,
 } from "./projects/ListProjectsHandler.js";
 export {
