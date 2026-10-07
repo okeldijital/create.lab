@@ -16,6 +16,8 @@ import {
   ListContractsHandler,
   GetContractHandler,
   ActivateContractHandler,
+  DeliverProjectHandler,
+  ListDeliveriesHandler,
   ListCustomersHandler,
   ListContactsHandler,
   DefaultAuthorizationService,
@@ -42,8 +44,10 @@ import {
   createContractCommand,
   markContractPendingSignatureCommand,
   activateContractCommand,
+  deliverProjectCommand,
   listContractsQuery,
   getContractQuery,
+  listDeliveriesQuery,
   type OrganizationDto,
   type ProjectDto,
   type CustomerDto,
@@ -69,6 +73,7 @@ import {
   PostgresContractRepository,
   PostgresContractVersionRepository,
   PostgresContractTermRepository,
+  PostgresDeliveryRepository,
   PostgresUnitOfWork,
   createPostgresDatabase,
   postgresConfigurationFromEnvironment,
@@ -101,6 +106,7 @@ async function createRuntime(): Promise<UseCaseExecutor> {
   const contractRepository = new PostgresContractRepository(database.db);
   const contractVersionRepository = new PostgresContractVersionRepository(database.db);
   const contractTermRepository = new PostgresContractTermRepository(database.db);
+  const deliveryRepository = new PostgresDeliveryRepository(database.db);
   const authorization = new DefaultAuthorizationService(
     new MembershipReaderAdapter(membershipRepository),
   );
@@ -283,6 +289,20 @@ async function createRuntime(): Promise<UseCaseExecutor> {
 
   executor.registerCommandHandler(
     new ActivateContractHandler(contractServiceDeps),
+  );
+
+  const deliveryServiceDeps = {
+    deliveryRepository,
+    organizationRepository,
+    eventPublisher,
+  };
+
+  executor.registerQueryHandler(
+    new ListDeliveriesHandler(deliveryServiceDeps),
+  );
+
+  executor.registerCommandHandler(
+    new DeliverProjectHandler(deliveryServiceDeps),
   );
 
   return executor;
@@ -558,6 +578,30 @@ export async function activateContract(
   const executor = await getApplicationRuntime();
   const result = await executor.executeCommand<ContractDto>(
     activateContractCommand(contractId),
+    context,
+  );
+  return result.data;
+}
+
+export async function listDeliveries(
+  context: ApplicationContext,
+  projectId?: string,
+): Promise<import("@creative-lab/application").DeliveryDto[]> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeQuery<import("@creative-lab/application").DeliveryDto[]>(
+    listDeliveriesQuery(projectId),
+    context,
+  );
+  return result.data;
+}
+
+export async function deliverProject(
+  deliveryId: string,
+  context: ApplicationContext,
+): Promise<import("@creative-lab/application").DeliveryDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<import("@creative-lab/application").DeliveryDto>(
+    deliverProjectCommand(deliveryId),
     context,
   );
   return result.data;
