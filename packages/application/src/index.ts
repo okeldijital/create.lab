@@ -176,6 +176,7 @@ export {
   GetContractHandler,
   ActivateContractHandler,
   FindInvoicesHandler,
+  CreateInvoiceHandler,
   ListAssetsHandler,
   DeliverProjectHandler,
   ListDeliveriesHandler,
