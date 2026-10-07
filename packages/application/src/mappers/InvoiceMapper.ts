@@ -14,6 +14,7 @@ export class InvoiceMapper {
           ? invoice.currency
           : invoice.currency.code,
       projectId: invoice.projectId,
+      deliveryId: invoice.deliveryId,
     };
   }
 }
