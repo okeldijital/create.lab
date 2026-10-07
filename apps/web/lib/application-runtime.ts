@@ -39,6 +39,7 @@ import {
   listServiceCategoriesQuery,
   createQuoteCommand,
   issueQuoteCommand,
+  createInvoiceCommand,
   listQuotesQuery,
   getQuoteQuery,
   createContractCommand,
@@ -74,6 +75,8 @@ import {
   PostgresContractVersionRepository,
   PostgresContractTermRepository,
   PostgresDeliveryRepository,
+  PostgresInvoiceRepository,
+  PostgresInvoiceLineRepository,
   PostgresUnitOfWork,
   createPostgresDatabase,
   postgresConfigurationFromEnvironment,
@@ -107,6 +110,8 @@ async function createRuntime(): Promise<UseCaseExecutor> {
   const contractVersionRepository = new PostgresContractVersionRepository(database.db);
   const contractTermRepository = new PostgresContractTermRepository(database.db);
   const deliveryRepository = new PostgresDeliveryRepository(database.db);
+  const invoiceRepository = new PostgresInvoiceRepository(database.db);
+  const invoiceLineRepository = new PostgresInvoiceLineRepository(database.db);
   const authorization = new DefaultAuthorizationService(
     new MembershipReaderAdapter(membershipRepository),
   );
@@ -291,15 +296,26 @@ async function createRuntime(): Promise<UseCaseExecutor> {
     new ActivateContractHandler(contractServiceDeps),
   );
 
+  executor.registerCommandHandler(
+    new CreateInvoiceHandler({
+      invoiceRepository,
+      invoiceLineRepository,
+      organizationRepository,
+      eventPublisher,
+      customerRepository,
+      projectRepository,
+      deliveryRepository,
+    }),
+  );
+
   const deliveryServiceDeps = {
     deliveryRepository,
     organizationRepository,
     eventPublisher,
   };
 
-  executor.registerQueryHandler(
-    new ListDeliveriesHandler(deliveryServiceDeps),
-  );
+  executor.registerQueryHandler(new ListDeliveriesHandler(deliveryServiceDeps));
+  executor.registerQueryHandler(new FindInvoicesHandler({ invoiceRepository }));
 
   executor.registerCommandHandler(
     new DeliverProjectHandler(deliveryServiceDeps),
@@ -602,6 +618,25 @@ export async function deliverProject(
   const executor = await getApplicationRuntime();
   const result = await executor.executeCommand<import("@creative-lab/application").DeliveryDto>(
     deliverProjectCommand(deliveryId),
+    context,
+  );
+  return result.data;
+}
+
+export async function createInvoice(
+  input: {
+    customerId: string;
+    projectId: string;
+    deliveryId: string;
+    currency?: string;
+    invoiceNumber?: string;
+    lines: ReadonlyArray<{ description: string; quantity: number; unitAmountMinor: number }>;
+  },
+  context: ApplicationContext,
+): Promise<import("@creative-lab/application").InvoiceDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<import("@creative-lab/application").InvoiceDto>(
+    createInvoiceCommand(input),
     context,
   );
   return result.data;
