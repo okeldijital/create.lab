@@ -168,7 +168,6 @@ export {
   EmploymentContractMapper,
   ReportingRelationshipMapper,
   PostgresPositionRepository,
-  PostgresWorkerRepository,
   PostgresEmploymentRepository,
   PostgresEmploymentContractRepository,
   PostgresReportingRelationshipRepository,
@@ -223,3 +222,10 @@ export {
   PostgresInvoiceRepository,
   PostgresInvoiceLineRepository,
 } from "./billing/index.js";
+
+export {
+  deliveries,
+  deliverySchema,
+  DeliveryMapper,
+  PostgresDeliveryRepository,
+} from "./delivery/index.js";
