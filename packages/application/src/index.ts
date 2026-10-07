@@ -68,6 +68,7 @@ export {
   getQuoteQuery,
   listContractsQuery,
   getContractQuery,
+  listDeliveriesQuery,
 } from "./queries/index.js";
 export type {
   GetProjectQuery,
@@ -84,6 +85,7 @@ export type {
   GetQuoteQuery,
   ListContractsQuery,
   GetContractQuery,
+  ListDeliveriesQuery,
 } from "./queries/index.js";
 
 export type {
@@ -175,6 +177,8 @@ export {
   ActivateContractHandler,
   FindInvoicesHandler,
   ListAssetsHandler,
+  DeliverProjectHandler,
+  ListDeliveriesHandler,
 } from "./handlers/index.js";
 
 export {
