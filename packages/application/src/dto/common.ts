@@ -70,6 +70,7 @@ export type InvoiceDto = {
   status: string;
   currency: string;
   projectId: string;
+  deliveryId: string;
 };
 
 export type QuoteDto = {
