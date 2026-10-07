@@ -17,6 +17,7 @@ import {
   GetContractHandler,
   ActivateContractHandler,
   DeliverProjectHandler,
+  FindInvoicesHandler,
   ListDeliveriesHandler,
   ListCustomersHandler,
   ListContactsHandler,
@@ -49,6 +50,7 @@ import {
   listContractsQuery,
   getContractQuery,
   listDeliveriesQuery,
+  findInvoicesQuery,
   type OrganizationDto,
   type ProjectDto,
   type CustomerDto,
@@ -637,6 +639,18 @@ export async function createInvoice(
   const executor = await getApplicationRuntime();
   const result = await executor.executeCommand<import("@creative-lab/application").InvoiceDto>(
     createInvoiceCommand(input),
+    context,
+  );
+  return result.data;
+}
+
+export async function findInvoices(
+  context: ApplicationContext,
+  filters: { customerId?: string; status?: string } = {},
+): Promise<import("@creative-lab/application").InvoiceDto[]> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeQuery<import("@creative-lab/application").InvoiceDto[]>(
+    findInvoicesQuery(filters),
     context,
   );
   return result.data;
