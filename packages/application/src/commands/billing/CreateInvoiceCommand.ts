@@ -2,7 +2,8 @@ import type { Command } from "../Command.js";
 
 export type CreateInvoiceCommand = Command<"CreateInvoice"> & {
   readonly customerId: string;
-  readonly projectId?: string;
+  readonly projectId: string;
+  readonly deliveryId: string;
   readonly currency?: string;
   readonly lines: ReadonlyArray<{
     description: string;
