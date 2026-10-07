@@ -17,3 +17,4 @@ export { CreateQuoteHandler, type CreateQuoteHandlerDeps, IssueQuoteHandler, typ
 export { CreateContractHandler, type CreateContractHandlerDeps, MarkContractPendingSignatureHandler, type MarkContractPendingSignatureHandlerDeps, ListContractsHandler, type ListContractsHandlerDeps, GetContractHandler, type GetContractHandlerDeps, ActivateContractHandler, type ActivateContractHandlerDeps } from "./contracts/index.js";
 export { FindInvoicesHandler, type FindInvoicesHandlerDeps } from "./billing/FindInvoicesHandler.js";
 export { ListAssetsHandler, type ListAssetsHandlerDeps } from "./assets/ListAssetsHandler.js";
+export { DeliverProjectHandler, type DeliverProjectHandlerDeps, ListDeliveriesHandler, type ListDeliveriesHandlerDeps } from "./delivery/index.js";
