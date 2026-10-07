@@ -13,3 +13,4 @@ export { type ListQuotesQuery, listQuotesQuery } from "./ListQuotesQuery.js";
 export { type GetQuoteQuery, getQuoteQuery } from "./GetQuoteQuery.js";
 export { type ListContractsQuery, listContractsQuery } from "./ListContractsQuery.js";
 export { type GetContractQuery, getContractQuery } from "./GetContractQuery.js";
+export { type ListDeliveriesQuery, listDeliveriesQuery } from "./ListDeliveriesQuery.js";
