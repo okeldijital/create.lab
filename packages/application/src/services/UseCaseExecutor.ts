@@ -60,6 +60,7 @@ const QUERY_PERMISSIONS: Readonly<Record<string, Permission>> = {
   GetQuote: "quote.read",
   ListContracts: "contract.read",
   GetContract: "contract.read",
+  ListDeliveries: "delivery.read",
 };
 
 /**
