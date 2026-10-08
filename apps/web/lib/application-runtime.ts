@@ -41,6 +41,7 @@ import {
   createQuoteCommand,
   issueQuoteCommand,
   createInvoiceCommand,
+  issueInvoiceCommand,
   listQuotesQuery,
   getQuoteQuery,
   createContractCommand,
@@ -307,6 +308,15 @@ async function createRuntime(): Promise<UseCaseExecutor> {
       customerRepository,
       projectRepository,
       deliveryRepository,
+    }),
+  );
+
+  executor.registerCommandHandler(
+    new IssueInvoiceHandler({
+      invoiceRepository,
+      invoiceLineRepository,
+      organizationRepository,
+      eventPublisher,
     }),
   );
 
@@ -651,6 +661,18 @@ export async function findInvoices(
   const executor = await getApplicationRuntime();
   const result = await executor.executeQuery<import("@creative-lab/application").InvoiceDto[]>(
     findInvoicesQuery(filters),
+    context,
+  );
+  return result.data;
+}
+
+export async function issueInvoice(
+  invoiceId: string,
+  context: ApplicationContext,
+): Promise<import("@creative-lab/application").InvoiceDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<import("@creative-lab/application").InvoiceDto>(
+    issueInvoiceCommand(invoiceId),
     context,
   );
   return result.data;
