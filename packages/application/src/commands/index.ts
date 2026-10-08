@@ -8,6 +8,7 @@ export { type CreateServiceCommand, createServiceCommand } from "./services/Crea
 export { type CreateServiceCategoryCommand, createServiceCategoryCommand } from "./services/CreateServiceCategoryCommand.js";
 export { type StartProductionCommand, startProductionCommand } from "./production/StartProductionCommand.js";
 export { type CreateInvoiceCommand, createInvoiceCommand } from "./billing/CreateInvoiceCommand.js";
+export { type IssueInvoiceCommand, issueInvoiceCommand } from "./billing/IssueInvoiceCommand.js";
 export { type CreateQuoteCommand, createQuoteCommand } from "./quotation/CreateQuoteCommand.js";
 export { type IssueQuoteCommand, issueQuoteCommand } from "./quotation/IssueQuoteCommand.js";
 export { type CreateContractCommand, createContractCommand } from "./contracts/CreateContractCommand.js";
