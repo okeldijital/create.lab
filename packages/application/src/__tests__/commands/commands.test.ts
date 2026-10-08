@@ -39,6 +39,8 @@ describe("Commands", () => {
   it("createInvoiceCommand carries lines", () => {
     const c = createInvoiceCommand({
       customerId: "c1",
+      projectId: "p1",
+      deliveryId: "d1",
       lines: [{ description: "x", quantity: 1, unitAmountMinor: 100 }],
     });
     expect(c.lines).toHaveLength(1);
