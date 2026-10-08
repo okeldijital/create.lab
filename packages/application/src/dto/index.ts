@@ -16,3 +16,5 @@ export type {
   ReviewDto,
   DeliveryDto,
 } from "./common.js";
+
+export type { PaymentDto } from "./common.js";
