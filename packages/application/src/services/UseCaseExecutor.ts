@@ -57,6 +57,8 @@ const QUERY_PERMISSIONS: Readonly<Record<string, Permission>> = {
   ListServices: "service.read",
   ListServiceCategories: "service.read",
   FindInvoices: "invoice.read",
+  GetInvoice: "invoice.read",
+  ListPayments: "invoice.read",
   SearchKnowledge: "knowledge.search",
   ListAssets: "asset.read",
   GetOrganization: "organization.read",
