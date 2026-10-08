@@ -64,6 +64,7 @@ import {
   type QuoteDto,
   type ContractDto,
   type ApplicationContext,
+  type RecordPaymentCommand,
 } from "@creative-lab/application";
 import {
   PostgresOrganizationMembershipRepository,
@@ -694,7 +695,7 @@ export async function issueInvoice(
 }
 
 export async function recordPayment(
-  input: import("@creative-lab/application").RecordPaymentCommand extends infer T ? Omit<T, "type"> : never,
+  input: Omit<RecordPaymentCommand, "type">,
   context: ApplicationContext,
 ): Promise<import("@creative-lab/application").PaymentDto> {
   const executor = await getApplicationRuntime();
