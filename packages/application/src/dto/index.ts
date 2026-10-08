@@ -6,6 +6,7 @@ export type {
   ServiceCategoryDto,
   ServiceDto,
   InvoiceDto,
+  InvoiceDetailDto,
   QuoteDto,
   ContractDto,
   EngagementDto,
