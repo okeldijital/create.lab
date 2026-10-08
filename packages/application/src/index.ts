@@ -234,3 +234,9 @@ export type {
   ReviewRepository,
   DeliveryRepository,
 } from "./ports/index.js";
+
+export { recordPaymentCommand, completePaymentCommand, refundPaymentCommand } from "./commands/index.js";
+export type { RecordPaymentCommand, CompletePaymentCommand, RefundPaymentCommand } from "./commands/index.js";
+export type { PaymentDto } from "./dto/index.js";
+export { PaymentMapper } from "./mappers/index.js";
+export { RecordPaymentHandler, CompletePaymentHandler, RefundPaymentHandler } from "./handlers/index.js";
