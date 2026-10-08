@@ -216,6 +216,7 @@ export { user, session, account, verification, authSchema } from "./auth/auth-sc
 export {
   invoices,
   invoiceLines,
+  payments,
   billingSchema,
   InvoiceMapper as BillingInvoiceMapper,
   InvoiceLineMapper as BillingInvoiceLineMapper,
