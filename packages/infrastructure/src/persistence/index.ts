@@ -221,6 +221,7 @@ export {
   InvoiceLineMapper as BillingInvoiceLineMapper,
   PostgresInvoiceRepository,
   PostgresInvoiceLineRepository,
+  PostgresPaymentRepository,
 } from "./billing/index.js";
 
 export {
