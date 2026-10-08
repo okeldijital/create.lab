@@ -19,3 +19,7 @@ export { FindInvoicesHandler, type FindInvoicesHandlerDeps } from "./billing/Fin
 export { CreateInvoiceHandler, type CreateInvoiceHandlerDeps } from "./billing/CreateInvoiceHandler.js";
 export { ListAssetsHandler, type ListAssetsHandlerDeps } from "./assets/ListAssetsHandler.js";
 export { DeliverProjectHandler, type DeliverProjectHandlerDeps, ListDeliveriesHandler, type ListDeliveriesHandlerDeps } from "./delivery/index.js";
+
+export { RecordPaymentHandler, type RecordPaymentHandlerDeps } from "./billing/RecordPaymentHandler.js";
+export { CompletePaymentHandler, type CompletePaymentHandlerDeps } from "./billing/CompletePaymentHandler.js";
+export { RefundPaymentHandler, type RefundPaymentHandlerDeps } from "./billing/RefundPaymentHandler.js";
