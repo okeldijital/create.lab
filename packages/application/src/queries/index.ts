@@ -6,6 +6,8 @@ export { type ListServicesQuery, listServicesQuery } from "./ListServicesQuery.j
 export { type ListServiceCategoriesQuery, listServiceCategoriesQuery } from "./ListServiceCategoriesQuery.js";
 export { type ListContactsQuery, listContactsQuery } from "./ListContactsQuery.js";
 export { type FindInvoicesQuery, findInvoicesQuery } from "./FindInvoicesQuery.js";
+export { type GetInvoiceQuery, getInvoiceQuery } from "./GetInvoiceQuery.js";
+export { type ListPaymentsQuery, listPaymentsQuery } from "./ListPaymentsQuery.js";
 export { type SearchKnowledgeQuery, searchKnowledgeQuery } from "./SearchKnowledgeQuery.js";
 export { type ListAssetsQuery, listAssetsQuery } from "./ListAssetsQuery.js";
 export { type GetOrganizationQuery, getOrganizationQuery } from "./GetOrganizationQuery.js";
