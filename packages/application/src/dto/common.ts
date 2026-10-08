@@ -7,6 +7,7 @@ export type ContactDto = { id: string; organizationId: string; customerId: strin
 export type ServiceCategoryDto = { id: string; organizationId: string; name: string; description: string | null; status: string; };
 export type ServiceDto = { id: string; organizationId: string; serviceCode: string; name: string; description: string | null; categoryId: string; defaultPriceBookId: string | null; pricingModel: string; status: string; };
 export type InvoiceDto = { id: string; organizationId: string; invoiceNumber: string; customerId: string; status: string; currency: string; projectId: string; deliveryId: string; };
+export type InvoiceDetailDto = InvoiceDto & { issueDate: string | null; dueDate: string | null; subtotalMinor: number; taxMinor: number; discountMinor: number; totalMinor: number; balanceMinor: number; paidMinor: number; creditedMinor: number; lineIds: string[]; archivedAt: string | null; createdAt: string; updatedAt: string; };
 export type PaymentDto = {
   id: string;
   organizationId: string;
