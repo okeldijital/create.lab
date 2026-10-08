@@ -42,6 +42,9 @@ import {
   issueQuoteCommand,
   createInvoiceCommand,
   issueInvoiceCommand,
+  recordPaymentCommand,
+  completePaymentCommand,
+  refundPaymentCommand,
   listQuotesQuery,
   getQuoteQuery,
   createContractCommand,
@@ -80,6 +83,7 @@ import {
   PostgresDeliveryRepository,
   PostgresInvoiceRepository,
   PostgresInvoiceLineRepository,
+  PostgresPaymentRepository,
   PostgresUnitOfWork,
   createPostgresDatabase,
   postgresConfigurationFromEnvironment,
@@ -115,6 +119,7 @@ async function createRuntime(): Promise<UseCaseExecutor> {
   const deliveryRepository = new PostgresDeliveryRepository(database.db);
   const invoiceRepository = new PostgresInvoiceRepository(database.db);
   const invoiceLineRepository = new PostgresInvoiceLineRepository(database.db);
+  const paymentRepository = new PostgresPaymentRepository(database.db);
   const authorization = new DefaultAuthorizationService(
     new MembershipReaderAdapter(membershipRepository),
   );
@@ -319,6 +324,16 @@ async function createRuntime(): Promise<UseCaseExecutor> {
       eventPublisher,
     }),
   );
+
+  const paymentServiceDeps = {
+    paymentRepository,
+    invoiceRepository,
+    eventPublisher,
+  };
+
+  executor.registerCommandHandler(new RecordPaymentHandler(paymentServiceDeps));
+  executor.registerCommandHandler(new CompletePaymentHandler(paymentServiceDeps));
+  executor.registerCommandHandler(new RefundPaymentHandler(paymentServiceDeps));
 
   const deliveryServiceDeps = {
     deliveryRepository,
@@ -675,5 +690,33 @@ export async function issueInvoice(
     issueInvoiceCommand(invoiceId),
     context,
   );
+  return result.data;
+}
+
+export async function recordPayment(
+  input: import("@creative-lab/application").RecordPaymentCommand extends infer T ? Omit<T, "type"> : never,
+  context: ApplicationContext,
+): Promise<import("@creative-lab/application").PaymentDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<import("@creative-lab/application").PaymentDto>(recordPaymentCommand(input), context);
+  return result.data;
+}
+
+export async function completePayment(
+  paymentId: string,
+  context: ApplicationContext,
+): Promise<import("@creative-lab/application").PaymentDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<import("@creative-lab/application").PaymentDto>(completePaymentCommand(paymentId), context);
+  return result.data;
+}
+
+export async function refundPayment(
+  paymentId: string,
+  amountMinor: number,
+  context: ApplicationContext,
+): Promise<import("@creative-lab/application").PaymentDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeCommand<import("@creative-lab/application").PaymentDto>(refundPaymentCommand(paymentId, amountMinor), context);
   return result.data;
 }
