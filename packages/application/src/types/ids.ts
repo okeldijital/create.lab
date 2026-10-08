@@ -25,6 +25,7 @@ export type Permission =
   | "delivery.read"
   | "invoice.create"
   | "invoice.read"
+  | "invoice.write"
   | "invoice.approve"
   | "quote.create"
   | "quote.read"
