@@ -18,6 +18,11 @@ import {
   ActivateContractHandler,
   DeliverProjectHandler,
   FindInvoicesHandler,
+  GetInvoiceHandler,
+  ListPaymentsHandler,
+  RecordPaymentHandler,
+  CompletePaymentHandler,
+  RefundPaymentHandler,
   ListDeliveriesHandler,
   ListCustomersHandler,
   ListContactsHandler,
@@ -55,6 +60,8 @@ import {
   getContractQuery,
   listDeliveriesQuery,
   findInvoicesQuery,
+  getInvoiceQuery,
+  listPaymentsQuery,
   type OrganizationDto,
   type ProjectDto,
   type CustomerDto,
@@ -63,6 +70,8 @@ import {
   type ServiceCategoryDto,
   type QuoteDto,
   type ContractDto,
+  type InvoiceDetailDto,
+  type PaymentDto,
   type ApplicationContext,
   type RecordPaymentCommand,
 } from "@creative-lab/application";
@@ -331,6 +340,9 @@ async function createRuntime(): Promise<UseCaseExecutor> {
     invoiceRepository,
     eventPublisher,
   };
+
+  executor.registerQueryHandler(new GetInvoiceHandler({ invoiceRepository }));
+  executor.registerQueryHandler(new ListPaymentsHandler({ invoiceRepository, paymentRepository }));
 
   executor.registerCommandHandler(new RecordPaymentHandler(paymentServiceDeps));
   executor.registerCommandHandler(new CompletePaymentHandler(paymentServiceDeps));
@@ -677,6 +689,30 @@ export async function findInvoices(
   const executor = await getApplicationRuntime();
   const result = await executor.executeQuery<import("@creative-lab/application").InvoiceDto[]>(
     findInvoicesQuery(filters),
+    context,
+  );
+  return result.data;
+}
+
+export async function getInvoice(
+  invoiceId: string,
+  context: ApplicationContext,
+): Promise<InvoiceDetailDto> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeQuery<InvoiceDetailDto>(
+    getInvoiceQuery(invoiceId),
+    context,
+  );
+  return result.data;
+}
+
+export async function listPayments(
+  invoiceId: string,
+  context: ApplicationContext,
+): Promise<PaymentDto[]> {
+  const executor = await getApplicationRuntime();
+  const result = await executor.executeQuery<PaymentDto[]>(
+    listPaymentsQuery(invoiceId),
     context,
   );
   return result.data;
