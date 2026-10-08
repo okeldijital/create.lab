@@ -14,3 +14,5 @@ export { AssetMapper } from "./AssetMapper.js";
 export { ProductionMapper } from "./ProductionMapper.js";
 export { ReviewMapper } from "./ReviewMapper.js";
 export { DeliveryMapper } from "./DeliveryMapper.js";
+
+export { PaymentMapper } from "./PaymentMapper.js";
