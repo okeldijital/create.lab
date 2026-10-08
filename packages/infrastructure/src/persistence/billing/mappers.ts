@@ -1,14 +1,22 @@
-import type { Invoice, InvoiceLine } from "@creative-lab/billing";
-import { Invoice as InvoiceAggregate, InvoiceLine as InvoiceLineAggregate, asInvoiceId, asInvoiceLineId } from "@creative-lab/billing";
+import {
+  Invoice,
+  InvoiceLine,
+  Payment,
+  asInvoiceId,
+  asInvoiceLineId,
+  asPaymentId,
+  type PaymentSnapshot,
+} from "@creative-lab/billing";
 import type { InferInsertModel, InferSelectModel } from "drizzle-orm";
-import { invoices, invoiceLines } from "./schema.js";
+import { invoices, invoiceLines, payments } from "./schema.js";
 
 type InvoiceRow = InferSelectModel<typeof invoices>;
 type InvoiceLineRow = InferSelectModel<typeof invoiceLines>;
+type PaymentRow = InferSelectModel<typeof payments>;
 
-export class InvoiceMapper {
-  static fromRow(row: InvoiceRow): Invoice {
-    return InvoiceAggregate.reconstitute({
+export const InvoiceMapper = {
+  fromRow(row: InvoiceRow): Invoice {
+    return Invoice.reconstitute({
       id: asInvoiceId(row.id),
       organizationId: row.organizationId,
       projectId: row.projectId,
@@ -31,17 +39,38 @@ export class InvoiceMapper {
       createdAt: row.createdAt,
       updatedAt: row.updatedAt,
     });
-  }
-
-  static toRow(invoice: Invoice): InferInsertModel<typeof invoices> {
+  },
+  toRow(invoice: Invoice): InferInsertModel<typeof invoices> {
     const s = invoice.toSnapshot();
-    return { id: s.id, organizationId: s.organizationId, projectId: s.projectId, deliveryId: s.deliveryId, invoiceNumber: s.invoiceNumber, customerId: s.customerId, issueDate: s.issueDate, dueDate: s.dueDate, currency: s.currency, subtotalMinor: s.subtotalMinor, taxMinor: s.taxMinor, discountMinor: s.discountMinor, totalMinor: s.totalMinor, balanceMinor: s.balanceMinor, paidMinor: s.paidMinor, creditedMinor: s.creditedMinor, lineIds: s.lineIds, status: s.status, archivedAt: s.archivedAt, createdAt: s.createdAt, updatedAt: s.updatedAt };
-  }
-}
+    return {
+      id: s.id,
+      organizationId: s.organizationId,
+      projectId: s.projectId,
+      deliveryId: s.deliveryId,
+      invoiceNumber: s.invoiceNumber,
+      customerId: s.customerId,
+      issueDate: s.issueDate,
+      dueDate: s.dueDate,
+      currency: s.currency,
+      subtotalMinor: s.subtotalMinor,
+      taxMinor: s.taxMinor,
+      discountMinor: s.discountMinor,
+      totalMinor: s.totalMinor,
+      balanceMinor: s.balanceMinor,
+      paidMinor: s.paidMinor,
+      creditedMinor: s.creditedMinor,
+      lineIds: s.lineIds,
+      status: s.status,
+      archivedAt: s.archivedAt,
+      createdAt: s.createdAt,
+      updatedAt: s.updatedAt,
+    };
+  },
+};
 
-export class InvoiceLineMapper {
-  static fromRow(row: InvoiceLineRow): InvoiceLine {
-    return InvoiceLineAggregate.reconstitute({
+export const InvoiceLineMapper = {
+  fromRow(row: InvoiceLineRow): InvoiceLine {
+    return InvoiceLine.reconstitute({
       id: asInvoiceLineId(row.id),
       organizationId: row.organizationId,
       invoiceId: asInvoiceId(row.invoiceId),
@@ -54,10 +83,58 @@ export class InvoiceLineMapper {
       currency: row.currency,
       createdAt: row.createdAt,
     });
-  }
-
-  static toRow(line: InvoiceLine): InferInsertModel<typeof invoiceLines> {
+  },
+  toRow(line: InvoiceLine): InferInsertModel<typeof invoiceLines> {
     const s = line.toSnapshot();
-    return { id: s.id, organizationId: s.organizationId, invoiceId: s.invoiceId, description: s.description, quantity: s.quantity, unitPriceMinor: s.unitPriceMinor, discountMinor: s.discountMinor, taxRate: s.taxRate, lineTotalMinor: s.lineTotalMinor, currency: s.currency, createdAt: s.createdAt };
-  }
-}
+    return {
+      id: s.id,
+      organizationId: s.organizationId,
+      invoiceId: s.invoiceId,
+      description: s.description,
+      quantity: s.quantity,
+      unitPriceMinor: s.unitPriceMinor,
+      discountMinor: s.discountMinor,
+      taxRate: s.taxRate,
+      lineTotalMinor: s.lineTotalMinor,
+      currency: s.currency,
+      createdAt: s.createdAt,
+    };
+  },
+};
+
+export const PaymentMapper = {
+  fromRow(row: PaymentRow): Payment {
+    const snapshot: PaymentSnapshot = {
+      id: asPaymentId(row.id),
+      organizationId: row.organizationId,
+      invoiceId: asInvoiceId(row.invoiceId),
+      reference: row.reference,
+      amountMinor: row.amountMinor,
+      currency: row.currency,
+      paymentDate: row.paymentDate,
+      method: row.method as PaymentSnapshot["method"],
+      status: row.status as PaymentSnapshot["status"],
+      refundedMinor: row.refundedMinor,
+      createdAt: row.createdAt,
+      updatedAt: row.updatedAt,
+    };
+    return Payment.reconstitute(snapshot);
+  },
+  toRow(payment: Payment): InferInsertModel<typeof payments> {
+    const s = payment.toSnapshot();
+    return {
+      id: s.id,
+      organizationId: s.organizationId,
+      invoiceId: s.invoiceId,
+      reference: s.reference,
+      amountMinor: s.amountMinor,
+      currency: s.currency,
+      paymentDate: s.paymentDate,
+      method: s.method,
+      status: s.status,
+      refundedMinor: s.refundedMinor,
+      createdAt: s.createdAt,
+      updatedAt: s.updatedAt,
+    };
+  },
+};
