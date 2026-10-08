@@ -1,4 +1,4 @@
-import { bigint, doublePrecision, index, pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
+import { bigint, index, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { customers } from "../crm/schema.js";
 import { organizations } from "../organization/schema.js";
 import { projects } from "../projects/schema.js";
@@ -31,7 +31,6 @@ export const invoices = pgTable("invoices", {
   deliveryIndex: index("invoices_delivery_idx").on(table.deliveryId),
   customerIndex: index("invoices_customer_idx").on(table.customerId),
   statusIndex: index("invoices_status_idx").on(table.status),
-  organizationNumberUnique: uniqueIndex("invoices_org_number_unique").on(table.organizationId, table.invoiceNumber),
 }));
 
 export const invoiceLines = pgTable("invoice_lines", {
@@ -39,10 +38,10 @@ export const invoiceLines = pgTable("invoice_lines", {
   organizationId: uuid("organization_id").notNull().references(() => organizations.id),
   invoiceId: uuid("invoice_id").notNull().references(() => invoices.id),
   description: text("description").notNull(),
-  quantity: doublePrecision("quantity").notNull(),
+  quantity: bigint("quantity", { mode: "number" }).notNull(),
   unitPriceMinor: bigint("unit_price_minor", { mode: "number" }).notNull(),
   discountMinor: bigint("discount_minor", { mode: "number" }).notNull(),
-  taxRate: doublePrecision("tax_rate").notNull(),
+  taxRate: bigint("tax_rate", { mode: "number" }).notNull(),
   lineTotalMinor: bigint("line_total_minor", { mode: "number" }).notNull(),
   currency: text("currency").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
@@ -51,4 +50,24 @@ export const invoiceLines = pgTable("invoice_lines", {
   invoiceIndex: index("invoice_lines_invoice_idx").on(table.invoiceId),
 }));
 
-export const billingSchema = { invoices, invoiceLines };
+export const payments = pgTable("payments", {
+  id: uuid("id").primaryKey(),
+  organizationId: uuid("organization_id").notNull().references(() => organizations.id),
+  invoiceId: uuid("invoice_id").notNull().references(() => invoices.id),
+  reference: text("reference").notNull(),
+  amountMinor: bigint("amount_minor", { mode: "number" }).notNull(),
+  currency: text("currency").notNull(),
+  paymentDate: timestamp("payment_date", { withTimezone: true }).notNull(),
+  method: text("method").notNull(),
+  status: text("status").notNull(),
+  refundedMinor: bigint("refunded_minor", { mode: "number" }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
+}, (table) => ({
+  organizationIndex: index("payments_organization_idx").on(table.organizationId),
+  invoiceIndex: index("payments_invoice_idx").on(table.invoiceId),
+  statusIndex: index("payments_status_idx").on(table.status),
+  referenceIndex: index("payments_reference_idx").on(table.reference),
+}));
+
+export const billingSchema = { invoices, invoiceLines, payments };
