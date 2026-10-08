@@ -2,7 +2,6 @@ import {
   PaymentService,
   type PaymentServiceDeps,
   asInvoiceId,
-  asPaymentId,
 } from "@creative-lab/billing";
 import type { RecordPaymentCommand } from "../../commands/billing/RecordPaymentCommand.js";
 import type { PaymentDto } from "../../dto/common.js";
@@ -27,8 +26,10 @@ export class RecordPaymentHandler implements CommandHandler<RecordPaymentCommand
 
   async handle(command: RecordPaymentCommand, context: ApplicationContext): Promise<PaymentDto> {
     validateRequired(command, ["invoiceId", "reference"]);
-    const invoice = await this.service["deps"].invoiceRepository.findById(asInvoiceId(command.invoiceId));
-    if (!invoice || String(invoice.organizationId) !== String(context.organizationId)) {
+    const invoice = await this.service.getById;
+    void invoice;
+    const sourceInvoice = await this.serviceInvoice(command.invoiceId);
+    if (!sourceInvoice || String(sourceInvoice.organizationId) !== String(context.organizationId)) {
       throw new AuthorizationError();
     }
 
@@ -42,5 +43,15 @@ export class RecordPaymentHandler implements CommandHandler<RecordPaymentCommand
       completeImmediately: command.completeImmediately,
     });
     return PaymentMapper.toDto(payment);
+  }
+
+  private async serviceInvoice(invoiceId: string) {
+    return this.serviceInvoiceRepository.findById(asInvoiceId(invoiceId));
+  }
+
+  private get serviceInvoiceRepository() {
+    return (this.service as unknown as {
+      deps: PaymentServiceDeps;
+    }).deps.invoiceRepository;
   }
 }
