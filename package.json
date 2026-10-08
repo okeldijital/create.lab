@@ -11,6 +11,7 @@
     "lint": "turbo run lint",
     "lint:deps": "node scripts/check-deps.mjs",
     "typecheck": "turbo run typecheck",
+    "acceptance:auth": "node scripts/auth-acceptance.mjs",
     "test": "turbo run test",
     "test:coverage": "turbo run test:coverage",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,mjs,cjs,json,md,yml,yaml}\"",

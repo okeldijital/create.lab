@@ -43,6 +43,7 @@ export type {
 export type { Query, QueryResult } from "./queries/index.js";
 export {
   getProjectQuery,
+  listProjectsQuery,
   findInvoicesQuery,
   searchKnowledgeQuery,
   listAssetsQuery,
@@ -50,6 +51,7 @@ export {
 } from "./queries/index.js";
 export type {
   GetProjectQuery,
+  ListProjectsQuery,
   FindInvoicesQuery,
   SearchKnowledgeQuery,
   ListAssetsQuery,
@@ -113,6 +115,7 @@ export {
   GetOrganizationHandler,
   CreateProjectHandler,
   GetProjectHandler,
+  ListProjectsHandler,
   CreatePortfolioHandler,
   CreateKnowledgeArticleHandler,
   SearchKnowledgeHandler,

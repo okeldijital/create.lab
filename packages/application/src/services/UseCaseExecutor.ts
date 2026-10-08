@@ -41,6 +41,7 @@ const COMMAND_PERMISSIONS: Readonly<Record<string, Permission>> = {
 
 const QUERY_PERMISSIONS: Readonly<Record<string, Permission>> = {
   GetProject: "project.read",
+  ListProjects: "project.read",
   FindInvoices: "invoice.read",
   SearchKnowledge: "knowledge.search",
   ListAssets: "asset.read",

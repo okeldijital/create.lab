@@ -211,3 +211,5 @@ export { postgresConfigurationFromEnvironment } from "./PostgresConfiguration.js
 export type { PostgresClient, DrizzleDatabase, PostgresDatabase } from "./PostgresDatabase.js";
 export { createPostgresDatabase, checkPostgresConnection } from "./PostgresDatabase.js";
 export { PostgresUnitOfWork } from "./PostgresUnitOfWork.js";
+
+export { user, session, account, verification, authSchema } from "./auth/auth-schema.js";

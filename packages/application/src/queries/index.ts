@@ -4,6 +4,10 @@ export {
   getProjectQuery,
 } from "./GetProjectQuery.js";
 export {
+  type ListProjectsQuery,
+  listProjectsQuery,
+} from "./ListProjectsQuery.js";
+export {
   type FindInvoicesQuery,
   findInvoicesQuery,
 } from "./FindInvoicesQuery.js";
