@@ -20,3 +20,7 @@ export { type CreateKnowledgeArticleCommand, createKnowledgeArticleCommand } fro
 export { type CreateAssetCommand, createAssetCommand } from "./assets/CreateAssetCommand.js";
 export { type ApproveReviewCommand, approveReviewCommand } from "./review/ApproveReviewCommand.js";
 export { type DeliverProjectCommand, deliverProjectCommand } from "./delivery/DeliverProjectCommand.js";
+
+export { type RecordPaymentCommand, recordPaymentCommand } from "./billing/RecordPaymentCommand.js";
+export { type CompletePaymentCommand, completePaymentCommand } from "./billing/CompletePaymentCommand.js";
+export { type RefundPaymentCommand, refundPaymentCommand } from "./billing/RefundPaymentCommand.js";
