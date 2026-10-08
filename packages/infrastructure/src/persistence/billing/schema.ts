@@ -1,4 +1,4 @@
-import { bigint, index, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { bigint, doublePrecision, index, pgTable, text, timestamp, uniqueIndex, uuid } from "drizzle-orm/pg-core";
 import { customers } from "../crm/schema.js";
 import { organizations } from "../organization/schema.js";
 import { projects } from "../projects/schema.js";
@@ -31,6 +31,7 @@ export const invoices = pgTable("invoices", {
   deliveryIndex: index("invoices_delivery_idx").on(table.deliveryId),
   customerIndex: index("invoices_customer_idx").on(table.customerId),
   statusIndex: index("invoices_status_idx").on(table.status),
+  organizationNumberUnique: uniqueIndex("invoices_org_number_unique").on(table.organizationId, table.invoiceNumber),
 }));
 
 export const invoiceLines = pgTable("invoice_lines", {
@@ -38,10 +39,10 @@ export const invoiceLines = pgTable("invoice_lines", {
   organizationId: uuid("organization_id").notNull().references(() => organizations.id),
   invoiceId: uuid("invoice_id").notNull().references(() => invoices.id),
   description: text("description").notNull(),
-  quantity: bigint("quantity", { mode: "number" }).notNull(),
+  quantity: doublePrecision("quantity").notNull(),
   unitPriceMinor: bigint("unit_price_minor", { mode: "number" }).notNull(),
   discountMinor: bigint("discount_minor", { mode: "number" }).notNull(),
-  taxRate: bigint("tax_rate", { mode: "number" }).notNull(),
+  taxRate: doublePrecision("tax_rate").notNull(),
   lineTotalMinor: bigint("line_total_minor", { mode: "number" }).notNull(),
   currency: text("currency").notNull(),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
